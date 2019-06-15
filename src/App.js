@@ -69,7 +69,7 @@ class App extends Component {
     super(props)
     const { cookies } = props
 
-    const id = path.split("/invite/")[1] || cookies.get('id') || null
+    const id = cookies.get('id') || null
 
     this.state = {
       id,
@@ -137,7 +137,6 @@ class App extends Component {
         }, data, typeof data)
 
         console.log('XX set cookie', this.state.id)
-        this.props.cookies.set('id', this.state.id, { path: '/' })
 
         this.setState({
           people,

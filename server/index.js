@@ -118,8 +118,15 @@ async function main() {
       })
   });
 
+  app.get('/:id', (req, res) => {
+    res.cookie('id', req.params.id, {
+      maxAge: 864000000
+    })
+    res.redirect('https://nancyandanand.com')
+  })
+
   app.listen(PORT);
-  console.log('listening http://localhost:', PORT);
+  console.log(`listening http://localhost:${PORT}`);
 }
 
 /**
@@ -155,7 +162,7 @@ const saveRow = (sheets, updateRow) => {
     throw new Error(`row not found ${updateRow}`)
   }
   const values = [updateRow.slice(ROW_MAP.attendingList)]
-  const range = `${TABLE_NAME}!${FIRST_DATA}${row}:${LAST_DATA}${row}`
+  const range = `${TABLE_NAME}!${FIRST_DATA}${row}: ${LAST_DATA}${row}`
   console.log('XX updating row', updateRow)
   return sheets.spreadsheets.values.update({
     spreadsheetId: SHEET_ID,
