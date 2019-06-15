@@ -318,3 +318,6 @@ h2 {
   background-color: var(--fox-gold);
 }
 
+.hidden {
+  visibility: hidden;
+}

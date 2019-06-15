@@ -5,17 +5,13 @@ import Col from 'react-bootstrap/Col';
 class People extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      people: props.people
-    }
   }
 
   getItemColor(name) {
-    if (this.state.people[name].isAttending === "Yes") {
+    if (this.props.people[name].isAttending === "Yes") {
       return "person yes"
     }
-    if (this.state.people[name].isAttending === "No") {
+    if (this.props.people[name].isAttending === "No") {
       return "person no"
     }
     return "person"
@@ -23,17 +19,17 @@ class People extends Component {
 
   getButtonColor(type, name) {
     let out = type + " ask"
-    if (this.state.people[name].isAttending === "Yes") {
+    if (this.props.people[name].isAttending === "Yes") {
       out += " yes"
-    } else if (this.state.people[name].isAttending === "No") {
+    } else if (this.props.people[name].isAttending === "No") {
       out += " no"
     }
     return out
   }
 
   render() {
-    var people = this.state.people || []
-    var peopleList = Object.keys(this.state.people)
+    var people = this.props.people || []
+    var peopleList = Object.keys(this.props.people)
     var list = peopleList.map((name) => {
       return <div key={name} className={this.getItemColor(name)}>
         <Row>
@@ -49,6 +45,10 @@ class People extends Component {
         </Row>
       </div>
     })
+
+    if (list.length === 0) {
+      list = [(<div key="checkemail" >Check your email for RSVP link</div>)]
+    }
 
     return (
       <div className="fox-outer">

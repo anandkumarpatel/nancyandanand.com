@@ -26,18 +26,18 @@ const path = window && window.location && window.location.pathname
 const request = require('request-promise')
 
 const hostname = window && window.location && window.location.hostname
-let bURL = window && window.location && window.location.origin
+let bURL = 'https://nancyandanand.herokuapp.com'
+
 let IS_MOCK = false
-if (/^localhost/.test(hostname)) {
-  bURL = `http://localhost:4311`
-  IS_MOCK = true
+if (/^localhost/.test(hostname) && IS_MOCK) {
+  bURL = `http://localhost:8080`
 }
 
 
 
 const MOCK = {
   "people": {
-    "anand": { "isAttending": "?" },
+    // "anand": { "isAttending": "?" },
     // "nancy": { "isAttending": "?" },
     // "Niru": { "isAttending": "?" },
     // "Dhansukh": { "isAttending": "?" },
@@ -50,7 +50,6 @@ const MOCK = {
     "name": "GT"
   },
   "didRSVP": false,
-  sheetLoaded: true,
   submitted: true,
   // address: {
   //   street: '860 peachtree street NE unit 1814',
@@ -70,12 +69,11 @@ class App extends Component {
     super(props)
     const { cookies } = props
 
-    const id = path.split("/invite/")[1] || cookies.get('id')
+    const id = path.split("/invite/")[1] || cookies.get('id') || null
 
     this.state = {
       id,
       didRSVP: false,
-      sheetLoaded: false,
       hotel: {},
       people: {},
       address: {
@@ -90,6 +88,7 @@ class App extends Component {
       backendUrl: `${bURL}/invite/${id}`
     }
 
+    console.log("init state", this.state)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.click = this.click.bind(this)
     this.handlePositionChange = this.handlePositionChange.bind(this)
@@ -107,6 +106,12 @@ class App extends Component {
   }
 
   getInvite() {
+    if (!this.state.id) {
+      return setTimeout(() => {
+        document.getElementById('loading').classList.add("loading-finish")
+      }, 100)
+    }
+
     if (IS_MOCK) {
       return setTimeout(() => {
         this.setState(MOCK)
@@ -128,7 +133,6 @@ class App extends Component {
           people,
           hotel,
           didRSVP,
-          sheetLoaded: true,
           address
         }, data, typeof data)
 
@@ -139,11 +143,11 @@ class App extends Component {
           people,
           hotel,
           didRSVP,
-          sheetLoaded: true,
           address
         })
       })
       .catch((err) => {
+        document.getElementById('loading').classList.add("loading-finish")
         console.log(`get invite failed ${err.message}`)
         setTimeout(() => {
           return this.getInvite()
@@ -255,10 +259,6 @@ class App extends Component {
       return "Click to RSVP"
     }
 
-    if (!this.state.sheetLoaded) {
-      return null
-    }
-
     if (this.state.didSubmit) {
       window.scrollTo(0, 0)
       return (
@@ -337,7 +337,7 @@ class App extends Component {
             <Address address={this.state.address} change={this.addrChange} ></Address>
             <Hotels info={this.state.hotel}></Hotels>
           </div>
-          <Row className="rsvp-button">
+          <Row className={Object.keys(this.state.people).length !== 0 ? "rsvp-button" : 'rsvp-button hidden'}>
             <Col>
               <Button size="lg" value="RSVP" onClick={this.handleSubmit} disabled={isSubmitDisabled()}>{getRsvpText()}</Button>
             </Col>
