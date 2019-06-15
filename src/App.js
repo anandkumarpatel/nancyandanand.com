@@ -85,7 +85,8 @@ class App extends Component {
       },
       didSubmit: false,
       submitClicked: false,
-      backendUrl: `${bURL}/invite/${id}`
+      backendUrl: `${bURL}/invite/${id}`,
+      gotInvite: false,
     }
 
     console.log("init state", this.state)
@@ -142,7 +143,8 @@ class App extends Component {
           people,
           hotel,
           didRSVP,
-          address
+          address,
+          gotInvite: true
         })
       })
       .catch((err) => {
@@ -230,7 +232,7 @@ class App extends Component {
 
   render() {
     const isSubmitDisabled = () => {
-      return anyNoAnswer() || (this.anyYes() && !this.addressIsValid()) || this.state.submitClicked
+      return !this.state.gotInvite || anyNoAnswer() || (this.anyYes() && !this.addressIsValid()) || this.state.submitClicked
     }
 
     const anyNoAnswer = () => {
@@ -247,6 +249,10 @@ class App extends Component {
     }
 
     const getRsvpText = () => {
+      if (!this.state.gotInvite) {
+        return ''
+      }
+
       if (anyNoAnswer()) {
         return "Please click Yes or No for all guests above"
       }
@@ -269,7 +275,6 @@ class App extends Component {
 
     return (
       <div className="App" id="App">
-
         <div className='star-drop' style={{ top: "1vh", left: "calc(1rem + 45px)", animationDelay: ".5s" }}>
           <div className='star-sway' style={{ animationDelay: "1.5s" }} >
             <Star src={star} className="star" />
@@ -336,7 +341,7 @@ class App extends Component {
             <Address address={this.state.address} change={this.addrChange} ></Address>
             <Hotels info={this.state.hotel}></Hotels>
           </div>
-          <Row className={Object.keys(this.state.people).length !== 0 ? "rsvp-button" : 'rsvp-button hidden'}>
+          <Row className={this.state.gotInvite ? "rsvp-button" : 'rsvp-button hidden'}>
             <Col>
               <Button size="lg" value="RSVP" onClick={this.handleSubmit} disabled={isSubmitDisabled()}>{getRsvpText()}</Button>
             </Col>
