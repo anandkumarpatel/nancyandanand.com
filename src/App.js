@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { Waypoint } from 'react-waypoint';
-import { instanceOf } from 'prop-types';
-import { withCookies, Cookies } from 'react-cookie';
+import React, { Component } from 'react'
+import Button from 'react-bootstrap/Button'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import { Waypoint } from 'react-waypoint'
+import { instanceOf } from 'prop-types'
+import { withCookies, Cookies } from 'react-cookie'
 
-import './App.css';
+import './App.css'
 
 import People from './people.js'
 import Divider from './divider.js'
@@ -16,14 +16,24 @@ import Address from './address.js'
 import Msg from './msg.js'
 import Stars from './stars.js'
 import Garnesh from './garnesh.js'
-import Atl from './atl.js';
-import April from './april.js';
-import Star from './star.js';
+import Atl from './atl.js'
+import April from './april.js'
+import Star from './star.js'
 
-import star from './img/star.svg';
+import star from './img/star.svg'
 
-const path = window && window.location && window.location.pathname;
+const path = window && window.location && window.location.pathname
 const request = require('request-promise')
+
+const hostname = window && window.location && window.location.hostname
+let bURL = window && window.location && window.location.origin
+let IS_MOCK = false
+if (/^localhost/.test(hostname)) {
+  bURL = `http://localhost:4311`
+  IS_MOCK = true
+}
+
+
 
 const MOCK = {
   "people": {
@@ -54,11 +64,11 @@ const MOCK = {
 class App extends Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired
-  };
+  }
 
   constructor(props) {
     super(props)
-    const { cookies } = props;
+    const { cookies } = props
 
     const id = path.split("/invite/")[1] || cookies.get('id')
 
@@ -77,7 +87,7 @@ class App extends Component {
       },
       didSubmit: false,
       submitClicked: false,
-      backendUrl: `http://localhost:8080/invite/${id}`
+      backendUrl: `${bURL}/invite/${id}`
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -97,15 +107,18 @@ class App extends Component {
   }
 
   getInvite() {
-    return setTimeout(() => {
-      this.setState(MOCK)
-      document.getElementById('loading').classList.add("loading-finish")
-    }, 100)
+    if (IS_MOCK) {
+      return setTimeout(() => {
+        this.setState(MOCK)
+        document.getElementById('loading').classList.add("loading-finish")
+      }, 100)
+    }
 
     return request(this.state.backendUrl, {
       json: true
     })
       .then((data) => {
+        document.getElementById('loading').classList.add("loading-finish")
         const people = data.people
         const hotel = data.hotel
         const didRSVP = data.didRSVP
@@ -120,7 +133,7 @@ class App extends Component {
         }, data, typeof data)
 
         console.log('XX set cookie', this.state.id)
-        this.props.cookies.set('id', this.state.id, { path: '/' });
+        this.props.cookies.set('id', this.state.id, { path: '/' })
 
         this.setState({
           people,
@@ -134,7 +147,7 @@ class App extends Component {
         console.log(`get invite failed ${err.message}`)
         setTimeout(() => {
           return this.getInvite()
-        }, 1000);
+        }, 1000)
       })
   }
 
@@ -150,24 +163,27 @@ class App extends Component {
       submitClicked: true,
       didSubmit: true
     })
-    if (!this.addressIsValid()) {
+    if (this.anyYes() && !this.addressIsValid()) {
       console.log("invalid address")
       return
     }
-    // return
+
+    if (IS_MOCK) {
+      return
+    }
+
     try {
       await request.post(this.state.backendUrl, {
         json: {
           people: this.state.people,
           address: this.state.address,
         }
-      });
-      console.log("XX TODO: show model Submitted");
+      })
     } catch (err) {
-      console.log("XX Error submitting", err);
+      console.log("XX Error submitting", err)
       setTimeout(() => {
-        return this.handleSubmit();
-      }, 1000);
+        return this.handleSubmit()
+      }, 1000)
     }
   }
 
@@ -199,9 +215,19 @@ class App extends Component {
     this.setState(update)
   }
 
+  yesList() {
+    return Object.keys(this.state.people).filter((name) => {
+      return "Yes" === this.state.people[name].isAttending
+    })
+  }
+
+  anyYes() {
+    return this.yesList().length > 0
+  }
+
   render() {
     const isSubmitDisabled = () => {
-      return anyNoAnswer() || (anyYes() && !this.addressIsValid()) || !!this.state.submitClicked
+      return anyNoAnswer() || (this.anyYes() && !this.addressIsValid()) || this.state.submitClicked
     }
 
     const anyNoAnswer = () => {
@@ -210,18 +236,8 @@ class App extends Component {
       })
     }
 
-    const anyYes = () => {
-      return yesList().length > 0
-    }
-
-    const yesList = () => {
-      return Object.keys(this.state.people).filter((name) => {
-        return "Yes" === this.state.people[name].isAttending
-      })
-    }
-
     const getDrawerClass = () => {
-      if (anyYes()) {
+      if (this.anyYes()) {
         return 'drawer drawer-show'
       }
       return 'drawer'
@@ -232,7 +248,7 @@ class App extends Component {
         return "Please click Yes or No for all guests above"
       }
 
-      if (anyYes() && !this.addressIsValid()) {
+      if (this.anyYes() && !this.addressIsValid()) {
         return "Please enter mailing address"
       }
 
@@ -247,7 +263,7 @@ class App extends Component {
       window.scrollTo(0, 0)
       return (
         <div className="App" id="App">
-          <Msg show={this.state.didSubmit} yesList={yesList()} />
+          <Msg show={this.state.didSubmit} yesList={this.yesList()} />
         </div>
       )
     }
@@ -328,8 +344,8 @@ class App extends Component {
           </Row>
         </div>
       </div >
-    );
+    )
   }
 }
 
-export default withCookies(App);
+export default withCookies(App)

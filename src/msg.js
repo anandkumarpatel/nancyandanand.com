@@ -27,7 +27,7 @@ class Msg extends Component {
           <h1>Thank You! </h1>
           {attend()}
           <p>If things change please update your RSVP by clicking on your invite link.</p>
-          <p>Visit <a href='nancyandanand.com'> NancyAndAnand.com </a> to keep updated!</p>
+          <p>Visit <a href='https://nancyandanand.com'> NancyAndAnand.com </a> to keep updated!</p>
         </div>
       </div>
     )
