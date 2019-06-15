@@ -122,6 +122,7 @@ async function main() {
     res.cookie('id', req.params.id, {
       maxAge: 864000000
     })
+    // res.redirect('http://localhost:3000')
     res.redirect('https://nancyandanand.com')
   })
 
