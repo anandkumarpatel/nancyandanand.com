@@ -108,7 +108,8 @@ h2 {
   width: 100vw;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
 }
 
 .intro {
@@ -132,17 +133,13 @@ h2 {
   max-width: 80vw;
 }
 
-.atl, .april {
-  bottom: 1vh;
-}
-
 .fox {
   padding: 2rem;
   position: relative;
   margin-right: auto;
   margin-left: auto;
-  max-width: 100rem;
   margin-bottom: 0vh;
+  max-width: 100rem;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
