@@ -211,35 +211,26 @@ h2 {
 
 .names {
   position: relative;
-  border: .5rem solid var(--fox-red);
+  border: 1rem solid var(--fox-red);
   font-size: var(--p-size);
   z-index: 2;
   background: var(--black);
   color: whitesmoke;
 }
 
-@media (max-width: 576px){
-  .names {
-    border-width: 1rem;
-  }
-  .fox-neon {
-    border-width: 5rem;
-  }
-}
-
 .bYes {
-  color: white;
+  color: var(--black);
   background: var(--black);
 }
 
 .bYes:hover, .bYes:disabled {
-  color: white;
+  color: var(--black);
   background: var(--fox-gold-bright);
   border-color: var(--fox-red);
 }
 
 .bNo {
-  color: black;
+  color:var(--black);
   background: var(--black);
 }
 
