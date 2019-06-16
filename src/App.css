@@ -6,6 +6,8 @@
   --main-font: 'Great Vibes';
   --grass: #A1FFCE;
   --sun: #FAFFD1;
+  --h1-size: 12rem;
+  --p-size: 5rem;
   font-size: 1vw;
 }
 
@@ -47,10 +49,6 @@
   width: 80vw;
 }
 
-.msg-text p {
-  font-size: 4rem;
-}
-
 .App {
   text-align: center;
   color: var(--black);
@@ -73,15 +71,15 @@
 }
 
 p {
-  font-size: 6rem;
+  font-size: var(--p-size);
 }
 
 h1 {
-  font-size: 12rem;
+  font-size: var(--h1-size);
 }
 
 h2 {
-  font-size: 7rem;
+  font-size: var(--h2-size);
 }
 
 .blue-font h1 {
@@ -97,24 +95,31 @@ h2 {
 }
 
 .cItem {
+  position: relative;
   margin-top: 10vh;
-  height: 50vh;
   margin-bottom: 10vh;
+  height: 50vh;
+  min-height: 200px;
   vertical-align: middle;
-  padding-top: 5vh;
+}
+
+.info-hold {
+  position: absolute;
+  width: 100vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .intro {
-  padding-top: 20vh;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  min-height: 100vw;
 }
 
 .intro h1 {
-  font-size: 29rem;
-}
-
-.us {
-  padding-top: 30vh;
-  padding-bottom: 25vh;
+  font-size: 30rem;
 }
 
 .us h1 {
@@ -123,21 +128,12 @@ h2 {
 
 .detail {
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  height:  20rem;
-  max-width: 60rem;
+  max-height:  20vh;
+  max-width: 80vw;
 }
 
 .atl, .april {
   bottom: 1vh;
-}
-
-.garnesh, .dance  {
-  padding-top: 0px;
-  position: relative;
 }
 
 .fox {
@@ -219,7 +215,7 @@ h2 {
 .names {
   position: relative;
   border: .5rem solid var(--fox-red);
-  font-size: 5rem;
+  font-size: var(--p-size);
   z-index: 2;
   background: var(--black);
   color: whitesmoke;
@@ -283,7 +279,7 @@ h2 {
 
 .addr {
   position: relative;
-  font-size: 5rem;
+  font-size: var(--p-size);
   max-width: 60rem;
   text-align: center;
   border: 1rem double var(--fox-red);
@@ -309,7 +305,7 @@ h2 {
 }
 
 .rsvp-button .btn {
-  font-size: 5rem;
+  font-size: var(--p-size);
   background-color: transparent;
   border-color: var(--fox-gold-bright);
 }

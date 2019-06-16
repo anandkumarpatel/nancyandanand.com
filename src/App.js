@@ -28,7 +28,7 @@ const request = require('request-promise')
 const hostname = window && window.location && window.location.hostname
 let bURL = 'https://nancyandanand.herokuapp.com'
 
-let IS_MOCK = false
+let IS_MOCK = true
 if (/^localhost/.test(hostname) && IS_MOCK) {
   bURL = `http://localhost:8080`
 }
@@ -37,7 +37,7 @@ if (/^localhost/.test(hostname) && IS_MOCK) {
 
 const MOCK = {
   "people": {
-    // "anand": { "isAttending": "?" },
+    "anand": { "isAttending": "?" },
     // "nancy": { "isAttending": "?" },
     // "Niru": { "isAttending": "?" },
     // "Dhansukh": { "isAttending": "?" },
@@ -50,6 +50,7 @@ const MOCK = {
     "name": "GT"
   },
   "didRSVP": false,
+  gotInvite: true,
   submitted: true,
   // address: {
   //   street: '860 peachtree street NE unit 1814',
@@ -69,8 +70,10 @@ class App extends Component {
     super(props)
     const { cookies } = props
 
-    const id = cookies.get('id') || null
-
+    let id = cookies.get('id') || null
+    if (IS_MOCK) {
+      id = 'helloId'
+    }
     this.state = {
       id,
       didRSVP: false,
@@ -107,16 +110,10 @@ class App extends Component {
   }
 
   getInvite() {
-    if (!this.state.id) {
-      return setTimeout(() => {
-        document.getElementById('loading').classList.add("loading-finish")
-      }, 100)
-    }
 
     if (IS_MOCK) {
       return setTimeout(() => {
         this.setState(MOCK)
-        document.getElementById('loading').classList.add("loading-finish")
       }, 100)
     }
 
@@ -124,7 +121,6 @@ class App extends Component {
       json: true
     })
       .then((data) => {
-        document.getElementById('loading').classList.add("loading-finish")
         const people = data.people
         const hotel = data.hotel
         const didRSVP = data.didRSVP
@@ -137,8 +133,6 @@ class App extends Component {
           address
         }, data, typeof data)
 
-        console.log('XX set cookie', this.state.id)
-
         this.setState({
           people,
           hotel,
@@ -148,7 +142,6 @@ class App extends Component {
         })
       })
       .catch((err) => {
-        document.getElementById('loading').classList.add("loading-finish")
         console.log(`get invite failed ${err.message}`)
         setTimeout(() => {
           return this.getInvite()
@@ -297,39 +290,51 @@ class App extends Component {
         </div>
 
         <div className="intro blue-font">
-          <h1 className="cursive" > You Are  </h1>
-          <h1 className="cursive" >Invited</h1>
-          <h2> To Celebrate the Marriage of </h2>
+          <div className="info-hold">
+            <h1 className="cursive" > You Are  </h1>
+            <h1 className="cursive" >Invited</h1>
+            <p> To Celebrate the Marriage of </p>
+          </div>
         </div>
-        <div className="us blue-font">
-          <h1 className="cursive" > Nancy </h1>
-          <h2> & </h2>
-          <h1 className="cursive" >Anand </h1>
+        <div className="intro blue-font">
+          <div className="info-hold us">
+            <h1 className="cursive" > Nancy </h1>
+            <p> & </p>
+            <h1 className="cursive" >Anand </h1>
+          </div>
         </div>
         <Divider className="divider" />
         <div className="cItem date">
-          <April className="detail april" />
-          <h1> April 4th 2020 </h1>
+          <div className="info-hold">
+            <April className="detail april" />
+            <h1> April 4th 2020 </h1>
+          </div>
         </div>
         <Divider className="divider" />
         <div className="cItem location">
-          <Atl className="detail atl" />
-          <h1> Atlanta, GA </h1>
+          <div className="info-hold">
+            <Atl className="detail atl" />
+            <h1> Atlanta, GA </h1>
+          </div>
         </div>
         <Divider className="divider" />
         <div className="cItem">
           <Waypoint onPositionChange={this.handlePositionChange} />
-          <Garnesh className="detail garnesh" />
-          <h1> Wedding </h1>
-          <p> Piedmont Room at Park Tavern </p>
+          <div className="info-hold">
+            <Garnesh className="detail garnesh" />
+            <h1> Wedding </h1>
+            <p> Piedmont Room at Park Tavern </p>
+          </div>
         </div>
         <Divider className="divider" />
         <div className="star-bottom">
           <Stars />
           <div className="cItem">
-            <Dance className="detail dance" />
-            <h1> Reception </h1>
-            <p> Egyptian ballroom at Fox Theater </p>
+            <div className="info-hold">
+              <Dance className="detail dance" />
+              <h1> Reception </h1>
+              <p> Egyptian ballroom at Fox Theater </p>
+            </div>
           </div>
           <Divider className="divider" />
           <div className="cItem fox">
