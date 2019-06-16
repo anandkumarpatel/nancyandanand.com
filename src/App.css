@@ -2,6 +2,8 @@
   --fox-red: #7C2128;
   --fox-gold: #c1a875;
   --fox-gold-bright: #E0C388;
+  --fox-grey: #1F1F1F;
+  --fox-white: #FFF;
   --black: #000027;
   --main-font: 'Great Vibes';
   --grass: #A1FFCE;
@@ -66,8 +68,8 @@
 
 .App.darken {
   background-position: 0 100%;
-  color: white;
-  fill: white;
+  color: var(--fox-white);
+  fill: var(--fox-white);
 }
 
 p {
@@ -147,7 +149,7 @@ h2 {
 
 .fox-outer {
   position: relative;
-  border: 1rem ridge #7C2128;
+  border: 1rem ridge var(--fox-red);
   z-index: 1;
 }
 
@@ -215,7 +217,7 @@ h2 {
   font-size: var(--p-size);
   z-index: 2;
   background: var(--black);
-  color: whitesmoke;
+  color: var(--fox-white);
 }
 
 .bYes {
@@ -236,7 +238,7 @@ h2 {
 
 .bNo:hover, .bNo:disabled {
   color: var(--black);
-  background: #808080;
+  background: var(--fox-grey);
   border-color: var(--fox-red);
 }
 
@@ -246,7 +248,7 @@ h2 {
   top: 5%;
   border-color: var(--fox-red);
   border-width: 2px;
-  color: white;
+  color: var(--fox-white);
   width: 90%;
 }
 
