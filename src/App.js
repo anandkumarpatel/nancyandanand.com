@@ -30,7 +30,9 @@ if (/^localhost/.test(hostname) && IS_MOCK) {
   bURL = `http://localhost:8080`
 }
 
-
+if (hostname === "nancyandanand.com") {
+  IS_MOCK = false
+}
 
 const MOCK = {
   "people": {
