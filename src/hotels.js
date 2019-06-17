@@ -25,6 +25,10 @@ class Hotels extends Component {
   render() {
     const hotelInfo = HOTEL_MAP[this.props.info.name] || {}
     const name = hotelInfo.name
+    if (!name) {
+      return null
+    }
+
     const homepage = hotelInfo.homepage
     const booking = hotelInfo.booking
 
