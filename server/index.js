@@ -6,7 +6,7 @@ const jsonParser = bodyParser.json();
 
 const SHEET_ID = process.env.SHEET_ID || "1Ab3fNGhNv1UIR6KQcxYi0OKK2kVYG5v0ecn7cyVux_Q"
 const PORT = process.env.PORT || 8080
-
+const TEST_ID = process.env.TEST_ID || "MnxiaGFyYXQ="
 const ROW_MAP = {
   lastName: 0,
   invitedList: 1,
@@ -63,7 +63,7 @@ async function main() {
 
   const sheets = google.sheets({ version: 'v4', auth });
 
-  getRowById(sheets, "2|patel")
+  getRowById(sheets, TEST_ID)
     .then(parseRow)
     .then(console.log)
   // .then(() => {
