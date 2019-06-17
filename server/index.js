@@ -6,7 +6,7 @@ const jsonParser = bodyParser.json();
 
 const SHEET_ID = process.env.SHEET_ID || "1Ab3fNGhNv1UIR6KQcxYi0OKK2kVYG5v0ecn7cyVux_Q"
 const PORT = process.env.PORT || 8080
-const TEST_ID = process.env.TEST_ID || "MnxiaGFyYXQ="
+const TEST_ID = process.env.TEST_ID || "2|bharat"
 const ROW_MAP = {
   lastName: 0,
   invitedList: 1,
@@ -211,6 +211,7 @@ const parseRow = (data) => {
   const declineList = data[ROW_MAP.declineList] || ""
   const didRSVP = data[ROW_MAP.didRSVP] || false
   const flagList = data[ROW_MAP.flags] || ""
+  const rawAddr = data[ROW_MAP.address] || ""
   const flags = flagList.split('|').reduce((prev, cur) => {
     const split = cur.split("=")
     const key = split[0]
@@ -221,14 +222,20 @@ const parseRow = (data) => {
     prev[key] = val
     return prev
   }, {})
-  const addr = data[ROW_MAP.address].split("|")
+  const addr = rawAddr.split("|")
   const address = addr[4] ? {
     street: addr[0].trim(),
     city: addr[1].trim(),
     state: addr[2].trim(),
     zip: addr[3].trim(),
     country: addr[4].trim(),
-  } : null
+  } : {
+      street: '',
+      city: '',
+      state: '',
+      zip: '',
+      country: '',
+    }
 
   const rate = data[ROW_MAP.rate]
   const name = data[ROW_MAP.hotelType]
