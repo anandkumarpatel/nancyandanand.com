@@ -7,7 +7,7 @@ class Msg extends Component {
       if (list.length > 0) {
         return (
           <div>
-            <p>We look forward to celebrating with you.</p>
+            <p>We look forward to celebrating with you!</p>
             <p>Additional details will be sent out in your kankotri (invitation card).</p>
           </div>
         )

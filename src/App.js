@@ -87,6 +87,7 @@ class App extends Component {
         zip: '',
         country: '',
       },
+      flags: {},
       didSubmit: false,
       submitClicked: false,
       backendUrl: `${bURL}/invite/${id}`,
@@ -126,12 +127,14 @@ class App extends Component {
         const hotel = data.hotel
         const didRSVP = data.didRSVP
         const address = data.address
+        const flags = data.flags
 
         console.log("XX setting invite", {
           people,
           hotel,
           didRSVP,
-          address
+          address,
+          flags
         }, data, typeof data)
 
         this.setState({
@@ -139,6 +142,7 @@ class App extends Component {
           hotel,
           didRSVP,
           address,
+          flags,
           gotInvite: true
         })
       })
@@ -345,7 +349,7 @@ class App extends Component {
           <br />
           <div className={getDrawerClass()}>
             <Address address={this.state.address} change={this.addrChange} ></Address>
-            <Hotels info={this.state.hotel}></Hotels>
+            <Hotels flags={this.state.flags} info={this.state.hotel}></Hotels>
           </div>
           <div className={this.state.gotInvite ? "rsvp-button" : 'rsvp-button hidden'}>
             <div className="info-hold">
