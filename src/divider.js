@@ -23,7 +23,7 @@ let SvgComponent = props => (
   </svg>
 )
 
-// import divider from './img/divider2.svg';
+// import divider from './img/divider.svg';
 // SvgComponent = props => (
 //   <img src={divider} className="divider" />
 // )

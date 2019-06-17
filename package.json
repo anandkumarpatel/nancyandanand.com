@@ -20,6 +20,9 @@
   },
   "scripts": {
     "heroku": "heroku container:login && heroku container:push web && heroku container:release web",
+    "hon": "heroku scale web=1",
+    "hoff": "heroku scale web=0",
+    "log": "heroku logs -t",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
