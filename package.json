@@ -27,6 +27,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "ss": "node ./server",
+    "dev": "DEV=yes node ./server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

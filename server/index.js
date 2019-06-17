@@ -12,16 +12,17 @@ const ROW_MAP = {
   invitedList: 1,
   hotelType: 2,
   rate: 3,
-  attendingList: 4,
-  declineList: 5,
-  didRSVP: 6,
-  address: 7,
+  flags: 4,
+  attendingList: 5,
+  declineList: 6,
+  didRSVP: 7,
+  address: 8,
 }
 
 const TABLE_NAME = 'list'
-const FULL_RANGE = 'A2:H'
-const FIRST_DATA = 'E'
-const LAST_DATA = 'H'
+const FIRST_DATA = 'F'
+const LAST_DATA = 'I'
+const FULL_RANGE = `A2:${LAST_DATA}`
 
 const MOCK = {
   "people": {
@@ -39,8 +40,12 @@ const MOCK = {
 }
 
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://nancyandanand.com")
-  res.header("Vary", "Origin")
+  if (process.env.DEV === "yes") {
+    res.header("Access-Control-Allow-Origin", "*")
+  } else {
+    res.header("Access-Control-Allow-Origin", "https://nancyandanand.com")
+    res.header("Vary", "Origin")
+  }
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
   res.header("Access-Control-Allow-Methods", "GET POST")
   next()
@@ -164,7 +169,7 @@ const saveRow = (sheets, updateRow) => {
     throw new Error(`row not found ${updateRow}`)
   }
   const values = [updateRow.slice(ROW_MAP.attendingList)]
-  const range = `${TABLE_NAME}!${FIRST_DATA}${row}: ${LAST_DATA}${row}`
+  const range = `${TABLE_NAME}!${FIRST_DATA}${row}:${LAST_DATA}${row}`
   console.log('XX updating row', updateRow)
   return sheets.spreadsheets.values.update({
     spreadsheetId: SHEET_ID,
@@ -205,6 +210,17 @@ const parseRow = (data) => {
   const attendingList = data[ROW_MAP.attendingList] || ""
   const declineList = data[ROW_MAP.declineList] || ""
   const didRSVP = data[ROW_MAP.didRSVP] || false
+  const flagList = data[ROW_MAP.flags] || ""
+  const flags = flagList.split('|').reduce((prev, cur) => {
+    const split = cur.split("=")
+    const key = split[0]
+    if (!key) {
+      return prev
+    }
+    const val = split[1] || "yes"
+    prev[key] = val
+    return prev
+  }, {})
   const addr = data[ROW_MAP.address].split("|")
   const address = addr[4] ? {
     street: addr[0].trim(),
@@ -251,7 +267,8 @@ const parseRow = (data) => {
     people,
     hotel,
     didRSVP,
-    address
+    address,
+    flags,
   }
 }
 

@@ -25,8 +25,10 @@ const request = require('request-promise')
 const hostname = window && window.location && window.location.hostname
 let bURL = 'https://nancyandanand.herokuapp.com'
 
-let IS_MOCK = true
-if (/^localhost/.test(hostname) && IS_MOCK) {
+const B_MOCK = true
+let IS_MOCK = false
+
+if (/^localhost/.test(hostname) && B_MOCK) {
   bURL = `http://localhost:8080`
 }
 
