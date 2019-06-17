@@ -48,7 +48,7 @@
 .msg-text {
   margin: 0 auto;
   padding-top: 25vh;
-  width: 80vw;
+  max-width: 900px;
 }
 
 .App {
@@ -163,8 +163,8 @@ h2 {
   border-bottom-width: 6rem;
   border-left-style: solid;
   border-left-width: 6rem;
-  -o-border-image: url(./img/fox-back-v1.png) 50 round;
-     border-image: url(./img/fox-back-v1.png) 50 round;
+  -o-border-image: url(./img/fox-back-v1.png);
+     border-image: url(./img/fox-back-v1.png);
   z-index: 1;
   -webkit-animation: foxblink .5s linear infinite;
           animation: foxblink .5s linear infinite;
@@ -172,6 +172,12 @@ h2 {
   border-image-width: 1;
   border-image-outset: 0;
   border-image-repeat: round;
+}
+
+@supports (-webkit-overflow-scrolling: touch) {
+  .fox-neon {
+    border-image-repeat: repeat;
+  }
 }
 
 @-webkit-keyframes foxblink {
