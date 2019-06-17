@@ -27,9 +27,11 @@ let bURL = 'https://nancyandanand.herokuapp.com'
 
 const B_MOCK = true
 let IS_MOCK = false
+let logger = () => { }
 
 if (/^localhost/.test(hostname) && B_MOCK) {
   bURL = `http://localhost:8080`
+  logger = console.log
 }
 
 if (hostname === "nancyandanand.com") {
@@ -94,9 +96,9 @@ class App extends Component {
       gotInvite: false,
     }
 
-    console.log("init state", this.state)
+    logger("init state", this.state)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.click = this.click.bind(this)
+    this.attendOptionClick = this.attendOptionClick.bind(this)
     this.handlePositionChange = this.handlePositionChange.bind(this)
     this.addrChange = this.addrChange.bind(this)
     this.getInvite()
@@ -129,7 +131,7 @@ class App extends Component {
         const address = data.address
         const flags = data.flags
 
-        console.log("XX setting invite", {
+        logger("XX setting invite", {
           people,
           hotel,
           didRSVP,
@@ -147,7 +149,7 @@ class App extends Component {
         })
       })
       .catch((err) => {
-        console.log(`get invite failed ${err.message}`)
+        logger(`get invite failed ${err.message}`)
         setTimeout(() => {
           return this.getInvite()
         }, 1000)
@@ -160,14 +162,14 @@ class App extends Component {
 
   async handleSubmit() {
     this.state.submitClicked = true
-    console.log("handleSubmit", this.state.people)
-    console.log("handleSubmit", this.state.address)
+    logger("handleSubmit", this.state.people)
+    logger("handleSubmit", this.state.address)
     this.setState({
       submitClicked: true,
       didSubmit: true
     })
     if (this.anyYes() && !this.addressIsValid()) {
-      console.log("invalid address")
+      logger("invalid address")
       return
     }
 
@@ -183,7 +185,7 @@ class App extends Component {
         }
       })
     } catch (err) {
-      console.log("XX Error submitting", err)
+      logger("XX Error submitting", err)
       setTimeout(() => {
         return this.handleSubmit()
       }, 1000)
@@ -193,7 +195,7 @@ class App extends Component {
   /**
    * @param {React.ReactText} name
    */
-  click(name) {
+  attendOptionClick(name) {
     return (event) => {
       const update = this.state.people
       if (event.target.value === "Yes") {
@@ -208,11 +210,14 @@ class App extends Component {
       this.setState({
         people: update
       })
-      console.log("click", update)
+      logger("attendOptionClick", update)
     }
   }
 
-  addrChange(field, val) {
+  addrChange(event) {
+    const field = event.target.name
+    const val = event.target.value
+    logger("XX addr change", field, val)
     const update = this.state
     update.address[field] = val
     this.setState(update)
@@ -344,7 +349,7 @@ class App extends Component {
           <Divider className="divider" />
           <div className="cItem fox">
             <h1 className="gold-text cursive"> R.S.V.P. </h1>
-            <People people={this.state.people} click={this.click} />
+            <People people={this.state.people} click={this.attendOptionClick} />
           </div>
           <br />
           <div className={getDrawerClass()}>
