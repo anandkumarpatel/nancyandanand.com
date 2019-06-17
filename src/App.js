@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import Button from 'react-bootstrap/Button'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import { Waypoint } from 'react-waypoint'
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
@@ -22,7 +20,6 @@ import Star from './star.js'
 
 import star from './img/star.svg'
 
-const path = window && window.location && window.location.pathname
 const request = require('request-promise')
 
 const hostname = window && window.location && window.location.hostname
@@ -346,11 +343,11 @@ class App extends Component {
             <Address address={this.state.address} change={this.addrChange} ></Address>
             <Hotels info={this.state.hotel}></Hotels>
           </div>
-          <Row className={this.state.gotInvite ? "rsvp-button" : 'rsvp-button hidden'}>
-            <Col>
+          <div className={this.state.gotInvite ? "rsvp-button" : 'rsvp-button hidden'}>
+            <div className="info-hold">
               <Button size="lg" value="RSVP" onClick={this.handleSubmit} disabled={isSubmitDisabled()}>{getRsvpText()}</Button>
-            </Col>
-          </Row>
+            </div>
+          </div>
         </div>
       </div >
     )

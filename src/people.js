@@ -3,10 +3,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 class People extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   getItemColor(name) {
     if (this.props.people[name].isAttending === "Yes") {
       return "person yes"

@@ -287,7 +287,6 @@ h2 {
 
 .hotels {
   padding-top: 4rem;
-  padding-bottom: 4rem;
 }
 
 .gold-text {
@@ -295,7 +294,7 @@ h2 {
 }
 
 .rsvp-button {
-  padding: 2rem;
+  position: relative;
   padding-bottom: 25vh;
 }
 
