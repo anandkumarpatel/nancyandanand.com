@@ -259,17 +259,15 @@ h2 {
 
 .drawer {
   overflow: hidden;
-  height: 0;
+  display: none;
   opacity: 0;
-  -webkit-transition: height .5s, opacity .5s;
-  transition: height .5s, opacity .5s;
+  -webkit-transition: opacity 1s;
+  transition: opacity 1s;
 }
 
 .drawer-show {
+  display: block;
   opacity: 1;
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
 }
 
 .addr {

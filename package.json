@@ -19,6 +19,7 @@
     "request-promise": "^4.2.4"
   },
   "scripts": {
+    "heroku": "heroku container:login && heroku container:push web && heroku container:release web",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
