@@ -96,7 +96,7 @@ class App extends Component {
       gotInvite: false,
     }
 
-    logger("init state", this.state)
+    logger("XX init state", this.state)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.attendOptionClick = this.attendOptionClick.bind(this)
     this.handlePositionChange = this.handlePositionChange.bind(this)
@@ -152,7 +152,7 @@ class App extends Component {
         })
       })
       .catch((err) => {
-        logger(`get invite failed ${err.message}`)
+        logger(`XX get invite failed ${err.message}`)
         setTimeout(() => {
           return this.getInvite()
         }, 1000)
@@ -165,14 +165,14 @@ class App extends Component {
 
   async handleSubmit() {
     this.state.submitClicked = true
-    logger("handleSubmit", this.state.people)
-    logger("handleSubmit", this.state.address)
+    logger("XX handleSubmit", this.state.people)
+    logger("XX handleSubmit", this.state.address)
     this.setState({
       submitClicked: true,
       didSubmit: true
     })
     if (this.anyYes() && !this.addressIsValid()) {
-      logger("invalid address")
+      logger("XX invalid address")
       return
     }
 
@@ -213,7 +213,7 @@ class App extends Component {
       this.setState({
         people: update
       })
-      logger("attendOptionClick", update)
+      logger("XX attendOptionClick", update)
     }
   }
 
