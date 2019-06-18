@@ -125,11 +125,21 @@ async function main() {
   });
 
   app.get('/:id', (req, res) => {
+    let host = 'https://nancyandanand.com'
+    if (process.env.DEV === "yes") {
+      host = 'http://localhost:3000'
+    }
+
     res.cookie('id', req.params.id, {
-      maxAge: 864000000
+      httpOnly: false,
+      domain: host,
     })
-    // res.redirect('http://localhost:3000')
-    res.redirect('https://nancyandanand.com')
+
+    if (process.env.DEV === "yes") {
+      res.redirect('http://localhost:3000')
+    } else {
+      res.redirect('https://nancyandanand.com')
+    }
   })
 
   app.listen(PORT);
