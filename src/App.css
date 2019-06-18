@@ -87,7 +87,7 @@ h2 {
 .blue-font h1 {
   color: #95d7ef;
   -webkit-text-fill-color: transparent;
-  background-image: url(https://www.publicdomainpictures.net/pictures/260000/nahled/metallic-blue-background.jpg);
+  background-image: url('img/foil.jpg');
   background-repeat: repeat;
   -webkit-background-clip: text;
           background-clip: text;
