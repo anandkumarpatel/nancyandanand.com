@@ -114,11 +114,14 @@ class App extends Component {
   }
 
   getInvite() {
-
     if (IS_MOCK) {
       return setTimeout(() => {
         this.setState(MOCK)
       }, 100)
+    }
+
+    if (!this.state.id) {
+      return
     }
 
     return request(this.state.backendUrl, {
