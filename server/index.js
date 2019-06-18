@@ -125,14 +125,15 @@ async function main() {
   });
 
   app.get('/:id', (req, res) => {
-    let host = 'https://nancyandanand.com'
+    let host = 'nancyandanand.com'
     if (process.env.DEV === "yes") {
-      host = 'http://localhost:3000'
+      host = 'localhost:3000'
     }
 
     res.cookie('id', req.params.id, {
       httpOnly: false,
       domain: host,
+      path: '/',
     })
 
     if (process.env.DEV === "yes") {
