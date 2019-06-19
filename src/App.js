@@ -23,7 +23,7 @@ import star from './img/star.svg'
 const request = require('request-promise')
 
 const hostname = window && window.location && window.location.hostname
-let bURL = 'https://nancyandanand.herokuapp.com'
+let bURL = 'http://invite.nancyandanand.com'
 
 const B_MOCK = true
 let IS_MOCK = false
