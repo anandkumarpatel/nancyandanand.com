@@ -352,7 +352,7 @@ class App extends Component {
           <Divider className="divider" />
           <div className="cItem fox">
             <h1 className="gold-text cursive"> R.S.V.P. </h1>
-            <People people={this.state.people} click={this.attendOptionClick} />
+            <People valid={!!this.state.id} people={this.state.people} click={this.attendOptionClick} />
           </div>
           <br />
           <div className={getDrawerClass()}>

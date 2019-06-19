@@ -42,8 +42,12 @@ class People extends Component {
       </div>
     })
 
-    if (list.length === 0) {
+    if (!this.props.valid) {
       list = [(<div key="checkemail" >Check your email for RSVP link</div>)]
+    }
+
+    if (this.props.valid && list.length === 0) {
+      list = [(<div key="loadingrsvp">Loading your RSVP...</div>)]
     }
 
     return (
