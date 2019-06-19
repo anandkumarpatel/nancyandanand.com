@@ -133,7 +133,7 @@ class App extends Component {
         const didRSVP = data.didRSVP
         const address = data.address
         const flags = data.flags
-
+        window.FS.identify(`${this.state.id}--${people[0]}`)
         logger("XX setting invite", {
           people,
           hotel,
