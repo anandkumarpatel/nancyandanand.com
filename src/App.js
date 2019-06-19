@@ -41,9 +41,9 @@ if (hostname === "nancyandanand.com") {
 const MOCK = {
   "people": {
     "anand": { "isAttending": "?" },
-    // "nancy": { "isAttending": "?" },
-    // "Niru": { "isAttending": "?" },
-    // "Dhansukh": { "isAttending": "?" },
+    "nancy": { "isAttending": "?" },
+    "Niru": { "isAttending": "?" },
+    "Dhansukh": { "isAttending": "?" },
     // "people1": { "isAttending": "?" },
     // "people2": { "isAttending": "?" },
     // "people3": { "isAttending": "?" },
@@ -133,7 +133,8 @@ class App extends Component {
         const didRSVP = data.didRSVP
         const address = data.address
         const flags = data.flags
-        window.FS.identify(`${this.state.id}--${people[0]}`)
+
+        window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
         logger("XX setting invite", {
           people,
           hotel,
