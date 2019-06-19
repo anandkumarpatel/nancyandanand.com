@@ -125,9 +125,12 @@ async function main() {
   });
 
   app.get('/:id', (req, res) => {
+
     let host = 'nancyandanand.com'
     if (process.env.DEV === "yes") {
       host = 'localhost:3000'
+    } else if (!req.headers.host || !req.headers.host.includes('nancy')) {
+      res.send('OK')
     }
 
     res.cookie('id', req.params.id, {
