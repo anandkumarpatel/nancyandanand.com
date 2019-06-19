@@ -19,6 +19,7 @@
     "request-promise": "^4.2.4"
   },
   "scripts": {
+    "update": "ssh ubuntu@wedding './wedding-update.sh'",
     "heroku": "heroku container:login && heroku container:push web && heroku container:release web",
     "hon": "heroku scale web=1",
     "hoff": "heroku scale web=0",

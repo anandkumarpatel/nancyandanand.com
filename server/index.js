@@ -125,7 +125,7 @@ async function main() {
   });
 
   app.get('/:id', (req, res) => {
-
+    console.log("invite hit", req.params.id)
     let host = 'nancyandanand.com'
     if (process.env.DEV === "yes") {
       host = 'localhost:3000'
