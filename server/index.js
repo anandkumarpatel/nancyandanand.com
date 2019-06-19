@@ -130,7 +130,7 @@ async function main() {
     if (process.env.DEV === "yes") {
       host = 'localhost:3000'
     } else if (!req.headers.host || !req.headers.host.includes('nancy')) {
-      res.send('OK')
+      return res.send('OK')
     }
 
     res.cookie('id', req.params.id, {
