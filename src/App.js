@@ -27,10 +27,12 @@ let bURL = 'https://invite.nancyandanand.com'
 
 const B_MOCK = true
 let IS_MOCK = false
+let IS_LOCAL = false
 let logger = () => { }
 
 if (/^localhost/.test(hostname) && B_MOCK) {
   bURL = `http://localhost:8080`
+  IS_LOCAL = true
   logger = console.log
 }
 
@@ -94,6 +96,7 @@ class App extends Component {
       submitClicked: false,
       backendUrl: `${bURL}/invite/${id}`,
       gotInvite: false,
+      invite: {},
     }
 
     logger("XX init state", this.state)
@@ -134,7 +137,10 @@ class App extends Component {
         const address = data.address
         const flags = data.flags
 
-        window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
+        if (!IS_LOCAL) {
+          window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
+        }
+
         logger("XX setting invite", {
           people,
           hotel,
@@ -149,7 +155,11 @@ class App extends Component {
           didRSVP,
           address,
           flags,
-          gotInvite: true
+          gotInvite: true,
+          invite: JSON.parse(JSON.stringify({
+            people,
+            address,
+          }))
         })
       })
       .catch((err) => {
@@ -158,6 +168,37 @@ class App extends Component {
           return this.getInvite()
         }, 1000)
       })
+  }
+
+  rsvpChanged() {
+    return !this.isEquivalent(this.state.invite, {
+      people: this.state.people,
+      address: this.state.address
+    })
+  }
+
+  isEquivalent(a, b) {
+    var aProps = Object.keys(a);
+    var bProps = Object.keys(b);
+
+    if (aProps.length !== bProps.length) {
+      return false;
+    }
+
+    for (var i = 0; i < aProps.length; i++) {
+      var propName = aProps[i];
+      if (typeof a[propName] === "object") {
+        if (!this.isEquivalent(a[propName], b[propName])) {
+          return false
+        }
+        continue
+      }
+
+      if (a[propName] !== b[propName]) {
+        return false;
+      }
+    }
+    return true;
   }
 
   addressIsValid() {
@@ -239,7 +280,7 @@ class App extends Component {
 
   render() {
     const isSubmitDisabled = () => {
-      return !this.state.gotInvite || anyNoAnswer() || (this.anyYes() && !this.addressIsValid()) || this.state.submitClicked
+      return !this.state.gotInvite || anyNoAnswer() || (this.anyYes() && !this.addressIsValid()) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
     }
 
     const anyNoAnswer = () => {
@@ -266,6 +307,15 @@ class App extends Component {
 
       if (this.anyYes() && !this.addressIsValid()) {
         return "Please enter mailing address"
+      }
+
+
+      if (this.state.didRSVP) {
+        if (this.rsvpChanged()) {
+          return "Click to update RSVP"
+        } else {
+          return "RSVP Confirmed"
+        }
       }
 
       return "Click to RSVP"
