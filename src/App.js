@@ -96,7 +96,6 @@ class App extends Component {
       },
       events: {},
       flags: {},
-      didSubmit: false,
       submitClicked: false,
       backendUrl: `${bURL}/invite/${id}`,
       gotInvite: false,
@@ -178,7 +177,8 @@ class App extends Component {
   rsvpChanged() {
     return !this.isEquivalent(this.state.invite, {
       people: this.state.people,
-      address: this.state.address
+      address: this.state.address,
+      events: this.state.events
     })
   }
 
@@ -216,7 +216,6 @@ class App extends Component {
     logger("XX handleSubmit", this.state.address)
     this.setState({
       submitClicked: true,
-      didSubmit: true
     })
     if (this.anyYes() && !this.addressIsValid()) {
       logger("XX invalid address")
@@ -232,6 +231,7 @@ class App extends Component {
         json: {
           people: this.state.people,
           address: this.state.address,
+          events: this.state.events,
         }
       })
     } catch (err) {
@@ -377,11 +377,11 @@ class App extends Component {
       return "Click to RSVP"
     }
 
-    if (this.state.didSubmit) {
+    if (this.state.submitClicked) {
       window.scrollTo(0, 0)
       return (
         <div className="App" id="App">
-          <Msg show={this.state.didSubmit} yesList={this.yesList()} />
+          <Msg show={this.state.submitClicked} yesList={this.yesList()} />
         </div>
       )
     }
