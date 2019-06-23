@@ -33,7 +33,6 @@ class Events extends Component {
     if (!this.props.flags.pithi && !this.props.flags.mehndi) {
       return null
     }
-
     return (
       <Container className="events">
         <Row>

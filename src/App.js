@@ -326,10 +326,11 @@ class App extends Component {
   eventChange(event) {
     return (e) => {
       const update = {
-        events: {}
+        events: this.state.events
       }
       update.events[event] = e.target.value
       this.setState(update)
+      logger("XX eventChange", update)
     }
   }
 
