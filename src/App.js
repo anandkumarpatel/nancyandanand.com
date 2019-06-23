@@ -20,6 +20,7 @@ import People from './people.js'
 import Pithi from './pithi.js'
 import Star from './star.js'
 import Stars from './stars.js'
+import Welcome from './welcome.js'
 
 import star from './img/star.svg'
 
@@ -437,6 +438,14 @@ class App extends Component {
         </div>
         {this.getMehndi()}
         {this.getPithi()}
+        <Divider className="divider" />
+        <div className="cItem date">
+          <div className="info-hold">
+            <Welcome className="detail welcome" />
+            <h1> Welcome Dinner </h1>
+            <p> April 3th 2020 </p>
+          </div>
+        </div>
         <Divider className="divider" />
         <div className="cItem date">
           <div className="info-hold">

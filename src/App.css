@@ -131,8 +131,15 @@ h2 {
 .detail {
   position: relative;
   max-height:  20vh;
-  max-width: 500px;
+  max-width: 60vw;
 }
+
+@media screen and (min-width: 800px) {
+  .detail {
+    max-width: 500px;
+  }
+}
+
 
 .fox {
   padding: 2rem;
