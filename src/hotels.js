@@ -48,7 +48,13 @@ class Hotels extends Component {
       }
 
       if (this.props.info.rate === "89") {
-        const sKind = this.props.flags.boice ? 'Boice' : 'Brides'
+        let sKind = 'Family'
+        if (this.props.flags.boice) {
+          sKind = 'Boice'
+        } else if (this.props.flags.gsuite) {
+          sKind = 'Bridal'
+        }
+
         return (
           <p>
             You have been assigned to the {sKind} suite at the <a href={homepage}>{name}</a>.
