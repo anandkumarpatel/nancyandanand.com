@@ -288,7 +288,7 @@ class App extends Component {
   }
 
   getMehndi() {
-    if (!this.state.flags.mehndi) {
+    if (!this.state.events.mehndi) {
       return null
     }
 
@@ -308,7 +308,7 @@ class App extends Component {
   }
 
   getPithi() {
-    if (!this.state.flags.pithi) {
+    if (!this.state.events.pithi) {
       return null
     }
 
