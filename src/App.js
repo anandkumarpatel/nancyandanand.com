@@ -140,6 +140,7 @@ class App extends Component {
         const didRSVP = data.didRSVP
         const address = data.address
         const flags = data.flags
+        const events = data.events
 
         if (!IS_LOCAL) {
           window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
@@ -150,8 +151,9 @@ class App extends Component {
           hotel,
           didRSVP,
           address,
-          flags
-        }, data, typeof data)
+          flags,
+          events
+        })
 
         this.setState({
           people,
@@ -159,10 +161,12 @@ class App extends Component {
           didRSVP,
           address,
           flags,
+          events,
           gotInvite: true,
           invite: JSON.parse(JSON.stringify({
             people,
             address,
+            events,
           }))
         })
       })
@@ -466,7 +470,7 @@ class App extends Component {
           <br />
           <div className={getDrawerClass()}>
             <Address address={this.state.address} change={this.addrChange} />
-            <Events events={this.state.events} click={this.eventChange} flags={this.state.flags} />
+            <Events events={this.state.events} click={this.eventChange} />
             <Hotels flags={this.state.flags} info={this.state.hotel} />
           </div>
           <div className={this.state.gotInvite ? "rsvp-button" : 'rsvp-button hidden'}>

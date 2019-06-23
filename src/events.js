@@ -9,7 +9,7 @@ class Events extends Component {
   }
 
   getEvent(name) {
-    if (!this.props.flags[name]) {
+    if (!this.props.events[name]) {
       return null
     }
     return (
@@ -28,9 +28,10 @@ class Events extends Component {
   }
 
   render() {
-    if (!this.props.flags.pithi && !this.props.flags.mehndi) {
+    if (Object.keys(this.props.events).length === 0) {
       return null
     }
+
     return (
       <Container className="events">
         <Row>

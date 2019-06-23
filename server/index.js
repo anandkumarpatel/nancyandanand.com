@@ -6,38 +6,25 @@ const jsonParser = bodyParser.json();
 
 const SHEET_ID = process.env.SHEET_ID || "1Ab3fNGhNv1UIR6KQcxYi0OKK2kVYG5v0ecn7cyVux_Q"
 const PORT = process.env.PORT || 8080
-const TEST_ID = process.env.TEST_ID || "2|bharat"
+const TEST_ID = process.env.TEST_ID || "2|test"
 const ROW_MAP = {
   lastName: 0,
   invitedList: 1,
   hotelType: 2,
   rate: 3,
   flags: 4,
-  attendingList: 5,
-  declineList: 6,
-  didRSVP: 7,
-  address: 8,
+  events: 5,
+  attendingList: 6,
+  declineList: 7,
+  didRSVP: 8,
+  address: 9,
+  attendingEvents: 10,
 }
 
 const TABLE_NAME = 'list'
-const FIRST_DATA = 'F'
-const LAST_DATA = 'I'
+const FIRST_DATA = 'G'
+const LAST_DATA = 'K'
 const FULL_RANGE = `A2:${LAST_DATA}`
-
-const MOCK = {
-  "people": {
-    "no1": { "isAttending": "No" },
-    "yes1": { "isAttending": "Yes" },
-    "no2": { "isAttending": "No" },
-    "yes2": { "isAttending": "Yes" }
-  },
-  "hotel": {
-    "rate": "0",
-    "name": "GT"
-  },
-  "didRSVP": false,
-  sheetLoaded: true,
-}
 
 app.use((req, res, next) => {
   if (process.env.DEV === "yes") {
@@ -66,20 +53,6 @@ async function main() {
   getRowById(sheets, TEST_ID)
     .then(parseRow)
     .then(console.log)
-  // .then(() => {
-  //   return getRowById(sheets, "5|patel")
-  //     .then((row) => {
-  //       console.log("XX got row", row)
-  //       updateRow(row, MOCK)
-  //       return saveRow(sheets, row)
-  //     })
-  //     .then(() => {
-  //       console.log("XX sending OK")
-  //     })
-  //     .catch((err) => {
-  //       console.log("XX sending err", err)
-  //     })
-  // })
 
   app.get('/invite/:id', (req, res) => {
     const id = Buffer.from(req.params.id, 'base64').toString('ascii');
@@ -100,15 +73,16 @@ async function main() {
 
   app.post('/invite/:id', jsonParser, (req, res) => {
     const id = Buffer.from(req.params.id, 'base64').toString('ascii');
-    let { people, address } = req.body
-    console.log("XX got id", id, "and people", people, "address", address)
+    let { people, address, events } = req.body
+    console.log("XX got id", id, "and people", people, "address", address, "events", events)
 
     getRowById(sheets, id)
       .then((row) => {
         console.log("XX got row", row)
         updateRow(row, {
           people,
-          address
+          address,
+          events,
         })
         return saveRow(sheets, row)
       })
@@ -201,7 +175,7 @@ const saveRow = (sheets, updateRow) => {
 }
 
 const updateRow = (row, update) => {
-  const { people, address } = update
+  const { people, address, events } = update
   const attendingList = []
   const declineList = []
 
@@ -213,10 +187,15 @@ const updateRow = (row, update) => {
     }
   })
 
+
   row[ROW_MAP.attendingList] = attendingList.join('|')
   row[ROW_MAP.declineList] = declineList.join('|')
   row[ROW_MAP.didRSVP] = true
-  row[ROW_MAP.address] = `${address.street} | ${address.city} | ${address.state} | ${address.zip} | ${address.country}`
+  row[ROW_MAP.address] = !!address.street ? `${address.street} | ${address.city} | ${address.state} | ${address.zip} | ${address.country}` : ""
+
+  row[ROW_MAP.attendingEvents] = Object.keys(events).filter((key) => {
+    return events[key] === 'Yes'
+  }).join("|")
 }
 
 const parseRow = (data) => {
@@ -225,17 +204,35 @@ const parseRow = (data) => {
   const declineList = data[ROW_MAP.declineList] || ""
   const didRSVP = data[ROW_MAP.didRSVP] || false
   const flagList = data[ROW_MAP.flags] || ""
-  const rawAddr = data[ROW_MAP.address] || ""
   const flags = flagList.split('|').reduce((prev, cur) => {
+    if (!cur) {
+      return prev
+    }
     const split = cur.split("=")
     const key = split[0]
     if (!key) {
       return prev
     }
-    const val = split[1] || "yes"
+    const val = split[1] || "Yes"
     prev[key] = val
     return prev
   }, {})
+
+  const rawEvents = data[ROW_MAP.events] || ""
+  const attendingEvents = data[ROW_MAP.attendingEvents] || ""
+  const events = rawEvents.split("|").reduce((prev, cur) => {
+    if (!cur) {
+      return prev
+    }
+    let no = "?"
+    if (didRSVP) {
+      no = "No"
+    }
+    prev[cur] = attendingEvents.includes(cur) ? "Yes" : no
+    return prev
+  }, {})
+
+  const rawAddr = data[ROW_MAP.address] || ""
   const addr = rawAddr.split("|")
   const address = addr[4] ? {
     street: addr[0].trim(),
@@ -290,6 +287,7 @@ const parseRow = (data) => {
     didRSVP,
     address,
     flags,
+    events,
   }
 }
 
