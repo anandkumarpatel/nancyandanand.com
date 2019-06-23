@@ -6,19 +6,20 @@ import { withCookies, Cookies } from 'react-cookie'
 
 import './App.css'
 
-import People from './people.js'
-import Divider from './divider.js'
-import Dance from './dance.js'
-import Hotels from './hotels.js'
 import Address from './address.js'
-import Msg from './msg.js'
-import Stars from './stars.js'
-import Garnesh from './garnesh.js'
-import Atl from './atl.js'
 import April from './april.js'
-import Star from './star.js'
+import Atl from './atl.js'
+import Dance from './dance.js'
+import Divider from './divider.js'
+import Events from './events.js'
+import Garnesh from './garnesh.js'
+import Hotels from './hotels.js'
 import Mehndi from './mehndi.js'
+import Msg from './msg.js'
+import People from './people.js'
 import Pithi from './pithi.js'
+import Star from './star.js'
+import Stars from './stars.js'
 
 import star from './img/star.svg'
 
@@ -93,6 +94,7 @@ class App extends Component {
         zip: '',
         country: '',
       },
+      events: {},
       flags: {},
       didSubmit: false,
       submitClicked: false,
@@ -105,6 +107,7 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.attendOptionClick = this.attendOptionClick.bind(this)
     this.handlePositionChange = this.handlePositionChange.bind(this)
+    this.eventChange = this.eventChange.bind(this)
     this.addrChange = this.addrChange.bind(this)
     this.getInvite()
   }
@@ -320,6 +323,16 @@ class App extends Component {
     )
   }
 
+  eventChange(event) {
+    return (e) => {
+      const update = {
+        events: {}
+      }
+      update.events[event] = e.target.value
+      this.setState(update)
+    }
+  }
+
   render() {
     const isSubmitDisabled = () => {
       return !this.state.gotInvite || anyNoAnswer() || (this.anyYes() && !this.addressIsValid()) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
@@ -451,8 +464,9 @@ class App extends Component {
           </div>
           <br />
           <div className={getDrawerClass()}>
-            <Address address={this.state.address} change={this.addrChange} ></Address>
-            <Hotels flags={this.state.flags} info={this.state.hotel}></Hotels>
+            <Address address={this.state.address} change={this.addrChange} />
+            <Events events={this.state.events} click={this.eventChange} flags={this.state.flags} />
+            <Hotels flags={this.state.flags} info={this.state.hotel} />
           </div>
           <div className={this.state.gotInvite ? "rsvp-button" : 'rsvp-button hidden'}>
             <div className="info-hold">

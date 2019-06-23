@@ -3,40 +3,20 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 class People extends Component {
-  getItemColor(name) {
-    if (this.props.people[name].isAttending === "Yes") {
-      return "person yes"
-    }
-    if (this.props.people[name].isAttending === "No") {
-      return "person no"
-    }
-    return "person"
-  }
-
-  getButtonColor(type, name) {
-    let out = type + " ask"
-    if (this.props.people[name].isAttending === "Yes") {
-      out += " yes"
-    } else if (this.props.people[name].isAttending === "No") {
-      out += " no"
-    }
-    return out
-  }
-
   render() {
     var people = this.props.people || []
     var peopleList = Object.keys(this.props.people)
     var list = peopleList.map((name) => {
-      return <div key={name} className={this.getItemColor(name)}>
+      return <div key={name} className="person">
         <Row>
           <Col sm="6">
             {name}
           </Col>
           <Col>
-            <button className={this.getButtonColor("bYes", name)} onClick={this.props.click(name)} value="Yes" disabled={people[name].isAttending === "Yes"}>Yes</button>
+            <button className="bYes ask" onClick={this.props.click(name)} value="Yes" disabled={people[name].isAttending === "Yes"}>Yes</button>
           </Col>
           <Col>
-            <button className={this.getButtonColor("bNo", name)} onClick={this.props.click(name)} value="No" disabled={people[name].isAttending === "No"}>No</button>
+            <button className="bNo ask" onClick={this.props.click(name)} value="No" disabled={people[name].isAttending === "No"}>No</button>
           </Col>
         </Row>
       </div>

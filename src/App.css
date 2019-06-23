@@ -225,26 +225,14 @@ h2 {
   color: var(--fox-white);
 }
 
-.bYes {
-  color: var(--black);
-  background: var(--black);
-}
-
 .bYes:hover, .bYes:disabled {
   color: var(--black);
   background: var(--fox-gold-bright);
-  border-color: var(--fox-red);
-}
-
-.bNo {
-  color:var(--black);
-  background: var(--black);
 }
 
 .bNo:hover, .bNo:disabled {
   color: var(--black);
   background: var(--fox-grey);
-  border-color: var(--fox-red);
 }
 
 .ask {
@@ -255,6 +243,7 @@ h2 {
   border-width: 2px;
   color: var(--fox-white);
   width: 90%;
+  background: var(--black);
 }
 
 .drawer {
@@ -268,6 +257,16 @@ h2 {
 .drawer-show {
   display: block;
   opacity: 1;
+}
+
+.events {
+  position: relative;
+  margin-top: 2vh;
+  border: 1rem double var(--fox-red);
+  font-size: var(--p-size);
+  background: var(--black);
+  color: var(--fox-white);
+  max-width: 752px;
 }
 
 .addr {
