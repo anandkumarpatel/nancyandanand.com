@@ -17,6 +17,8 @@ import Garnesh from './garnesh.js'
 import Atl from './atl.js'
 import April from './april.js'
 import Star from './star.js'
+import Mehndi from './mehndi.js'
+import Pithi from './pithi.js'
 
 import star from './img/star.svg'
 
@@ -278,6 +280,46 @@ class App extends Component {
     return this.yesList().length > 0
   }
 
+  getMehndi() {
+    if (!this.state.flags.mehndi) {
+      return null
+    }
+
+    return (
+      <div>
+        <Divider className="divider" />
+        <div className="cItem">
+          <div className="info-hold">
+            <Mehndi className="detail mehndi" />
+            <h1> Mehndi Night </h1>
+            <p> April 2rd </p>
+            <p> Thakkar Household </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  getPithi() {
+    if (!this.state.flags.pithi) {
+      return null
+    }
+
+    return (
+      <div>
+        <Divider className="divider" />
+        <div className="cItem">
+          <div className="info-hold">
+            <Pithi className="detail pithi" />
+            <h1> Pithi Night </h1>
+            <p> April 3rd </p>
+            <p> Thakkar Household </p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   render() {
     const isSubmitDisabled = () => {
       return !this.state.gotInvite || anyNoAnswer() || (this.anyYes() && !this.addressIsValid()) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
@@ -368,17 +410,19 @@ class App extends Component {
           </div>
         </div>
         <Divider className="divider" />
-        <div className="cItem date">
-          <div className="info-hold">
-            <April className="detail april" />
-            <h1> April 4th 2020 </h1>
-          </div>
-        </div>
-        <Divider className="divider" />
         <div className="cItem location">
           <div className="info-hold">
             <Atl className="detail atl" />
             <h1> Atlanta, GA </h1>
+          </div>
+        </div>
+        {this.getMehndi()}
+        {this.getPithi()}
+        <Divider className="divider" />
+        <div className="cItem date">
+          <div className="info-hold">
+            <April className="detail april" />
+            <h1> April 4th 2020 </h1>
           </div>
         </div>
         <Divider className="divider" />
