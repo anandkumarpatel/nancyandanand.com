@@ -33,7 +33,7 @@ let IS_MOCK = false
 let IS_LOCAL = false
 let logger = () => { }
 
-if (/^localhost/.test(hostname) && B_MOCK) {
+if (!hostname.includes("nancy") && B_MOCK) {
   bURL = `http://localhost:8080`
   IS_LOCAL = true
   logger = console.log
@@ -41,6 +41,7 @@ if (/^localhost/.test(hostname) && B_MOCK) {
 
 if (hostname === "nancyandanand.com") {
   IS_MOCK = false
+  IS_LOCAL = false
 }
 
 const MOCK = {
@@ -293,7 +294,7 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <React.Fragment>
         <Divider className="divider" />
         <div className="cItem">
           <div className="info-hold">
@@ -303,7 +304,7 @@ class App extends Component {
             <p> Thakkar Household </p>
           </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 
@@ -313,7 +314,7 @@ class App extends Component {
     }
 
     return (
-      <div>
+      <React.Fragment>
         <Divider className="divider" />
         <div className="cItem">
           <div className="info-hold">
@@ -323,7 +324,7 @@ class App extends Component {
             <p> Thakkar Household </p>
           </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 
