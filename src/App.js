@@ -30,7 +30,7 @@ const hostname = window && window.location && window.location.hostname
 let bURL = 'https://invite.nancyandanand.com'
 
 const B_MOCK = true
-let IS_MOCK = false
+let IS_MOCK = true
 let IS_LOCAL = false
 let logger = () => { }
 
@@ -62,6 +62,15 @@ const MOCK = {
   "didRSVP": false,
   gotInvite: true,
   submitted: true,
+  flags: {
+    afam: "Yes",
+    // flight: "sfo".
+    // boice: "Yes"
+  },
+  events: {
+    pithi: "Yes",
+    mehndi: "Yes"
+  }
   // address: {
   //   street: '860 peachtree street NE unit 1814',
   //   city: 'Atlanta',
@@ -294,6 +303,15 @@ class App extends Component {
       return null
     }
 
+    // Nancy info
+    let date = "April 2rd"
+    let location = "Saha Household"
+    if (this.state.flags.afam) {
+      // Anands info
+      date = "April 1st"
+      location = "Mandir"
+    }
+
     return (
       <React.Fragment>
         <Divider className="divider" />
@@ -301,8 +319,8 @@ class App extends Component {
           <div className="info-hold">
             <Mehndi className="detail mehndi" />
             <h1> Mehndi Night </h1>
-            <p> April 2rd </p>
-            <p> Thakkar Household </p>
+            <p> {date} </p>
+            <p> {location}</p>
           </div>
         </div>
       </React.Fragment>
@@ -314,15 +332,25 @@ class App extends Component {
       return null
     }
 
+    // Nancy info
+    let date = "April 3rd"
+    let location = "Thakkar Household"
+    let event = "Pithi"
+    if (this.state.flags.afam) {
+      // Anands info
+      date = "April 1st"
+      location = "Mandir"
+    }
+
     return (
       <React.Fragment>
         <Divider className="divider" />
         <div className="cItem">
           <div className="info-hold">
             <Pithi className="detail pithi" />
-            <h1> Pithi Night </h1>
-            <p> April 3rd </p>
-            <p> Thakkar Household </p>
+            <h1> {event} </h1>
+            <p> {date} </p>
+            <p> {location} </p>
           </div>
         </div>
       </React.Fragment>
@@ -443,7 +471,7 @@ class App extends Component {
           <div className="info-hold">
             <Welcome className="detail welcome" />
             <h1> Welcome Dinner </h1>
-            <p> April 3th 2020 </p>
+            <p> April 3th </p>
           </div>
         </div>
         <Divider className="divider" />

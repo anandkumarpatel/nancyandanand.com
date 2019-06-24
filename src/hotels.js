@@ -18,6 +18,7 @@ const HOTEL_MAP = {
 const FLIGHT_MAP = {
   sfo: "https://www.google.com/flights?hl=en#flt=SFO.ATL.2020-04-03*ATL.SFO.2020-04-05;c:USD;e:1;sd:1;t:f",
   lhr: "https://www.google.com/flights?hl=en#flt=/m/04jpl.ATL.2020-04-03*ATL./m/04jpl.2020-04-05;c:USD;e:1;sd:1;t:f",
+  ord: "https://www.google.com/flights?hl=en#flt=/m/01_d4.ATL.2020-04-03*ATL./m/01_d4.2020-04-05;c:USD;e:1;sd:1;t:f",
 }
 
 class Hotels extends Component {
