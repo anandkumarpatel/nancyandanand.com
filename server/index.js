@@ -56,7 +56,7 @@ async function main() {
 
   app.get('/invite/:id', (req, res) => {
     const id = Buffer.from(req.params.id, 'base64').toString('ascii');
-    console.log("XX got id", id)
+    console.log("XX GET invite id", id)
     getRowById(sheets, id)
       .then(parseRow)
       .then((data) => {
@@ -74,7 +74,7 @@ async function main() {
   app.post('/invite/:id', jsonParser, (req, res) => {
     const id = Buffer.from(req.params.id, 'base64').toString('ascii');
     let { people, address, events } = req.body
-    console.log("XX got id", id, "and people", people, "address", address, "events", events)
+    console.log("XX POST id", id, "and people", people, "address", address, "events", events)
 
     getRowById(sheets, id)
       .then((row) => {
