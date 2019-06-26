@@ -53,7 +53,7 @@ class Events extends Component {
           <Col>
             Wedding
           </Col>
-          <Col >
+          <Col sm="6">
             <button className="bYes ask" disabled={true}>Yes</button>
           </Col>
         </Row>
@@ -61,7 +61,7 @@ class Events extends Component {
           <Col>
             Reception
           </Col>
-          <Col >
+          <Col sm="6">
             <button className="bYes ask" disabled={true}>Yes</button>
           </Col>
         </Row>

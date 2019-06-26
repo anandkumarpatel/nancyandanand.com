@@ -255,15 +255,16 @@ h2 {
 
 .drawer {
   overflow: hidden;
-  display: none;
+  height: 0px;
   opacity: 0;
-  -webkit-transition: opacity 1s;
-  transition: opacity 1s;
+  -webkit-transition: opacity .4s, height .3s;
+  transition: opacity .4s, height .3s;
 }
 
 .drawer-show {
   display: block;
   opacity: 1;
+  height: 100%;
 }
 
 .events {
