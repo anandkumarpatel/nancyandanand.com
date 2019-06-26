@@ -3,6 +3,11 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+const EVENT_MAP = {
+  wdin: "Welcome Dinner",
+  mehndi: "Mehndi",
+  pithi: "Pithi",
+}
 class Events extends Component {
   upperCase(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -12,10 +17,12 @@ class Events extends Component {
     if (!this.props.events[name]) {
       return null
     }
+    const event = EVENT_MAP[name]
+
     return (
       <Row>
         <Col sm="6">
-          {this.upperCase(name)}
+          {event}
         </Col>
         <Col>
           <button className="bYes ask" onClick={this.props.click(name)} value="Yes" disabled={this.props.events[name] === "Yes"}>Yes</button>
@@ -39,6 +46,9 @@ class Events extends Component {
             Events
           </Col>
         </Row>
+        {this.getEvent("pithi")}
+        {this.getEvent("mehndi")}
+        {this.getEvent("wdin")}
         <Row>
           <Col>
             Wedding
@@ -47,8 +57,14 @@ class Events extends Component {
             <button className="bYes ask" disabled={true}>Yes</button>
           </Col>
         </Row>
-        {this.getEvent("pithi")}
-        {this.getEvent("mehndi")}
+        <Row>
+          <Col>
+            Reception
+          </Col>
+          <Col >
+            <button className="bYes ask" disabled={true}>Yes</button>
+          </Col>
+        </Row>
       </Container>
     )
   }

@@ -30,7 +30,7 @@ const hostname = window && window.location && window.location.hostname
 let bURL = 'https://invite.nancyandanand.com'
 
 const B_MOCK = true
-let IS_MOCK = true
+let IS_MOCK = false
 let IS_LOCAL = false
 let logger = () => { }
 
@@ -368,12 +368,19 @@ class App extends Component {
     }
   }
 
+  anyMissingEvent() {
+    return Object.keys(this.state.events).some((name) => {
+      return "?" === this.state.events[name]
+    })
+  }
+
+
   render() {
     const isSubmitDisabled = () => {
-      return !this.state.gotInvite || anyNoAnswer() || (this.anyYes() && !this.addressIsValid()) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
+      return !this.state.gotInvite || anyMissingAnswer() || (this.anyYes() && (!this.addressIsValid() || this.anyMissingEvent())) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
     }
 
-    const anyNoAnswer = () => {
+    const anyMissingAnswer = () => {
       return Object.keys(this.state.people).some((name) => {
         return "?" === this.state.people[name].isAttending
       })
@@ -391,12 +398,17 @@ class App extends Component {
         return ''
       }
 
-      if (anyNoAnswer()) {
+      if (anyMissingAnswer()) {
         return "Please click Yes or No for all guests above"
       }
 
-      if (this.anyYes() && !this.addressIsValid()) {
-        return "Please enter mailing address"
+      if (this.anyYes()) {
+        if (!this.addressIsValid()) {
+          return "Please enter mailing address"
+        }
+        if (this.anyMissingEvent()) {
+          return "Please click Yes or No for all events above"
+        }
       }
 
 
@@ -421,7 +433,7 @@ class App extends Component {
     }
 
     return (
-      <div className="App" id="App">
+      <div className="App" id="App" >
         <div className='star-drop' style={{ top: "1vh", left: "calc(1rem + 45px)", animationDelay: ".5s" }}>
           <div className='star-sway' style={{ animationDelay: "1.5s" }} >
             <Star src={star} className="star" />
