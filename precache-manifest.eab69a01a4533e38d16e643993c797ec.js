@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1d9857f476fb1b383cf651df6578c939",
+    "revision": "4be45260ccba860389962ecb3799dce3",
     "url": "/index.html"
   },
   {
-    "revision": "371ff1eb76858254335d",
-    "url": "/static/css/main.15d3d05a.chunk.css"
+    "revision": "3b45e9cd76db83f88f4e",
+    "url": "/static/css/main.bd30408a.chunk.css"
   },
   {
-    "revision": "c6f99dfc40e4036cb237",
-    "url": "/static/js/2.6e5ee207.chunk.js"
+    "revision": "06d626aceeea405501b9",
+    "url": "/static/js/2.6872668c.chunk.js"
   },
   {
-    "revision": "371ff1eb76858254335d",
-    "url": "/static/js/main.ffa8ed48.chunk.js"
+    "revision": "3b45e9cd76db83f88f4e",
+    "url": "/static/js/main.eb908336.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -24,8 +24,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/media/foil.2f4c8ee3.jpg"
   },
   {
-    "revision": "cacdd9b4bb55215df0e95f72176bd3a3",
-    "url": "/static/media/mehndi_animated.cacdd9b4.svg"
+    "revision": "7833dacf3fb0ec713738ef24344c131f",
+    "url": "/static/media/mehndi_animated.7833dacf.svg"
   },
   {
     "revision": "dd5d27acf7402c79e007439f970e25a5",
