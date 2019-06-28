@@ -26,6 +26,10 @@ const FIRST_DATA = 'G'
 const LAST_DATA = 'K'
 const FULL_RANGE = `A2:${LAST_DATA}`
 
+const logger = (...args) => {
+  console.log(new Date(), ...args)
+}
+
 app.use((req, res, next) => {
   if (process.env.DEV === "yes") {
     res.header("Access-Control-Allow-Origin", "*")
@@ -52,19 +56,19 @@ async function main() {
 
   getRowById(sheets, TEST_ID)
     .then(parseRow)
-    .then(console.log)
+    .then(logger)
 
   app.get('/invite/:id', (req, res) => {
     const id = Buffer.from(req.params.id, 'base64').toString('ascii');
-    console.log("XX GET invite id", id)
+    logger("XX GET invite id", id)
     getRowById(sheets, id)
       .then(parseRow)
       .then((data) => {
-        console.log("XX sending data", data)
+        logger("XX sending data", data)
         res.json(data)
       })
       .catch((err) => {
-        console.log("XX sending err", err)
+        logger("XX sending err", err)
         res.status(500).json({
           err: err.message
         })
@@ -74,11 +78,11 @@ async function main() {
   app.post('/invite/:id', jsonParser, (req, res) => {
     const id = Buffer.from(req.params.id, 'base64').toString('ascii');
     let { people, address, events } = req.body
-    console.log("XX POST id", id, "and people", people, "address", address, "events", events)
+    logger("XX POST id", id, "and people", people, "address", address, "events", events)
 
     getRowById(sheets, id)
       .then((row) => {
-        console.log("XX got row", row)
+        logger("XX got row", row)
         updateRow(row, {
           people,
           address,
@@ -87,11 +91,11 @@ async function main() {
         return saveRow(sheets, row)
       })
       .then(() => {
-        console.log("XX sending OK")
+        logger("XX sending OK")
         res.status(200).send('OK')
       })
       .catch((err) => {
-        console.log("XX sending err", err)
+        logger("XX sending err", err)
         res.status(500).json({
           err: err.message
         })
@@ -99,7 +103,7 @@ async function main() {
   });
 
   app.get('/:id', (req, res) => {
-    console.log("invite hit", req.params.id)
+    logger("invite hit", req.params.id)
     let host = 'nancyandanand.com'
     if (process.env.DEV === "yes") {
       host = 'localhost:3000'
@@ -121,7 +125,7 @@ async function main() {
   })
 
   app.listen(PORT);
-  console.log(`listening http://localhost:${PORT}`);
+  logger(`listening http://localhost:${PORT}`);
 }
 
 /**
@@ -134,7 +138,7 @@ const getRowById = (sheets, id) => {
     range: `${TABLE_NAME}!${FULL_RANGE}`
   })
     .catch((err) => {
-      console.log('XX GET google Sheet API error: ' + err);
+      logger('XX GET google Sheet API error: ' + err);
       throw err
     })
     .then((gRes) => {
@@ -158,7 +162,7 @@ const saveRow = (sheets, updateRow) => {
   }
   const values = [updateRow.slice(ROW_MAP.attendingList)]
   const range = `${TABLE_NAME}!${FIRST_DATA}${row}:${LAST_DATA}${row}`
-  console.log('XX updating row', updateRow)
+  logger('XX updating row', updateRow)
   return sheets.spreadsheets.values.update({
     spreadsheetId: SHEET_ID,
     range,
@@ -169,7 +173,7 @@ const saveRow = (sheets, updateRow) => {
     }
   })
     .catch((err) => {
-      console.log('XX SAVE google sheets API error: ' + err);
+      logger('XX SAVE google sheets API error: ' + err);
       throw err
     })
 }
