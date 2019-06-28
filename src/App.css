@@ -298,7 +298,7 @@ h2 {
   color:var(--fox-gold-bright);
 }
 
-.rsvp-button {
+.rsvp {
   position: relative;
   padding-bottom: 25vh;
 }
@@ -311,6 +311,10 @@ h2 {
 
 .rsvp-button .btn:enabled {
   background-color: var(--fox-gold);
+}
+
+.invite-code .form-control {
+  font-size: 4rem;
 }
 
 .hidden {

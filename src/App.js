@@ -21,6 +21,7 @@ import Pithi from './pithi.js'
 import Star from './star.js'
 import Stars from './stars.js'
 import Welcome from './welcome.js'
+import InviteCode from './invitecode.js'
 
 import star from './img/star.svg'
 
@@ -32,7 +33,7 @@ let bURL = 'https://invite.nancyandanand.com'
 const B_MOCK = true
 let IS_MOCK = false
 let IS_LOCAL = false
-let logger = () => { }
+let logger = (...args) => { }
 
 if (!hostname.includes("nancy") && B_MOCK) {
   bURL = `http://localhost:8080`
@@ -87,9 +88,8 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    const { cookies } = props
 
-    let id = cookies.get('id') || null
+    let id = props.cookies.get('id') || null
     if (IS_MOCK) {
       id = 'helloId'
     }
@@ -108,7 +108,7 @@ class App extends Component {
       events: {},
       flags: {},
       submitClicked: false,
-      backendUrl: `${bURL}/invite/${id}`,
+      backendUrl: `${bURL}/invite`,
       gotInvite: false,
       invite: {},
     }
@@ -119,9 +119,13 @@ class App extends Component {
     this.handlePositionChange = this.handlePositionChange.bind(this)
     this.eventChange = this.eventChange.bind(this)
     this.addrChange = this.addrChange.bind(this)
+    this.submitInviteCode = this.submitInviteCode.bind(this)
     this.getInvite()
   }
 
+  getUrl() {
+    return this.state.backendUrl + '/' + this.state.id
+  }
   handlePositionChange(data) {
     if (data.currentPosition === 'above' && data.previousPosition === 'inside') {
       document.getElementById('App').classList.add('darken')
@@ -142,7 +146,7 @@ class App extends Component {
       return
     }
 
-    return request(this.state.backendUrl, {
+    return request(this.getUrl(), {
       json: true
     })
       .then((data) => {
@@ -154,6 +158,7 @@ class App extends Component {
         const events = data.events
 
         if (!IS_LOCAL) {
+          // @ts-ignore
           window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
         }
 
@@ -182,7 +187,14 @@ class App extends Component {
         })
       })
       .catch((err) => {
-        logger(`XX get invite failed ${err.message}`)
+        window.onerror(err.message, err)
+        logger(`XX get invite failed ${err.message}`, err.statusCode)
+        if (err.statusCode === 404) {
+          return this.setState({
+            id: ''
+          })
+        }
+
         setTimeout(() => {
           return this.getInvite()
         }, 1000)
@@ -242,7 +254,7 @@ class App extends Component {
     }
 
     try {
-      await request.post(this.state.backendUrl, {
+      await request.post(this.getUrl(), {
         json: {
           people: this.state.people,
           address: this.state.address,
@@ -251,6 +263,7 @@ class App extends Component {
       })
     } catch (err) {
       logger("XX Error submitting", err)
+      window.onerror(err.message, err)
       setTimeout(() => {
         return this.handleSubmit()
       }, 1000)
@@ -277,6 +290,16 @@ class App extends Component {
       })
       logger("XX attendOptionClick", update)
     }
+  }
+
+  submitInviteCode(inviteCode) {
+    logger("submitInviteCode: ", inviteCode)
+    this.props.cookies.set("id", inviteCode)
+    return this.setState({
+      id: inviteCode
+    }, () => {
+      return this.getInvite()
+    })
   }
 
   addrChange(event) {
@@ -375,9 +398,10 @@ class App extends Component {
   }
 
 
-  render() {
-    const isSubmitDisabled = () => {
-      return !this.state.gotInvite || anyMissingAnswer() || (this.anyYes() && (!this.addressIsValid() || this.anyMissingEvent())) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
+
+  getRSVPButton() {
+    if (!this.state.gotInvite) {
+      return null
     }
 
     const anyMissingAnswer = () => {
@@ -386,12 +410,10 @@ class App extends Component {
       })
     }
 
-    const getDrawerClass = () => {
-      if (this.anyYes()) {
-        return 'drawer drawer-show'
-      }
-      return 'drawer'
+    const isSubmitDisabled = () => {
+      return !this.state.gotInvite || anyMissingAnswer() || (this.anyYes() && (!this.addressIsValid() || this.anyMissingEvent())) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
     }
+
 
     const getRsvpText = () => {
       if (!this.state.gotInvite) {
@@ -421,6 +443,23 @@ class App extends Component {
       }
 
       return "Click to RSVP"
+    }
+
+    return (
+      <div className="rsvp rsvp-button">
+        <div className="info-hold">
+          <Button size="lg" value="RSVP" onClick={this.handleSubmit} disabled={isSubmitDisabled()}>{getRsvpText()}</Button>
+        </div>
+      </div>
+    )
+  }
+
+  render() {
+    const getDrawerClass = () => {
+      if (this.anyYes()) {
+        return 'drawer drawer-show'
+      }
+      return 'drawer'
     }
 
     if (this.state.submitClicked) {
@@ -515,7 +554,14 @@ class App extends Component {
           <Divider className="divider" />
           <div className="cItem fox">
             <h1 className="gold-text cursive"> R.S.V.P. </h1>
-            <People valid={!!this.state.id} people={this.state.people} click={this.attendOptionClick} />
+            <div className="fox-outer">
+              <div className="fox-neon">
+                <div className="names">
+                  <People valid={!!this.state.id} people={this.state.people} click={this.attendOptionClick} />
+                  <InviteCode valid={!this.state.id} handle={this.submitInviteCode} />
+                </div>
+              </div>
+            </div>
           </div>
           <br />
           <div className={getDrawerClass()}>
@@ -523,11 +569,7 @@ class App extends Component {
             <Events events={this.state.events} click={this.eventChange} />
             <Hotels flags={this.state.flags} info={this.state.hotel} />
           </div>
-          <div className={this.state.gotInvite ? "rsvp-button" : 'rsvp-button hidden'}>
-            <div className="info-hold">
-              <Button size="lg" value="RSVP" onClick={this.handleSubmit} disabled={isSubmitDisabled()}>{getRsvpText()}</Button>
-            </div>
-          </div>
+          {this.getRSVPButton()}
         </div>
       </div >
     )

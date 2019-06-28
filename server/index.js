@@ -26,6 +26,7 @@ const FIRST_DATA = 'G'
 const LAST_DATA = 'K'
 const FULL_RANGE = `A2:${LAST_DATA}`
 
+const NOT_FOUND = 'Invite Not Found'
 const logger = (...args) => {
   console.log(new Date(), ...args)
 }
@@ -60,16 +61,23 @@ async function main() {
 
   app.get('/invite/:id', (req, res) => {
     const id = Buffer.from(req.params.id, 'base64').toString('ascii');
-    logger("XX GET invite id", id)
+    logger("GET invite id", id)
     getRowById(sheets, id)
       .then(parseRow)
       .then((data) => {
-        logger("XX sending data", data)
+        logger("sending data", data)
         res.json(data)
       })
       .catch((err) => {
-        logger("XX sending err", err)
-        res.status(500).json({
+        if (err.message === NOT_FOUND) {
+          logger("invite not found", err)
+          return res.status(404).json({
+            err: err.message
+          })
+        }
+
+        logger("sending err", err)
+        return res.status(500).json({
           err: err.message
         })
       })
@@ -78,11 +86,11 @@ async function main() {
   app.post('/invite/:id', jsonParser, (req, res) => {
     const id = Buffer.from(req.params.id, 'base64').toString('ascii');
     let { people, address, events } = req.body
-    logger("XX POST id", id, "and people", people, "address", address, "events", events)
+    logger("POST id", id, "and people", people, "address", address, "events", events)
 
     getRowById(sheets, id)
       .then((row) => {
-        logger("XX got row", row)
+        logger("got row", row)
         updateRow(row, {
           people,
           address,
@@ -91,11 +99,11 @@ async function main() {
         return saveRow(sheets, row)
       })
       .then(() => {
-        logger("XX sending OK")
+        logger("sending OK")
         res.status(200).send('OK')
       })
       .catch((err) => {
-        logger("XX sending err", err)
+        logger("sending err", err)
         res.status(500).json({
           err: err.message
         })
@@ -138,7 +146,7 @@ const getRowById = (sheets, id) => {
     range: `${TABLE_NAME}!${FULL_RANGE}`
   })
     .catch((err) => {
-      logger('XX GET google Sheet API error: ' + err);
+      logger('GET google Sheet API error: ' + err);
       throw err
     })
     .then((gRes) => {
@@ -148,7 +156,7 @@ const getRowById = (sheets, id) => {
       })
 
       if (!iRow) {
-        throw new Error('Invite Not Found');
+        throw new Error(NOT_FOUND);
       }
 
       return iRow
@@ -162,7 +170,7 @@ const saveRow = (sheets, updateRow) => {
   }
   const values = [updateRow.slice(ROW_MAP.attendingList)]
   const range = `${TABLE_NAME}!${FIRST_DATA}${row}:${LAST_DATA}${row}`
-  logger('XX updating row', updateRow)
+  logger('updating row', updateRow)
   return sheets.spreadsheets.values.update({
     spreadsheetId: SHEET_ID,
     range,
@@ -173,7 +181,7 @@ const saveRow = (sheets, updateRow) => {
     }
   })
     .catch((err) => {
-      logger('XX SAVE google sheets API error: ' + err);
+      logger('SAVE google sheets API error: ' + err);
       throw err
     })
 }

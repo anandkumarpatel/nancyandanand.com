@@ -23,7 +23,7 @@ class People extends Component {
     })
 
     if (!this.props.valid) {
-      list = [(<div key="checkemail" >Check your email for RSVP link</div>)]
+      return null
     }
 
     if (this.props.valid && list.length === 0) {
@@ -31,13 +31,9 @@ class People extends Component {
     }
 
     return (
-      <div className="fox-outer">
-        <div className="fox-neon">
-          <div className="names">
-            {list}
-          </div>
-        </div>
-      </div>
+      <React.Fragment>
+        {list}
+      </ React.Fragment>
     )
   }
 }
