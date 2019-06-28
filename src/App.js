@@ -309,7 +309,7 @@ class App extends Component {
     if (this.state.flags.afam) {
       // Anands info
       date = "April 1st"
-      location = "Mandir"
+      location = "Patel Household"
     }
 
     return (
@@ -338,7 +338,7 @@ class App extends Component {
     let event = "Pithi"
     if (this.state.flags.afam) {
       // Anands info
-      date = "April 1st"
+      date = "April 2ed"
       location = "Mandir"
     }
 
