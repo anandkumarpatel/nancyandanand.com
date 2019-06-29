@@ -16,7 +16,8 @@
     "react-scripts": "3.0.0",
     "react-waypoint": "^9.0.2",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4"
+    "request-promise": "^4.2.4",
+    "universal-analytics": "^0.4.20"
   },
   "scripts": {
     "update": "ssh ubuntu@wedding './wedding-update.sh'",

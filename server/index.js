@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 const jsonParser = bodyParser.json();
+const ua = require('universal-analytics');
 
 const SHEET_ID = process.env.SHEET_ID || "1Ab3fNGhNv1UIR6KQcxYi0OKK2kVYG5v0ecn7cyVux_Q"
 const PORT = process.env.PORT || 8080
@@ -62,6 +63,16 @@ async function main() {
   app.get('/invite/:id', (req, res) => {
     const id = Buffer.from(req.params.id, 'base64').toString('ascii');
     logger("GET invite id", id)
+    if (process.env.DEV !== "yes") {
+      ua(process.env.GOOGLE_TRACK, { uid: id }).event({
+        ec: "invite",
+        ea: "server-get",
+        el: id,
+        ev: 1,
+        dp: "/invite/" + id
+      }).send()
+    }
+
     getRowById(sheets, id)
       .then(parseRow)
       .then((data) => {
@@ -88,6 +99,16 @@ async function main() {
     let { people, address, events } = req.body
     logger("POST id", id, "and people", people, "address", address, "events", events)
 
+    if (process.env.DEV !== "yes") {
+      ua(process.env.GOOGLE_TRACK, { uid: id }).event({
+        ec: "invite",
+        ea: "server-post",
+        el: id,
+        ev: 2,
+        dp: "/invite/" + id
+      }).send()
+    }
+
     getRowById(sheets, id)
       .then((row) => {
         logger("got row", row)
@@ -111,7 +132,18 @@ async function main() {
   });
 
   app.get('/:id', (req, res) => {
-    logger("invite hit", req.params.id)
+    const id = req.params.id
+    const tId = Buffer.from(req.params.id, 'base64').toString('ascii');
+    logger("invite hit", id, tId)
+    if (process.env.DEV !== "yes") {
+      ua(process.env.GOOGLE_TRACK, { uid: tId }).event({
+        ec: "invite",
+        ea: "server-invite",
+        el: tId,
+        ev: 2,
+        dp: "/" + tId
+      }).send()
+    }
     let host = 'nancyandanand.com'
     if (process.env.DEV === "yes") {
       host = 'localhost:3000'
@@ -124,9 +156,8 @@ async function main() {
       domain: host,
       path: '/',
     })
-
     if (process.env.DEV === "yes") {
-      res.redirect('http://localhost:3000')
+      res.redirect(`http://${req.headers.host.split(":")[0]}:3000`)
     } else {
       res.redirect('https://nancyandanand.com')
     }
