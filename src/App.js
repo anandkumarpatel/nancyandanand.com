@@ -188,7 +188,7 @@ class App extends Component {
           }))
         }, () => {
           if (this.state.updateCodeClicked) {
-            window.scrollTo(0, document.body.scrollHeight)
+            window.scrollTo(0, document.body.clientHeight)
           }
         })
       })
