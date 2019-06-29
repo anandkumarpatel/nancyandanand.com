@@ -109,6 +109,7 @@ class App extends Component {
       events: {},
       flags: {},
       submitClicked: false,
+      updateCodeClicked: false,
       backendUrl: `${bURL}/invite`,
       gotInvite: false,
       invite: {},
@@ -185,6 +186,10 @@ class App extends Component {
             address,
             events,
           }))
+        }, () => {
+          if (this.state.updateCodeClicked) {
+            window.scrollTo(0, document.body.scrollHeight)
+          }
         })
       })
       .catch((err) => {
@@ -299,6 +304,7 @@ class App extends Component {
     return this.setState({
       id: inviteCode
     }, () => {
+      this.state.updateCodeClicked = true
       return this.getInvite()
     })
   }
