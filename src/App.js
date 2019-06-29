@@ -21,9 +21,10 @@ import Pithi from './pithi.js'
 import Star from './star.js'
 import Stars from './stars.js'
 import Welcome from './welcome.js'
+import Beach from './beach.js'
 import InviteCode from './invitecode.js'
 
-import star from './img/star.svg'
+import star, { ReactComponent } from './img/star.svg'
 
 const request = require('request-promise')
 
@@ -454,6 +455,63 @@ class App extends Component {
     )
   }
 
+  getAtlanta() {
+    return (
+      <React.Fragment>
+        <Divider className="divider" />
+        <div className="cItem location">
+          <div className="info-hold">
+            <Atl className="detail atl" />
+            <h1> Atlanta, GA </h1>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  getPcb() {
+    return (
+      <React.Fragment>
+        <Divider className="divider" />
+        <div className="cItem location">
+          <div className="info-hold">
+            <Beach className="detail beach" />
+            <h1> Panama City Beach </h1>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  getNancy() {
+    return (
+      <React.Fragment>
+        {this.getAtlanta()}
+        {this.getMehndi()}
+        {this.getPithi()}
+      </React.Fragment>
+    )
+  }
+
+  getAnand() {
+    return (
+      <React.Fragment>
+        {this.getPcb()}
+        {this.getMehndi()}
+        {this.getPithi()}
+        {this.getAtlanta()}
+      </React.Fragment>
+    )
+  }
+
+  getPreEvents() {
+    if (this.state.flags.nfam) {
+      return this.getNancy()
+    }
+
+    return this.getAnand()
+  }
+
   render() {
     const getDrawerClass = () => {
       if (this.anyYes()) {
@@ -493,7 +551,6 @@ class App extends Component {
             <Star src={star} className="star" />
           </div>
         </div>
-
         <div className="intro blue-font">
           <div className="info-hold">
             <h1 className="cursive" > You Are  </h1>
@@ -508,15 +565,9 @@ class App extends Component {
             <h1 className="cursive" >Anand </h1>
           </div>
         </div>
-        <Divider className="divider" />
-        <div className="cItem location">
-          <div className="info-hold">
-            <Atl className="detail atl" />
-            <h1> Atlanta, GA </h1>
-          </div>
-        </div>
-        {this.getMehndi()}
-        {this.getPithi()}
+
+        {this.getPreEvents()}
+
         <Divider className="divider" />
         <div className="cItem date">
           <div className="info-hold">
