@@ -24,7 +24,7 @@ import Welcome from './welcome.js'
 import Beach from './beach.js'
 import InviteCode from './invitecode.js'
 
-import star, { ReactComponent } from './img/star.svg'
+import star from './img/star.svg'
 
 const request = require('request-promise')
 
@@ -37,7 +37,7 @@ let IS_LOCAL = false
 let logger = (...args) => { }
 
 if (!hostname.includes("nancy") && B_MOCK) {
-  bURL = `http://localhost:8080`
+  bURL = `http://${hostname}:8080`
   IS_LOCAL = true
   logger = console.log
 }
@@ -470,6 +470,10 @@ class App extends Component {
   }
 
   getPcb() {
+    if (!this.state.events.mehndi || !this.state.events.pithi) {
+      return null
+    }
+
     return (
       <React.Fragment>
         <Divider className="divider" />
