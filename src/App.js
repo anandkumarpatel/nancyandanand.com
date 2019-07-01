@@ -23,6 +23,7 @@ import Stars from './stars.js'
 import Welcome from './welcome.js'
 import Beach from './beach.js'
 import InviteCode from './invitecode.js'
+import Email from './email.js'
 
 import star from './img/star.svg'
 
@@ -72,7 +73,8 @@ const MOCK = {
   events: {
     pithi: "Yes",
     mehndi: "Yes"
-  }
+  },
+  email: "anand@gmail.com",
   // address: {
   //   street: '860 peachtree street NE unit 1814',
   //   city: 'Atlanta',
@@ -108,6 +110,7 @@ class App extends Component {
       },
       events: {},
       flags: {},
+      email: '',
       submitClicked: false,
       updateCodeClicked: false,
       backendUrl: `${bURL}/invite`,
@@ -120,6 +123,7 @@ class App extends Component {
     this.attendOptionClick = this.attendOptionClick.bind(this)
     this.handlePositionChange = this.handlePositionChange.bind(this)
     this.eventChange = this.eventChange.bind(this)
+    this.emailChange = this.emailChange.bind(this)
     this.addrChange = this.addrChange.bind(this)
     this.submitInviteCode = this.submitInviteCode.bind(this)
     this.getInvite()
@@ -158,6 +162,7 @@ class App extends Component {
         const address = data.address
         const flags = data.flags
         const events = data.events
+        const email = data.email
 
         if (!IS_LOCAL) {
           // @ts-ignore
@@ -170,7 +175,8 @@ class App extends Component {
           didRSVP,
           address,
           flags,
-          events
+          events,
+          email,
         })
 
         this.setState({
@@ -180,11 +186,13 @@ class App extends Component {
           address,
           flags,
           events,
+          email,
           gotInvite: true,
           invite: JSON.parse(JSON.stringify({
             people,
             address,
             events,
+            email,
           }))
         }, () => {
           if (this.state.updateCodeClicked) {
@@ -211,7 +219,8 @@ class App extends Component {
     return !this.isEquivalent(this.state.invite, {
       people: this.state.people,
       address: this.state.address,
-      events: this.state.events
+      events: this.state.events,
+      email: this.state.email,
     })
   }
 
@@ -265,6 +274,7 @@ class App extends Component {
           people: this.state.people,
           address: this.state.address,
           events: this.state.events,
+          email: this.state.email,
         }
       })
     } catch (err) {
@@ -302,9 +312,9 @@ class App extends Component {
     logger("submitInviteCode: ", inviteCode)
     this.props.cookies.set("id", inviteCode)
     return this.setState({
-      id: inviteCode
+      id: inviteCode,
+      updateCodeClicked: true
     }, () => {
-      this.state.updateCodeClicked = true
       return this.getInvite()
     })
   }
@@ -398,6 +408,14 @@ class App extends Component {
     }
   }
 
+  emailChange(e) {
+    const update = {
+      email: e.target.value
+    }
+    this.setState(update)
+    logger("XX eventChange", update)
+  }
+
   anyMissingEvent() {
     return Object.keys(this.state.events).some((name) => {
       return "?" === this.state.events[name]
@@ -417,8 +435,12 @@ class App extends Component {
       })
     }
 
+    const emailIsValid = () => {
+      return this.state.email !== '' && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(this.state.email)
+    }
+
     const isSubmitDisabled = () => {
-      return !this.state.gotInvite || anyMissingAnswer() || (this.anyYes() && (!this.addressIsValid() || this.anyMissingEvent())) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
+      return !this.state.gotInvite || anyMissingAnswer() || (this.anyYes() && (!this.addressIsValid() || this.anyMissingEvent() || !emailIsValid())) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
     }
 
 
@@ -433,10 +455,16 @@ class App extends Component {
 
       if (this.anyYes()) {
         if (!this.addressIsValid()) {
-          return "Please enter mailing address"
+          return "Please enter mailing address above"
         }
         if (this.anyMissingEvent()) {
           return "Please click Yes or No for all events above"
+        }
+        if (this.state.email === '') {
+          return "Please enter email above"
+        }
+        if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(this.state.email)) {
+          return "Please valid email above"
         }
       }
 
@@ -628,6 +656,7 @@ class App extends Component {
           <div className={getDrawerClass()}>
             <Address address={this.state.address} change={this.addrChange} />
             <Events events={this.state.events} click={this.eventChange} />
+            <Email email={this.state.email} change={this.emailChange} />
             <Hotels flags={this.state.flags} info={this.state.hotel} />
           </div>
           {this.getRSVPButton()}

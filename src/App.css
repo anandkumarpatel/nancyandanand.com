@@ -278,6 +278,7 @@ h2 {
 }
 
 .addr {
+  margin-top: 2vh;
   position: relative;
   font-size: var(--p-size);
   max-width: 60rem;
