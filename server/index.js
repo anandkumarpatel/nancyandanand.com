@@ -140,7 +140,7 @@ async function main() {
         ec: "invite",
         ea: "server-invite",
         el: tId,
-        ev: 2,
+        ev: 3,
         dp: "/" + tId
       }).send()
     }
