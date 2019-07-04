@@ -140,6 +140,33 @@ h2 {
   }
 }
 
+.fly-path {
+  margin: auto;
+}
+
+.plane {
+  width: 2vw;
+  max-width: 15px;
+  position: absolute;
+  animation: fly 30s ease-in-out infinite;
+}
+
+@keyframes fly {
+  0% {
+    transform: scale(0);
+    right: 0%
+  }
+  30% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+    right: 100%
+  }
+}
 
 .fox {
   padding: 2rem;

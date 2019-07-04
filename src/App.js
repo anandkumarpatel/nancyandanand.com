@@ -24,6 +24,7 @@ import Welcome from './welcome.js'
 import Beach from './beach.js'
 import InviteCode from './invitecode.js'
 import Email from './email.js'
+import Plane from './plane.js'
 
 import star from './img/star.svg'
 
@@ -495,6 +496,9 @@ class App extends Component {
         <Divider className="divider" />
         <div className="cItem location">
           <div className="info-hold">
+            <div className="detail fly-path">
+              <Plane className="plane" />
+            </div>
             <Atl className="detail atl" />
             <h1> Atlanta, GA </h1>
           </div>
