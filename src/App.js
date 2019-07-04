@@ -437,6 +437,9 @@ class App extends Component {
     }
 
     const emailIsValid = () => {
+      if (this.state.invite.email !== '') {
+        return true
+      }
       return this.state.email !== '' && /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(this.state.email)
     }
 
@@ -461,11 +464,14 @@ class App extends Component {
         if (this.anyMissingEvent()) {
           return "Please click Yes or No for all events above"
         }
-        if (this.state.email === '') {
-          return "Please enter email above"
-        }
-        if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(this.state.email)) {
-          return "Please valid email above"
+
+        if (this.state.invite.email === '') {
+          if (this.state.email === '') {
+            return "Please enter email above"
+          }
+          if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(this.state.email)) {
+            return "Please valid email above"
+          }
         }
       }
 
@@ -660,7 +666,7 @@ class App extends Component {
           <div className={getDrawerClass()}>
             <Address address={this.state.address} change={this.addrChange} />
             <Events events={this.state.events} click={this.eventChange} />
-            <Email email={this.state.email} change={this.emailChange} />
+            <Email inviteEmail={this.state.invite.email} email={this.state.email} change={this.emailChange} />
             <Hotels flags={this.state.flags} info={this.state.hotel} />
           </div>
           {this.getRSVPButton()}

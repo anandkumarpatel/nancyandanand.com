@@ -50,6 +50,7 @@ class Hotels extends Component {
 
       if (this.props.info.rate === "89") {
         let sKind = 'Family'
+
         if (this.props.flags.boice) {
           sKind = 'Boice'
         } else if (this.props.flags.gsuite) {
