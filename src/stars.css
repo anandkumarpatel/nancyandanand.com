@@ -17,8 +17,8 @@
 
 .star-drop {
   position: absolute;
-  -webkit-animation: falling var(--fall-time) ease-out infinite;
-          animation: falling var(--fall-time) ease-out infinite;
+  -webkit-animation: falling var(--fall-time)  cubic-bezier(0.5, .2, .6, 1) infinite;
+          animation: falling var(--fall-time)  cubic-bezier(0.5, .2, .6, 1) infinite;
 }
 
 .star-sway {
@@ -68,38 +68,14 @@
 }
 
 @-webkit-keyframes falling {
-  0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-
-  80% {
-    -webkit-transform: translateY(450vh);
-            transform: translateY(450vh);
-  }
-
-
   100% {
-    -webkit-transform: translateY(450vh);
-            transform: translateY(450vh);
+    top: 99%;
   }
 }
 
 @keyframes falling {
-  0% {
-    -webkit-transform: translateY(0);
-            transform: translateY(0);
-  }
-
-  80% {
-    -webkit-transform: translateY(450vh);
-            transform: translateY(450vh);
-  }
-
-
   100% {
-    -webkit-transform: translateY(450vh);
-            transform: translateY(450vh);
+    top: 99%;
   }
 }
 
