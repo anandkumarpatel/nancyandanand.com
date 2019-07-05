@@ -560,6 +560,21 @@ class App extends Component {
     return this.getAnand()
   }
 
+  getNames() {
+    const first = this.state.flags.afam ? "Anand" : "Nancy"
+    const sec = this.state.flags.afam ? "Nancy" : "Anand"
+
+    return (
+      <div className="intro blue-font">
+        <div className="info-hold us">
+          <h1 className="cursive" >{first}</h1>
+          <p> & </p>
+          <h1 className="cursive" >{sec}</h1>
+        </div>
+      </div>
+    )
+  }
+
   render() {
     const getDrawerClass = () => {
       if (this.anyYes()) {
@@ -606,13 +621,7 @@ class App extends Component {
             <p> To Celebrate the Marriage of </p>
           </div>
         </div>
-        <div className="intro blue-font">
-          <div className="info-hold us">
-            <h1 className="cursive" > Nancy </h1>
-            <p> & </p>
-            <h1 className="cursive" >Anand </h1>
-          </div>
-        </div>
+        {this.getNames()}
 
         {this.getPreEvents()}
 
