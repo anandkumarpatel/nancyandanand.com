@@ -544,7 +544,7 @@ class App extends Component {
   }
 
   getPcb() {
-    if (!this.state.flags.afam || (!this.state.events.mehndi && !this.state.events.pithi)) {
+    if (!(this.state.events.mehndi || this.state.events.mm || this.state.events.gs)) {
       return null
     }
 
