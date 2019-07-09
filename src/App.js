@@ -661,7 +661,7 @@ class App extends Component {
           <div className="info-hold">
             <Welcome className="detail welcome" />
             <h1> Welcome Dinner </h1>
-            <p> April 3th </p>
+            <p> April 3rd </p>
           </div>
         </div>
         <Divider className="divider" />
