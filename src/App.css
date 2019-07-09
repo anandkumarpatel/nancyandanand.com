@@ -148,8 +148,8 @@ h2 {
   width: 2vw;
   max-width: 15px;
   position: absolute;
-  -webkit-animation: fly 30s ease-in-out infinite;
-          animation: fly 30s ease-in-out infinite;
+  -webkit-animation: fly 10s ease-in-out infinite;
+          animation: fly 10s ease-in-out infinite;
 }
 
 @-webkit-keyframes fly {
@@ -158,7 +158,7 @@ h2 {
             transform: scale(0);
     right: 0%
   }
-  30% {
+  33% {
     -webkit-transform: scale(1);
             transform: scale(1);
   }
@@ -179,7 +179,7 @@ h2 {
             transform: scale(0);
     right: 0%
   }
-  30% {
+  33% {
     -webkit-transform: scale(1);
             transform: scale(1);
   }
