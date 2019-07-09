@@ -3,7 +3,7 @@ import Image from 'react-bootstrap/Image';
 import './stars.css';
 
 const image = require('./img/silver-star.png')
-const NUM_SQUARE = 5
+const NUM_SQUARE = 6
 const starSize = 45
 
 class Stars extends Component {

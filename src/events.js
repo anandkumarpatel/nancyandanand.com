@@ -7,7 +7,10 @@ const EVENT_MAP = {
   wdin: "Welcome Dinner",
   mehndi: "Mehndi",
   pithi: "Pithi",
+  gs: "Griha Shanti",
+  mm: "Mandap Muhurat",
 }
+
 class Events extends Component {
   upperCase(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -48,6 +51,8 @@ class Events extends Component {
         </Row>
         {this.getEvent("pithi")}
         {this.getEvent("mehndi")}
+        {this.getEvent("mm")}
+        {this.getEvent("gs")}
         {this.getEvent("wdin")}
         <Row>
           <Col>

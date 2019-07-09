@@ -25,8 +25,11 @@ import Beach from './beach.js'
 import InviteCode from './invitecode.js'
 import Email from './email.js'
 import Plane from './plane.js'
+import MM from './mm.js'
+import GS from './gs.js'
 
 import star from './img/star.svg'
+
 
 const request = require('request-promise')
 
@@ -345,7 +348,7 @@ class App extends Component {
     }
 
     // Nancy info
-    let date = "April 2rd"
+    let date = "April 2ed"
     let location = "Saha Household"
     if (this.state.flags.afam) {
       // Anands info
@@ -368,6 +371,38 @@ class App extends Component {
     )
   }
 
+  getMM() {
+    return (
+      <React.Fragment>
+        <Divider className="divider" />
+        <div className="cItem">
+          <div className="info-hold">
+            <MM className="detail" />
+            <h1> Mandap Muhurat </h1>
+            <p> Morning of April 2nd </p>
+            <p> Patel House </p>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  getGS() {
+    return (
+      <React.Fragment>
+        <Divider className="divider" />
+        <div className="cItem">
+          <div className="info-hold">
+            <GS className="detail" />
+            <h1> Griha Shanti </h1>
+            <p> Night of April 2nd </p>
+            <p> Mandir </p>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
   getPithi() {
     if (!this.state.events.pithi) {
       return null
@@ -377,11 +412,6 @@ class App extends Component {
     let date = "April 3rd"
     let location = "Thakkar Household"
     let event = "Pithi"
-    if (this.state.flags.afam) {
-      // Anands info
-      date = "April 2ed"
-      location = "Mandir"
-    }
 
     return (
       <React.Fragment>
@@ -546,7 +576,8 @@ class App extends Component {
       <React.Fragment>
         {this.getPcb()}
         {this.getMehndi()}
-        {this.getPithi()}
+        {this.getMM()}
+        {this.getGS()}
         {this.getAtlanta()}
       </React.Fragment>
     )
