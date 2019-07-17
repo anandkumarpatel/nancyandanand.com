@@ -372,6 +372,10 @@ class App extends Component {
   }
 
   getMM() {
+    if (!this.state.events.mm) {
+      return null
+    }
+
     return (
       <React.Fragment>
         <Divider className="divider" />
@@ -388,6 +392,10 @@ class App extends Component {
   }
 
   getGS() {
+    if (!this.state.events.gs) {
+      return null
+    }
+
     return (
       <React.Fragment>
         <Divider className="divider" />
@@ -588,7 +596,11 @@ class App extends Component {
       return this.getNancy()
     }
 
-    return this.getAnand()
+    if (this.state.flags.afam) {
+      return this.getAnand()
+    }
+
+    return this.getAtlanta()
   }
 
   getNames() {
