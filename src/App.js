@@ -402,7 +402,7 @@ class App extends Component {
         <div className="cItem">
           <div className="info-hold">
             <GS className="detail" />
-            <h1> Griha Shanti </h1>
+            <h1> Grah Shanti </h1>
             <p> Night of April 2nd </p>
             <p> Mandir </p>
           </div>
