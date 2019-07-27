@@ -5,8 +5,8 @@ const nodemailer = require("nodemailer");
 async function main() {
 
   const id = 'XXX'
-  const decId = 'XXX'
   const target = 'XXX'
+  const decId = Buffer.from(id, 'base64').toString('ascii')
   return sendMail(id, decId, target)
 }
 
