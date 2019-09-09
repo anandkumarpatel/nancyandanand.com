@@ -4,10 +4,6 @@ import Container from 'react-bootstrap/Container';
 
 class Address extends Component {
   render() {
-    if (this.props.inviteEmail !== '') {
-      return null
-    }
-
     return (
       <Container
         className="addr">
