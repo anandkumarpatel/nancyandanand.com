@@ -478,6 +478,9 @@ class App extends Component {
       }
       update.events[event] = e.target.value
       this.setState(update)
+      this.handlePatch({
+        events: update.events
+      })
       logger("XX eventChange", update)
     }
   }
