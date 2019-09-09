@@ -129,6 +129,7 @@ class App extends Component {
     this.eventChange = this.eventChange.bind(this)
     this.emailChange = this.emailChange.bind(this)
     this.addrChange = this.addrChange.bind(this)
+    this.addrBlur = this.addrBlur.bind(this)
     this.submitInviteCode = this.submitInviteCode.bind(this)
     this.getInvite()
   }
@@ -346,6 +347,15 @@ class App extends Component {
     }, () => {
       return this.getInvite()
     })
+  }
+
+  addrBlur(event) {
+    logger("XX addr blur", this.state.address)
+    if (this.addressIsValid()) {
+      this.handlePatch({
+        address: this.state.address
+      })
+    }
   }
 
   addrChange(event) {
@@ -741,7 +751,7 @@ class App extends Component {
           </div>
           <br />
           <div className={getDrawerClass()}>
-            <Address address={this.state.address} change={this.addrChange} />
+            <Address address={this.state.address} change={this.addrChange} blur={this.addrBlur} />
             <Events events={this.state.events} click={this.eventChange} />
             <Email inviteEmail={this.state.invite.email} email={this.state.email} change={this.emailChange} />
             <Hotels flags={this.state.flags} info={this.state.hotel} />

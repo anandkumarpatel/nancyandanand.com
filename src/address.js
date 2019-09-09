@@ -16,6 +16,7 @@ class Address extends Component {
               autoComplete="shipping street-address"
               type="street-address"
               onChange={this.props.change}
+              onBlur={this.props.blur}
               required
               placeholder="Enter Street Address" />
           </Form.Group>
@@ -27,6 +28,7 @@ class Address extends Component {
               autoComplete="shipping address-level2"
               type="address-level2"
               onChange={this.props.change}
+              onBlur={this.props.blur}
               required
               placeholder="Enter City" />
           </Form.Group>
@@ -38,6 +40,7 @@ class Address extends Component {
               autoComplete="shipping address-level1"
               type="address-level1"
               onChange={this.props.change}
+              onBlur={this.props.blur}
               required
               placeholder="Enter State or Region" />
           </Form.Group>
@@ -49,6 +52,7 @@ class Address extends Component {
               autoComplete="shipping postal-code"
               type="postal-code"
               onChange={this.props.change}
+              onBlur={this.props.blur}
               required
               placeholder="Enter Postal Code" />
           </Form.Group>
@@ -60,6 +64,7 @@ class Address extends Component {
               autoComplete="shipping country"
               type="country"
               onChange={this.props.change}
+              onBlur={this.props.blur}
               required
               placeholder="Enter Country" />
           </Form.Group>
