@@ -256,13 +256,38 @@ class App extends Component {
     return !(this.state.address.street === '' || this.state.address.city === '' || this.state.address.state === '' || this.state.address.zip === '' || this.state.address.country === '')
   }
 
+  async handlePatch(data) {
+    logger("XX handlePatch", data)
+    try {
+      await this.post(data)
+    } catch (err) {
+      logger("ignore post err", err)
+    }
+  }
+
+  async post(data) {
+    try {
+      await request.post(this.getUrl(), {
+        json: data
+      })
+    } catch (err) {
+      logger("XX Error posting", err)
+      window.onerror(err.message, err)
+      throw err
+    }
+  }
+
   async handleSubmit() {
     this.state.submitClicked = true
     logger("XX handleSubmit", this.state.people)
     logger("XX handleSubmit", this.state.address)
+    logger("XX handleSubmit", this.state.email)
+    logger("XX handleSubmit", this.state.events)
+
     this.setState({
       submitClicked: true,
     })
+
     if (this.anyYes() && !this.addressIsValid()) {
       logger("XX invalid address")
       return
@@ -273,17 +298,13 @@ class App extends Component {
     }
 
     try {
-      await request.post(this.getUrl(), {
-        json: {
-          people: this.state.people,
-          address: this.state.address,
-          events: this.state.events,
-          email: this.state.email,
-        }
+      await this.post({
+        people: this.state.people,
+        address: this.state.address,
+        events: this.state.events,
+        email: this.state.email,
       })
     } catch (err) {
-      logger("XX Error submitting", err)
-      window.onerror(err.message, err)
       setTimeout(() => {
         return this.handleSubmit()
       }, 1000)
@@ -305,9 +326,13 @@ class App extends Component {
           isAttending: "No"
         }
       }
-      this.setState({
+
+      const peopleUpdate = {
         people: update
-      })
+      }
+
+      this.setState(peopleUpdate)
+      this.handlePatch(peopleUpdate)
       logger("XX attendOptionClick", update)
     }
   }
