@@ -1,6 +1,7 @@
 const { google } = require('googleapis');
 
 const TABLE_NAME = 'list'
+// const TABLE_NAME = 'test'
 const FIRST_DATA = 'G'
 const LAST_DATA = 'L'
 const FULL_RANGE = `A2:${LAST_DATA}`
@@ -92,28 +93,43 @@ class Sheet {
   }
 
   updateRow(row, update) {
-    const { people, address, events } = update
-    const attendingList = []
-    const declineList = []
+    const { people, address, events, email } = update
 
-    Object.keys(people).forEach((person) => {
-      if (people[person].isAttending === 'Yes') {
-        attendingList.push(person)
-      } else if (people[person].isAttending === 'No') {
-        declineList.push(person)
-      }
-    })
+    if (people) {
+      const attendingList = []
+      const declineList = []
 
+      Object.keys(people).forEach((person) => {
+        if (people[person].isAttending === 'Yes') {
+          attendingList.push(person)
+        } else if (people[person].isAttending === 'No') {
+          declineList.push(person)
+        }
+      })
 
-    row[ROW_MAP.attendingList] = attendingList.join('|')
-    row[ROW_MAP.declineList] = declineList.join('|')
-    row[ROW_MAP.didRSVP] = true
-    row[ROW_MAP.address] = !!address.street ? `${address.street} | ${address.city} | ${address.state} | ${address.zip} | ${address.country}` : ""
-    row[ROW_MAP.email] = update.email
-    row[ROW_MAP.attendingEvents] = Object.keys(events).filter((key) => {
-      return events[key] === 'Yes'
-    }).join("|")
+      row[ROW_MAP.attendingList] = attendingList.join('|')
+      row[ROW_MAP.declineList] = declineList.join('|')
+    }
+
+    if (address) {
+      row[ROW_MAP.address] = !!address.street ? `${address.street} | ${address.city} | ${address.state} | ${address.zip} | ${address.country}` : ""
+    }
+
+    if (email) {
+      row[ROW_MAP.email] = email
+    }
+
+    if (events) {
+      row[ROW_MAP.attendingEvents] = Object.keys(events).filter((key) => {
+        return events[key] === 'Yes'
+      }).join("|")
+    }
+
+    if (people && address && events) {
+      row[ROW_MAP.didRSVP] = true
+    }
   }
+
 
   parseRow(data) {
     const invitedList = data[ROW_MAP.invitedList]
