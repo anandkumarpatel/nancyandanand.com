@@ -1,13 +1,78 @@
 "use strict";
 const nodemailer = require("nodemailer");
+const Sheets = require("../server/sheets.js")
+
+const TABLE_NAME = "admin"
+const FULL_RANGE = "A2:E"
+const ROW_MAP = {
+  rawId: 0,
+  names: 1,
+  phone: 2,
+  sent: 3,
+  email: 4,
+}
 
 // async..await is not allowed in global scope, must use a wrapper
 async function main() {
+  const sheet = new Sheets()
+  await sheet.init()
+  // START AUTO BLOCK
 
-  const id = 'XXX'
-  const target = 'XXX'
-  const decId = Buffer.from(id, 'base64').toString('ascii')
-  return sendMail(id, decId, target)
+  await getNeedToSend(sheet)
+    .then((items) => {
+      let requests = items.reduce((promiseChain, person) => {
+        const rawId = person.rawId
+        const id = new Buffer(rawId).toString('base64')
+        const target = person.email
+        return promiseChain.then(() => {
+          return sendMail(id, person.rawId, target).then(() => {
+            console.log("SENT", id, rawId, target)
+          })
+        });
+      }, Promise.resolve())
+
+      return requests.then(() => { console.log("DONE") })
+    })
+
+  /// END AUTO BLOCK
+  ///////
+  ///////
+  ///////
+
+  // id in base64
+  // const idBase64 = 'XXX'
+  // const email = 'XXX'
+  // const decodedId = Buffer.from(idBase64, 'base64').toString('ascii')
+
+  return sendMail(idBase64, decodedId, email)
+}
+
+function getNeedToSend(sheet) {
+  return sheet.sheets.spreadsheets.values.get({
+    spreadsheetId: "1Ab3fNGhNv1UIR6KQcxYi0OKK2kVYG5v0ecn7cyVux_Q",
+    range: `${TABLE_NAME}!${FULL_RANGE}`
+  })
+    .catch((err) => {
+      console.log('GET google Sheet API error: ' + err);
+      throw err
+    })
+    .then((gRes) => {
+      const rows = gRes.data.values;
+      return rows.map((row) => {
+        return {
+          rawId: row[ROW_MAP.rawId],
+          names: row[ROW_MAP.names],
+          phone: row[ROW_MAP.phone],
+          sent: row[ROW_MAP.sent] == "sent",
+          email: row[ROW_MAP.email],
+        }
+      }).filter((val) => {
+        if (!val.sent && val.email) {
+          return true
+        }
+        return false
+      })
+    })
 }
 
 async function sendMail(id, decId, target) {
