@@ -280,10 +280,10 @@ class App extends Component {
 
   async handleSubmit() {
     this.state.submitClicked = true
-    logger("XX handleSubmit", this.state.people)
-    logger("XX handleSubmit", this.state.address)
-    logger("XX handleSubmit", this.state.email)
-    logger("XX handleSubmit", this.state.events)
+    logger("XX handleSubmit: people", this.state.people)
+    logger("XX handleSubmit: address", this.state.address)
+    logger("XX handleSubmit: email", this.state.email)
+    logger("XX handleSubmit: events", this.state.events)
 
     this.setState({
       submitClicked: true,
@@ -586,6 +586,64 @@ class App extends Component {
     )
   }
 
+  getWelcomeDinner() {
+    if (!this.state.events.wdin) {
+      return null
+    }
+
+    return (
+      <React.Fragment>
+        <Divider className="divider" />
+        <div className="cItem date">
+          <div className="info-hold">
+            <Welcome className="detail welcome" />
+            <h1> Welcome Dinner </h1>
+            <p> April 3rd </p>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  getWedding() {
+    if (!this.state.events.wed) {
+      return <Waypoint onPositionChange={this.handlePositionChange} />
+    }
+
+    return (
+      <React.Fragment>
+        <Divider className="divider" />
+        <div className="cItem">
+          <Waypoint onPositionChange={this.handlePositionChange} />
+          <div className="info-hold">
+            <Garnesh className="detail garnesh" />
+            <h1> Wedding </h1>
+            <p> Piedmont Room at Park Tavern </p>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
+  getReception() {
+    if (!this.state.events.res) {
+      return null
+    }
+    return (
+      <React.Fragment>
+        <Divider className="divider" />
+        <Stars />
+        <div className="cItem">
+          <div className="info-hold">
+            <Dance className="detail dance" />
+            <h1> Reception </h1>
+            <p> Egyptian ballroom at Fox Theater </p>
+          </div>
+        </div>
+      </React.Fragment>
+    )
+  }
+
   getPcb() {
     if (!(this.state.events.mehndi || this.state.events.mm || this.state.events.gs)) {
       return null
@@ -699,18 +757,11 @@ class App extends Component {
             <p> To Celebrate the Marriage of </p>
           </div>
         </div>
+
         {this.getNames()}
-
         {this.getPreEvents()}
+        {this.getWelcomeDinner()}
 
-        <Divider className="divider" />
-        <div className="cItem date">
-          <div className="info-hold">
-            <Welcome className="detail welcome" />
-            <h1> Welcome Dinner </h1>
-            <p> April 3rd </p>
-          </div>
-        </div>
         <Divider className="divider" />
         <div className="cItem date">
           <div className="info-hold">
@@ -718,25 +769,12 @@ class App extends Component {
             <h1> April 4th 2020 </h1>
           </div>
         </div>
-        <Divider className="divider" />
-        <div className="cItem">
-          <Waypoint onPositionChange={this.handlePositionChange} />
-          <div className="info-hold">
-            <Garnesh className="detail garnesh" />
-            <h1> Wedding </h1>
-            <p> Piedmont Room at Park Tavern </p>
-          </div>
-        </div>
-        <Divider className="divider" />
+
+
+        {this.getWedding()}
+
         <div className="star-bottom">
-          <Stars />
-          <div className="cItem">
-            <div className="info-hold">
-              <Dance className="detail dance" />
-              <h1> Reception </h1>
-              <p> Egyptian ballroom at Fox Theater </p>
-            </div>
-          </div>
+          {this.getReception()}
           <Divider className="divider" />
           <div className="cItem fox">
             <h1 className="gold-text cursive"> R.S.V.P. </h1>

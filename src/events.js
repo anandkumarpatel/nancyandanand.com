@@ -4,6 +4,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const EVENT_MAP = {
+  res: "Reception",
+  wed: "Wedding",
   wdin: "Welcome Dinner",
   mehndi: "Mehndi",
   pithi: "Pithi",
@@ -50,22 +52,8 @@ class Events extends Component {
         {this.getEvent("mm")}
         {this.getEvent("gs")}
         {this.getEvent("wdin")}
-        <Row>
-          <Col>
-            Wedding
-          </Col>
-          <Col sm="6">
-            <button className="bYes ask" disabled={true}>Yes</button>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            Reception
-          </Col>
-          <Col sm="6">
-            <button className="bYes ask" disabled={true}>Yes</button>
-          </Col>
-        </Row>
+        {this.getEvent("wed")}
+        {this.getEvent("res")}
       </Container>
     )
   }
