@@ -41,7 +41,6 @@ class Sheet {
 
     this.sheets = google.sheets({ version: 'v4', auth });
   }
-
   /**
    * @param {sheets_v4.Sheets} sheets
    * @param {string} id
@@ -77,6 +76,20 @@ class Sheet {
     const values = [updateRow.slice(ROW_MAP.email)]
     const range = `${TABLE_NAME}!${FIRST_DATA}${row}:${LAST_DATA}${row}`
     logger('updating row', updateRow)
+    if (updateRow[ROW_MAP.didRSVP] == true) {
+      this.sheets.spreadsheets.values.append({
+        spreadsheetId: "1qClfMFZryzVc025wqfZPqTdS9SVzOwBu6DwfGhxOO4s",
+        valueInputOption: 'USER_ENTERED',
+        range: "notify!" + FULL_RANGE,
+        requestBody: {
+          values
+        }
+      }).then(() => {
+        logger("Append OK")
+      }).catch((err) => {
+        logger("Append error", err)
+      })
+    }
     return this.sheets.spreadsheets.values.update({
       spreadsheetId: SHEET_ID,
       range,
