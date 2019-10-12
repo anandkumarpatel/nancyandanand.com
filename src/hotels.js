@@ -12,6 +12,11 @@ const HOTEL_MAP = {
     name: "Courtyard Marriott",
     homepage: "https://www.marriott.com/hotels/travel/atlmn-courtyard-atlanta-midtown-georgia-tech/",
     booking: "https://www.marriott.com/event-reservations/reservation-link.mi?id=1555944203510&key=GRP&app=resvlink",
+  },
+  LH: {
+    name: "Loews Hotel",
+    homepage: "https://www.loewshotels.com/atlanta-hotel",
+    booking: "https://www.loewshotels.com/atlanta-hotel/thakkarpatel-wedding",
   }
 }
 
