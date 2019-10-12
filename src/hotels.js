@@ -91,7 +91,7 @@ class Hotels extends Component {
     }
 
     const getTransport = () => {
-      if (this.props.info.name != "LH") {
+      if (this.props.info.name !== "LH") {
         return <p>Transportation will be provided from the venues and the hotel.</p>
       }
       return null
