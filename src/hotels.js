@@ -90,13 +90,20 @@ class Hotels extends Component {
       </p>)
     }
 
+    const getTransport = () => {
+      if (this.props.info.name != "LH") {
+        return <p>Transportation will be provided from the venues and the hotel.</p>
+      }
+      return null
+    }
+
     return (
       <Row className="hotels">
         <Col>
           <h1> Hotel </h1>
           {getBody()}
           <br />
-          <p>Transportation will be provided from the venues and the hotel.</p>
+          {getTransport()}
           <br />
           {getFlight()}
         </Col>
