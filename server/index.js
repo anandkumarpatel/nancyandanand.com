@@ -151,7 +151,7 @@ async function main() {
       httpOnly: false,
       domain: host,
       path: '/',
-      sameSite: 'none',
+      sameSite: false,
       secure: true,
       maxAge: 315569520000
     })
