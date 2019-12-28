@@ -30,7 +30,6 @@ import GS from './gs.js'
 
 import star from './img/star.svg'
 
-
 const request = require('request-promise')
 
 const hostname = window && window.location && window.location.hostname
@@ -39,46 +38,46 @@ let bURL = 'https://invite.nancyandanand.com'
 const B_MOCK = true
 let IS_MOCK = false
 let IS_LOCAL = false
-let logger = (...args) => { }
+let logger = (...args) => {}
 
-if (!hostname.includes("nancy") && B_MOCK) {
+if (!hostname.includes('nancy') && B_MOCK) {
   bURL = `http://${hostname}:8080`
   IS_LOCAL = true
   logger = console.log
 }
 
-if (hostname === "nancyandanand.com") {
+if (hostname === 'nancyandanand.com') {
   IS_MOCK = false
   IS_LOCAL = false
 }
 
 const MOCK = {
-  "people": {
-    "anand": { "isAttending": "?" },
-    "nancy": { "isAttending": "?" },
-    "Niru": { "isAttending": "?" },
-    "Dhansukh": { "isAttending": "?" },
+  people: {
+    anand: { isAttending: '?' },
+    nancy: { isAttending: '?' },
+    Niru: { isAttending: '?' },
+    Dhansukh: { isAttending: '?' }
     // "people1": { "isAttending": "?" },
     // "people2": { "isAttending": "?" },
     // "people3": { "isAttending": "?" },
   },
-  "hotel": {
-    "rate": "0",
-    "name": "GT"
+  hotel: {
+    rate: '0',
+    name: 'GT'
   },
-  "didRSVP": false,
+  didRSVP: false,
   gotInvite: true,
   submitted: true,
   flags: {
-    afam: "Yes",
+    afam: 'Yes'
     // flight: "sfo".
     // boice: "Yes"
   },
   events: {
-    pithi: "Yes",
-    mehndi: "Yes"
+    pithi: 'Yes',
+    mehndi: 'Yes'
   },
-  email: "anand@gmail.com",
+  email: 'anand@gmail.com'
   // address: {
   //   street: '860 peachtree street NE unit 1814',
   //   city: 'Atlanta',
@@ -110,7 +109,7 @@ class App extends Component {
         city: '',
         state: '',
         zip: '',
-        country: '',
+        country: ''
       },
       events: {},
       flags: {},
@@ -119,10 +118,10 @@ class App extends Component {
       updateCodeClicked: false,
       backendUrl: `${bURL}/invite`,
       gotInvite: false,
-      invite: {},
+      invite: {}
     }
 
-    logger("XX init state", this.state)
+    logger('XX init state', this.state)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.attendOptionClick = this.attendOptionClick.bind(this)
     this.handlePositionChange = this.handlePositionChange.bind(this)
@@ -138,10 +137,16 @@ class App extends Component {
     return this.state.backendUrl + '/' + this.state.id
   }
   handlePositionChange(data) {
-    if (data.currentPosition === 'above' && data.previousPosition === 'inside') {
+    if (
+      data.currentPosition === 'above' &&
+      data.previousPosition === 'inside'
+    ) {
       document.getElementById('App').classList.add('darken')
     }
-    if (data.currentPosition === 'inside' && data.previousPosition === 'above') {
+    if (
+      data.currentPosition === 'inside' &&
+      data.previousPosition === 'above'
+    ) {
       document.getElementById('App').classList.remove('darken')
     }
   }
@@ -174,36 +179,41 @@ class App extends Component {
           window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
         }
 
-        logger("XX setting invite", {
+        logger('XX setting invite', {
           people,
           hotel,
           didRSVP,
           address,
           flags,
           events,
-          email,
+          email
         })
 
-        this.setState({
-          people,
-          hotel,
-          didRSVP,
-          address,
-          flags,
-          events,
-          email,
-          gotInvite: true,
-          invite: JSON.parse(JSON.stringify({
+        this.setState(
+          {
             people,
+            hotel,
+            didRSVP,
             address,
+            flags,
             events,
             email,
-          }))
-        }, () => {
-          if (this.state.updateCodeClicked) {
-            window.scrollTo(0, document.body.clientHeight)
+            gotInvite: true,
+            invite: JSON.parse(
+              JSON.stringify({
+                people,
+                address,
+                events,
+                email
+              })
+            )
+          },
+          () => {
+            if (this.state.updateCodeClicked) {
+              window.scrollTo(0, document.body.clientHeight)
+            }
           }
-        })
+        )
       })
       .catch((err) => {
         window.onerror(err.message, err)
@@ -225,21 +235,21 @@ class App extends Component {
       people: this.state.people,
       address: this.state.address,
       events: this.state.events,
-      email: this.state.email,
+      email: this.state.email
     })
   }
 
   isEquivalent(a, b) {
-    var aProps = Object.keys(a);
-    var bProps = Object.keys(b);
+    var aProps = Object.keys(a)
+    var bProps = Object.keys(b)
 
     if (aProps.length !== bProps.length) {
-      return false;
+      return false
     }
 
     for (var i = 0; i < aProps.length; i++) {
-      var propName = aProps[i];
-      if (typeof a[propName] === "object") {
+      var propName = aProps[i]
+      if (typeof a[propName] === 'object') {
         if (!this.isEquivalent(a[propName], b[propName])) {
           return false
         }
@@ -247,22 +257,28 @@ class App extends Component {
       }
 
       if (a[propName] !== b[propName]) {
-        return false;
+        return false
       }
     }
-    return true;
+    return true
   }
 
   addressIsValid() {
-    return !(this.state.address.street === '' || this.state.address.city === '' || this.state.address.state === '' || this.state.address.zip === '' || this.state.address.country === '')
+    return !(
+      this.state.address.street === '' ||
+      this.state.address.city === '' ||
+      this.state.address.state === '' ||
+      this.state.address.zip === '' ||
+      this.state.address.country === ''
+    )
   }
 
   async handlePatch(data) {
-    logger("XX handlePatch", data)
+    logger('XX handlePatch', data)
     try {
       await this.post(data)
     } catch (err) {
-      logger("ignore post err", err)
+      logger('ignore post err', err)
     }
   }
 
@@ -272,7 +288,7 @@ class App extends Component {
         json: data
       })
     } catch (err) {
-      logger("XX Error posting", err)
+      logger('XX Error posting', err)
       window.onerror(err.message, err)
       throw err
     }
@@ -280,17 +296,17 @@ class App extends Component {
 
   async handleSubmit() {
     this.state.submitClicked = true
-    logger("XX handleSubmit: people", this.state.people)
-    logger("XX handleSubmit: address", this.state.address)
-    logger("XX handleSubmit: email", this.state.email)
-    logger("XX handleSubmit: events", this.state.events)
+    logger('XX handleSubmit: people', this.state.people)
+    logger('XX handleSubmit: address', this.state.address)
+    logger('XX handleSubmit: email', this.state.email)
+    logger('XX handleSubmit: events', this.state.events)
 
     this.setState({
-      submitClicked: true,
+      submitClicked: true
     })
 
     if (this.anyYes() && !this.addressIsValid()) {
-      logger("XX invalid address")
+      logger('XX invalid address')
       return
     }
 
@@ -303,7 +319,7 @@ class App extends Component {
         people: this.state.people,
         address: this.state.address,
         events: this.state.events,
-        email: this.state.email,
+        email: this.state.email
       })
     } catch (err) {
       setTimeout(() => {
@@ -318,13 +334,13 @@ class App extends Component {
   attendOptionClick(name) {
     return (event) => {
       const update = this.state.people
-      if (event.target.value === "Yes") {
+      if (event.target.value === 'Yes') {
         update[name] = {
-          isAttending: "Yes"
+          isAttending: 'Yes'
         }
-      } else if (event.target.value === "No") {
+      } else if (event.target.value === 'No') {
         update[name] = {
-          isAttending: "No"
+          isAttending: 'No'
         }
       }
 
@@ -334,23 +350,33 @@ class App extends Component {
 
       this.setState(peopleUpdate)
       this.handlePatch(peopleUpdate)
-      logger("XX attendOptionClick", update)
+      logger('XX attendOptionClick', update)
     }
   }
 
   submitInviteCode(inviteCode) {
-    logger("submitInviteCode: ", inviteCode)
-    this.props.cookies.set("id", inviteCode)
-    return this.setState({
-      id: inviteCode,
-      updateCodeClicked: true
-    }, () => {
-      return this.getInvite()
+    logger('submitInviteCode: ', inviteCode)
+    this.props.cookies.set('id', inviteCode, {
+      httpOnly: false,
+      domain: hostname,
+      path: '/',
+      sameSite: 'none',
+      secure: true,
+      maxAge: 315569520
     })
+    return this.setState(
+      {
+        id: inviteCode,
+        updateCodeClicked: true
+      },
+      () => {
+        return this.getInvite()
+      }
+    )
   }
 
   addrBlur(event) {
-    logger("XX addr blur", this.state.address)
+    logger('XX addr blur', this.state.address)
     if (this.addressIsValid()) {
       this.handlePatch({
         address: this.state.address
@@ -361,7 +387,7 @@ class App extends Component {
   addrChange(event) {
     const field = event.target.name
     const val = event.target.value
-    logger("XX addr change", field, val)
+    logger('XX addr change', field, val)
     const update = this.state
     update.address[field] = val
     this.setState(update)
@@ -369,7 +395,7 @@ class App extends Component {
 
   yesList() {
     return Object.keys(this.state.people).filter((name) => {
-      return "Yes" === this.state.people[name].isAttending
+      return 'Yes' === this.state.people[name].isAttending
     })
   }
 
@@ -383,12 +409,12 @@ class App extends Component {
     }
 
     // Nancy info
-    let date = "April 2ed"
-    let location = "Saha Household"
+    let date = 'April 2ed'
+    let location = 'Saha Household'
     if (this.state.flags.afam) {
       // Anands info
-      date = "April 1st"
-      location = "Patel Household"
+      date = 'April 1st'
+      location = 'Patel Household'
     }
 
     return (
@@ -452,9 +478,9 @@ class App extends Component {
     }
 
     // Nancy info
-    let date = "April 3rd"
-    let location = "Thakkar Household"
-    let event = "Pithi"
+    let date = 'April 3rd'
+    let location = 'Thakkar Household'
+    let event = 'Pithi'
 
     return (
       <React.Fragment>
@@ -481,7 +507,7 @@ class App extends Component {
       this.handlePatch({
         events: update.events
       })
-      logger("XX eventChange", update)
+      logger('XX eventChange', update)
     }
   }
 
@@ -490,16 +516,14 @@ class App extends Component {
       email: e.target.value
     }
     this.setState(update)
-    logger("XX eventChange", update)
+    logger('XX eventChange', update)
   }
 
   anyMissingEvent() {
     return Object.keys(this.state.events).some((name) => {
-      return "?" === this.state.events[name]
+      return '?' === this.state.events[name]
     })
   }
-
-
 
   getRSVPButton() {
     if (!this.state.gotInvite) {
@@ -508,7 +532,7 @@ class App extends Component {
 
     const anyMissingAnswer = () => {
       return Object.keys(this.state.people).some((name) => {
-        return "?" === this.state.people[name].isAttending
+        return '?' === this.state.people[name].isAttending
       })
     }
 
@@ -521,9 +545,17 @@ class App extends Component {
     }
 
     const isSubmitDisabled = () => {
-      return !this.state.gotInvite || anyMissingAnswer() || (this.anyYes() && (!this.addressIsValid() || this.anyMissingEvent() || !emailIsValid())) || this.state.submitClicked || (this.state.didRSVP && !this.rsvpChanged())
+      return (
+        !this.state.gotInvite ||
+        anyMissingAnswer() ||
+        (this.anyYes() &&
+          (!this.addressIsValid() ||
+            this.anyMissingEvent() ||
+            !emailIsValid())) ||
+        this.state.submitClicked ||
+        (this.state.didRSVP && !this.rsvpChanged())
+      )
     }
-
 
     const getRsvpText = () => {
       if (!this.state.gotInvite) {
@@ -531,39 +563,48 @@ class App extends Component {
       }
 
       if (anyMissingAnswer()) {
-        return "Please click Yes or No for all guests above"
+        return 'Please click Yes or No for all guests above'
       }
 
       if (this.anyYes()) {
         if (!this.addressIsValid()) {
-          return "Please enter mailing address above"
+          return 'Please enter mailing address above'
         }
         if (this.anyMissingEvent()) {
-          return "Please click Yes or No for all events above"
+          return 'Please click Yes or No for all events above'
         }
 
         if (this.state.email !== '') {
-          if (!/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(this.state.email)) {
-            return "Please valid email above"
+          if (
+            !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(this.state.email)
+          ) {
+            return 'Please valid email above'
           }
         }
       }
 
       if (this.state.didRSVP) {
         if (this.rsvpChanged()) {
-          return "Click to update RSVP"
+          return 'Click to update RSVP'
         } else {
-          return "RSVP Confirmed"
+          return 'RSVP Confirmed'
         }
       }
 
-      return "Click to RSVP"
+      return 'Click to RSVP'
     }
 
     return (
       <div className="rsvp rsvp-button">
         <div className="info-hold">
-          <Button size="lg" value="RSVP" onClick={this.handleSubmit} disabled={isSubmitDisabled()}>{getRsvpText()}</Button>
+          <Button
+            size="lg"
+            value="RSVP"
+            onClick={this.handleSubmit}
+            disabled={isSubmitDisabled()}
+          >
+            {getRsvpText()}
+          </Button>
         </div>
       </div>
     )
@@ -645,7 +686,13 @@ class App extends Component {
   }
 
   getPcb() {
-    if (!(this.state.events.mehndi || this.state.events.mm || this.state.events.gs)) {
+    if (
+      !(
+        this.state.events.mehndi ||
+        this.state.events.mm ||
+        this.state.events.gs
+      )
+    ) {
       return null
     }
 
@@ -697,15 +744,15 @@ class App extends Component {
   }
 
   getNames() {
-    const first = this.state.flags.afam ? "Anand" : "Nancy"
-    const sec = this.state.flags.afam ? "Nancy" : "Anand"
+    const first = this.state.flags.afam ? 'Anand' : 'Nancy'
+    const sec = this.state.flags.afam ? 'Nancy' : 'Anand'
 
     return (
       <div className="intro blue-font">
         <div className="info-hold us">
-          <h1 className="cursive" >{first}</h1>
+          <h1 className="cursive">{first}</h1>
           <p> & </p>
-          <h1 className="cursive" >{sec}</h1>
+          <h1 className="cursive">{sec}</h1>
         </div>
       </div>
     )
@@ -729,31 +776,59 @@ class App extends Component {
     }
 
     return (
-      <div className="App" id="App" >
-        <div className='star-drop' style={{ top: "1vh", left: "calc(1rem + 45px)", animationDelay: ".5s" }}>
-          <div className='star-sway' style={{ animationDelay: "1.5s" }} >
+      <div className="App" id="App">
+        <div
+          className="star-drop"
+          style={{
+            top: '1vh',
+            left: 'calc(1rem + 45px)',
+            animationDelay: '.5s'
+          }}
+        >
+          <div className="star-sway" style={{ animationDelay: '1.5s' }}>
             <Star src={star} className="star" />
           </div>
         </div>
-        <div className='star-drop' style={{ top: "50vh", left: "calc(2rem + 45px)", animationDelay: "1.3s" }}>
-          <div className='star-sway' style={{ animationDelay: "2.3s" }}>
+        <div
+          className="star-drop"
+          style={{
+            top: '50vh',
+            left: 'calc(2rem + 45px)',
+            animationDelay: '1.3s'
+          }}
+        >
+          <div className="star-sway" style={{ animationDelay: '2.3s' }}>
             <Star src={star} className="star" />
           </div>
         </div>
-        <div className='star-drop' style={{ top: "60vh", right: "calc(2rem + 90px)", animationDelay: ".1s" }}>
-          <div className='star-sway' style={{ animationDelay: "1.1s" }}>
+        <div
+          className="star-drop"
+          style={{
+            top: '60vh',
+            right: 'calc(2rem + 90px)',
+            animationDelay: '.1s'
+          }}
+        >
+          <div className="star-sway" style={{ animationDelay: '1.1s' }}>
             <Star src={star} className="star" />
           </div>
         </div>
-        <div className='star-drop' style={{ top: "5vh", right: "calc(1rem + 90px)", animationDelay: ".7s" }}>
-          <div className='star-sway' style={{ animationDelay: "1.7s" }}>
+        <div
+          className="star-drop"
+          style={{
+            top: '5vh',
+            right: 'calc(1rem + 90px)',
+            animationDelay: '.7s'
+          }}
+        >
+          <div className="star-sway" style={{ animationDelay: '1.7s' }}>
             <Star src={star} className="star" />
           </div>
         </div>
         <div className="intro blue-font">
           <div className="info-hold">
-            <h1 className="cursive" > You Are  </h1>
-            <h1 className="cursive" >Invited</h1>
+            <h1 className="cursive"> You Are </h1>
+            <h1 className="cursive">Invited</h1>
             <p> To Celebrate the Marriage of </p>
           </div>
         </div>
@@ -770,7 +845,6 @@ class App extends Component {
           </div>
         </div>
 
-
         {this.getWedding()}
 
         <div className="star-bottom">
@@ -781,22 +855,33 @@ class App extends Component {
             <div className="fox-outer">
               <div className="fox-neon">
                 <div className="names">
-                  <People valid={!!this.state.id} people={this.state.people} click={this.attendOptionClick} />
-                  <InviteCode valid={!this.state.id} handle={this.submitInviteCode} />
+                  <People
+                    valid={!!this.state.id}
+                    people={this.state.people}
+                    click={this.attendOptionClick}
+                  />
+                  <InviteCode
+                    valid={!this.state.id}
+                    handle={this.submitInviteCode}
+                  />
                 </div>
               </div>
             </div>
           </div>
           <br />
           <div className={getDrawerClass()}>
-            <Address address={this.state.address} change={this.addrChange} blur={this.addrBlur} />
+            <Address
+              address={this.state.address}
+              change={this.addrChange}
+              blur={this.addrBlur}
+            />
             <Events events={this.state.events} click={this.eventChange} />
             <Email email={this.state.email} change={this.emailChange} />
             <Hotels flags={this.state.flags} info={this.state.hotel} />
           </div>
           {this.getRSVPButton()}
         </div>
-      </div >
+      </div>
     )
   }
 }
