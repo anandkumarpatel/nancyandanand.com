@@ -75,7 +75,7 @@ class Hotels extends Component {
 
       return (
         <p>
-          Our room block is at the <a href={homepage} rel="noopener noreferrer" target="_blank">{name}</a>.
+          Our room block is at the {name}.
           <br />
           The rate is ${this.props.info.rate} plus tax per night.
           <br />
