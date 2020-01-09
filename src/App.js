@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import CardDeck from 'react-bootstrap/CardDeck'
+import Image from 'react-bootstrap/Image'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
@@ -10,6 +13,11 @@ import './App.css'
 
 import Invite from './invite.js'
 import foil from './img/foil.jpg'
+
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+
+import Slider from 'react-slick'
 
 const request = require('request-promise')
 
@@ -84,17 +92,22 @@ class App extends Component {
   render() {
     const API_KEY = 'AIzaSyCqnOPWWqsgOJXtw2H_P6AjtYUJjPF0RD4'
 
+    var storySettings = {
+      dots: false,
+      infinite: true,
+      speed: 500,
+      autoplaySpeed: 1000,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      pauseOnHover: true
+    }
+
     return (
-      <React.Fragment>
-        <div
-          className="page-header section-dark"
-          style={{
-            backgroundImage: 'url(' + require('./img/main.jpg') + ')'
-          }}
-        >
-          <div className="filter" />
+      <div className="page">
+        <div className="page-top">
           <Container>
-            <div className="title-brand">
+            <div className="top-text">
               <h1>The Adventure Begins</h1>
             </div>
           </Container>
@@ -105,8 +118,22 @@ class App extends Component {
             }}
           />
         </div>
-
-        <div className="section  pink">
+        <Navbar expand="sm" sticky="top">
+          <Navbar.Brand href="#home">N&A</Navbar.Brand>
+          <Navbar.Toggle />
+          <Navbar.Collapse>
+            {/* Used to justify right */}
+            <div className="mr-auto"></div>
+            <Nav>
+              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#ourstory">Our Story</Nav.Link>
+              <Nav.Link href="#link">What to do</Nav.Link>
+              <Nav.Link href="#link">Date</Nav.Link>
+              <Nav.Link href="#link">Link</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+        <div className="section pink">
           <div className="content-center">
             <Container>
               <h1>Nancy & Anand </h1>
@@ -115,16 +142,7 @@ class App extends Component {
             </Container>
           </div>
         </div>
-
-        <div className="section blue">
-          <div className="content-center">
-            <Container>
-              <h1>Our Story</h1>
-            </Container>
-          </div>
-        </div>
-
-        <div className="section purple">
+        <div className="section white">
           <div className="content-center">
             <Container>
               <h1>Events</h1>
@@ -160,7 +178,7 @@ class App extends Component {
                   {/* <iframe
                     name="gMap"
                     src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y&key=${API_KEY}`}
-                  ></iframe>{' '} */}
+                  ></iframe> */}
                   <Card.Body>
                     <Card.Title>Wedding</Card.Title>
                     <Card.Text>
@@ -180,7 +198,7 @@ class App extends Component {
                   <iframe
                     name="gMap"
                     src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y&key=${API_KEY}`}
-                  ></iframe>{' '}
+                  ></iframe>
                   <Card.Body>
                     <Card.Title>Reception</Card.Title>
                     <Card.Text>
@@ -200,8 +218,7 @@ class App extends Component {
             </Container>
           </div>
         </div>
-
-        <div className="section gray">
+        <div className="section pink">
           <div className="content-center">
             <Container>
               <h1>What to do</h1>
@@ -222,7 +239,49 @@ class App extends Component {
             </Container>
           </div>
         </div>
-      </React.Fragment>
+        <a href="/" name="ourstory"></a>
+        <div className="story">
+          <div className="story-stage"> </div>
+          <Container className="story-main">
+            <h1 className="story-intro">Our Story</h1>
+            <Slider {...storySettings}>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+              <div>
+                <Image thumbnail src={require('./img/main.jpg')} />
+              </div>
+            </Slider>
+          </Container>
+        </div>
+      </div>
     )
     // return <Invite />
   }
