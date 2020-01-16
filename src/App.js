@@ -5,6 +5,11 @@ import CardDeck from 'react-bootstrap/CardDeck'
 import Image from 'react-bootstrap/Image'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
+import { Waypoint } from 'react-waypoint'
+import YouTube from 'react-youtube'
 
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
@@ -88,7 +93,25 @@ class App extends Component {
         }, 5000)
       }
     }, 1000)
+
+    this.handleEnterStage = this.handleEnterStage.bind(this)
   }
+
+  handleEnterStage(data) {
+    if (data.currentPosition === 'above' || data.currentPosition === 'inside') {
+      console.log('enter theatre, nav off', data)
+      // document.getElementById('App').classList.add('darken')
+    }
+
+    if (
+      data.currentPosition === 'inside' &&
+      data.previousPosition === 'above'
+    ) {
+      console.log('leave theatre, run on nav')
+      // document.getElementById('App').classList.remove('darken')
+    }
+  }
+
   render() {
     const API_KEY = 'AIzaSyCqnOPWWqsgOJXtw2H_P6AjtYUJjPF0RD4'
 
@@ -101,6 +124,147 @@ class App extends Component {
       slidesToScroll: 1,
       autoplay: true,
       pauseOnHover: true
+    }
+
+    const navBar = () => {
+      return (
+        <Navbar expand="sm" sticky="top">
+          <Navbar.Brand href="#home">N&A</Navbar.Brand>
+          <Navbar.Toggle />
+          <Navbar.Collapse>
+            {/* Used to justify right */}
+            <div className="mr-auto"></div>
+            <Nav>
+              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#ourstory">Our Story</Nav.Link>
+              <Nav.Link href="#link">What to do</Nav.Link>
+              <Nav.Link href="#link">Date</Nav.Link>
+              <Nav.Link href="#link">Link</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      )
+    }
+
+    const eventCard = (place, name, date, times, loc, desc) => {
+      return (
+        <Row className="event">
+          <Col sm className="map-parent">
+            <a href="google.com">
+              <div className="map-overlay" />
+            </a>
+            <iframe
+              className="map"
+              name="gMap"
+              src={`https://www.google.com/maps/embed/v1/place?q=${place}&key=${API_KEY}`}
+            />
+          </Col>
+          <Col className="map-info">
+            <h1>{name}</h1>
+            <div className="text-detail">
+              <br />
+              {date}: {times} <br />
+              {loc} <br />
+            </div>
+            <div className="text-detail">
+              <br />
+              {desc}
+            </div>
+          </Col>
+        </Row>
+      )
+    }
+    const events = () => {
+      return (
+        <div className="section white">
+          <div className="content-center">
+            <Container className="events">
+              <h1>Events</h1>
+              {eventCard(
+                'place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y',
+                'Welcome Dinner & Garba',
+                'April 3rd',
+                '7:00pm - 10:00pm',
+                'Ashiana: 5675 Jimmy Carter Blvd #101, Norcross, GA 30071',
+                "Prepare to eat and dance the night away. This is your chance to mingle with the guest before the big day. Garba is a form of Indian dance. If you don't know it is quick to pick up. Dress colorful"
+              )}
+
+              {eventCard(
+                'place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y',
+                'Wedding',
+                'April 4th 2020',
+                '10:00am - 3:00pm',
+                'Park Tavern: 500 10th St NE, Atlanta, GA 30309',
+                'We will start with the Bharat which is the grooms procession to the venue. Once at the Venue we will have a short Hindu ceremony followed by a lunch. Dress Indian'
+              )}
+
+              {eventCard(
+                'place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y',
+                'Reception',
+                'April 4th 2020',
+                '7:00pm - 12:00pm',
+                'Fox Theater:  660 Peachtree St NE, Atlanta, GA 30308',
+                'This is it, the final event. There will be food, performances and more dancing. Dress sharp'
+              )}
+            </Container>
+          </div>
+        </div>
+      )
+    }
+    const things = [
+      {
+        name: 'stk',
+        desc: 'great palce to eat',
+        link: ''
+      },
+      {
+        name: 'beltline',
+        desc: 'great to walk',
+        link: ''
+      }
+    ]
+
+    const thing = (thing) => {
+      const name = thing.name
+      const desc = thing.desc
+      const link = thing.link
+      return (
+        <Card style={{ width: '18rem' }}>
+          <Card.Img variant="top" src="holder.js/100px180" />
+          <Card.Body>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>{desc}</Card.Text>
+            <Card.Link href={link}>Details</Card.Link>
+          </Card.Body>
+        </Card>
+      )
+    }
+
+    const thingsToDo = () => {
+      return (
+        <div className="section pink">
+          <div className="content-center">
+            <Container>
+              <h1>Have your own Adventure while your in Atlanta </h1>
+              {things.map(thing)}
+            </Container>
+          </div>
+        </div>
+      )
+    }
+
+    const vidOps = {
+      height: '390',
+      width: '640',
+      playerVars: {
+        autoplay: 0,
+        controls: 0
+      }
+    }
+
+    const _onReady = (event) => {
+      // access to player in all event handlers via event.target
+      event.target.playVideo()
     }
 
     return (
@@ -118,21 +282,7 @@ class App extends Component {
             }}
           />
         </div>
-        <Navbar expand="sm" sticky="top">
-          <Navbar.Brand href="#home">N&A</Navbar.Brand>
-          <Navbar.Toggle />
-          <Navbar.Collapse>
-            {/* Used to justify right */}
-            <div className="mr-auto"></div>
-            <Nav>
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#ourstory">Our Story</Nav.Link>
-              <Nav.Link href="#link">What to do</Nav.Link>
-              <Nav.Link href="#link">Date</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+        {/* {navBar()} */}
         <div className="section pink">
           <div className="content-center">
             <Container>
@@ -142,144 +292,23 @@ class App extends Component {
             </Container>
           </div>
         </div>
-        <div className="section white">
-          <div className="content-center">
-            <Container>
-              <h1>Events</h1>
-              <CardDeck>
-                <Card>
-                  <iframe
-                    name="gMap"
-                    src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y&key=${API_KEY}`}
-                  ></iframe>
-                  <Card.Body>
-                    <Card.Title>Welcome Garba</Card.Title>
-                    <Card.Text>
-                      <br />
-                      April 3rd <br />
-                      7:00pm - 10:00pm <br />
-                      Ashiana <br />
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <small className="text-muted">
-                      5675 Jimmy Carter Blvd #101, Norcross, GA 30071
-                    </small>
-                  </Card.Footer>
-                </Card>
-                <Card>
-                  <div id="map" className="map"></div>
-
-                  {/* <iframe
-                    src="https://maps.wrld3d.com/fullembed/?mapscene=42d969c"
-                    frameborder="0"
-                    allowfullscreen
-                  ></iframe> */}
-                  {/* <iframe
-                    name="gMap"
-                    src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y&key=${API_KEY}`}
-                  ></iframe> */}
-                  <Card.Body>
-                    <Card.Title>Wedding</Card.Title>
-                    <Card.Text>
-                      <br />
-                      April 4th 2020 <br />
-                      9:00am - 3:00pm <br />
-                      Park Tavern <br />
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <small className="text-muted">
-                      500 10th St NE, Atlanta, GA 30309
-                    </small>
-                  </Card.Footer>
-                </Card>
-                <Card>
-                  <iframe
-                    name="gMap"
-                    src={`https://www.google.com/maps/embed/v1/place?q=place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y&key=${API_KEY}`}
-                  ></iframe>
-                  <Card.Body>
-                    <Card.Title>Reception</Card.Title>
-                    <Card.Text>
-                      <br />
-                      April 4th 2020 <br />
-                      7:00pm - 12:00pm <br />
-                      Fox Theater <br />
-                    </Card.Text>
-                  </Card.Body>
-                  <Card.Footer>
-                    <small className="text-muted">
-                      660 Peachtree St NE, Atlanta, GA 30308
-                    </small>
-                  </Card.Footer>
-                </Card>
-              </CardDeck>
-            </Container>
-          </div>
-        </div>
-        <div className="section pink">
-          <div className="content-center">
-            <Container>
-              <h1>What to do</h1>
-              Have your own Adventure while your in Atlanta <br />
-              Places to eat: <br />
-              ponce city market <br />
-              krog city market <br />
-              <br />
-              Things to do: <br />
-              Botanical Gardens <br />
-              coke museum <br />
-              aquarium <br />
-              high musem of art. <br />
-              <br />
-              Hiking: <br />
-              Beltline <br />
-              Stone Mountai <br />
-            </Container>
-          </div>
-        </div>
+        {events()}
+        {thingsToDo()}
         <a href="/" name="ourstory"></a>
+        <Waypoint onPositionChange={this.handleEnterStage} />
         <div className="story">
-          <div className="story-stage"> </div>
-          <Container className="story-main">
-            <h1 className="story-intro">Our Story</h1>
-            <Slider {...storySettings}>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-              <div>
-                <Image thumbnail src={require('./img/main.jpg')} />
-              </div>
-            </Slider>
-          </Container>
+          <div className="story-stage"></div>
+          <div className="story-main">
+            {/* <h1 className="story-intro">Our Story</h1> */}
+            <div className="story-image">
+              <YouTube
+                videoId="FTLKdAU4XJM?controls=0"
+                opts={vidOps}
+                onReady={_onReady}
+                lassName="story-video"
+              />
+            </div>
+          </div>
         </div>
       </div>
     )

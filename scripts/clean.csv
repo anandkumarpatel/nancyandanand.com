@@ -1,0 +1,93 @@
+street address, address line 2, postal code, city, state, country
+254 Carlyle Park Drive NE,,30307,Atlanta,Ga,USA
+2475 Quacco Rd.,,31322,Pooler,GA,United States of America
+5000 Timberbridge Lane,,30022,Alpharetta,GA,USA
+12305 Clarimonte ave,,30009,Atlanta,GA,USA
+1568 Dunwoody club xing,,30338,Atlanta,Georgia,US
+25 River St,,29601,Greenville,SC,USA
+950 49th st apt 9k,,11219,Brooklyn,New York,USA
+3428 Briarcliff Drive apartment S,,27834,Greenville,NC,USA
+1052 dunmoore way,,30078,Snellville,Ga,USA
+4115 Waterford Circle,,37221,Nashville,TN,USA
+18680 Belview Drive,,33157,Cutler Bay,Florida,United States of America
+2921 Lenox Rd,,30324,Atlanta,GA,USA
+1140 n Wells St unit 1704,,60610,Chicago,IL,US
+3918 S Elm Street,,85282,Tempe,AZ,US
+1630 Alexandria CT SE,,33410,Marietta,GA,USA
+2 Bayside Village Place APT 224,,94107,San Francisco,CA,USA
+250 10th st NE APT 1312,,30309,Atlanta,Georgia,USA
+1884 Noblin Woods Trail,,30097,Duluth,GA,United States
+11215 Bramshill Dr.,,30022,Johns Creek,Georgia,United States
+3110 MONROE WAY,,30004,ALPHARETTA,Georgia,US
+2258 Murphy lane east,,45373,troy,OH,US
+2451 fiesta dr,,45373,Troy,Ohio,USA
+2258 Murphy Ln E,,45373,Troy,OH,US
+180 Jackson St Apt 5208,,30312,Atlanta,Georgia,USA
+1038 W.Rollingwood ct.,,34442,Hernando,FL,USA
+30 Buchanan Lane,,60107,Streamwood,IL,USA
+6732 Wimbledon drive,,46077,Zionsville,Indiana,USA
+11290 Musette Circle,,30009,Alpharetta,GA,USA
+15 Glad Valley Dr,,01821,Billerica,Massachusetts,United States
+120 Kingston st apt 905,,02111,Boston,Massachusetts,US
+5022 Pinelake Road,,33543,Wesley Chapel,FL,US
+4,Balaji Society N K N Road,,387001,Nadiad,Gujarat,India
+69 Bridgeport crescent,,L9k1k3,Ancaster,Ontario,Canada
+4866 Cote des neiges,,H3V1H1,Montreal,Quebec,Canada
+2523,Cannon Farm Trace,,30097,Duluth,Georgia,USA
+2472 kinglet ct,,30097,Duluth,Georgia,Usa
+11745 Stratham Drive,,30009-2430,Alpharetta,GA,USA
+3959 N Stratford Rd NE,,30342,Atlanta,Georgia,USA
+2 Karnell Ct,,08820,Edison,NJ,USA
+10207 Sable CT,,31820,Midland,Georgia,USA
+1160 Sonoma Chase,,30004,Alpharetta,Georgia,US
+280 Jon Jeff Dr,,30047,Lilburn,Georgia,Usa
+11325 donnington drive,,30097,John's creek,Ga,Uk
+Desktop $ node clean.js > clean.csv
+Desktop $ cat clean.csv
+Desktop $ rm clean.csv
+Desktop $ node clean.js > clean.csv
+Desktop $ node clean.js
+street address, address line 2, postal code, city, state, country
+254 Carlyle Park Drive NE,,30307,Atlanta,Ga,USA
+2475 Quacco Rd.,,31322,Pooler,GA,United States of America
+5000 Timberbridge Lane,,30022,Alpharetta,GA,USA
+12305 Clarimonte ave,,30009,Atlanta,GA,USA
+1568 Dunwoody club xing,,30338,Atlanta,Georgia,US
+25 River St,,29601,Greenville,SC,USA
+950 49th st apt 9k,,11219,Brooklyn,New York,USA
+3428 Briarcliff Drive apartment S,,27834,Greenville,NC,USA
+1052 dunmoore way,,30078,Snellville,Ga,USA
+4115 Waterford Circle,,37221,Nashville,TN,USA
+18680 Belview Drive,,33157,Cutler Bay,Florida,United States of America
+2921 Lenox Rd,,30324,Atlanta,GA,USA
+1140 n Wells St unit 1704,,60610,Chicago,IL,US
+3918 S Elm Street,,85282,Tempe,AZ,US
+1630 Alexandria CT SE,,33410,Marietta,GA,USA
+2 Bayside Village Place APT 224,,94107,San Francisco,CA,USA
+250 10th st NE APT 1312,,30309,Atlanta,Georgia,USA
+1884 Noblin Woods Trail,,30097,Duluth,GA,United States
+11215 Bramshill Dr.,,30022,Johns Creek,Georgia,United States
+3110 MONROE WAY,,30004,ALPHARETTA,Georgia,US
+2258 Murphy lane east,,45373,troy,OH,US
+2451 fiesta dr,,45373,Troy,Ohio,USA
+2258 Murphy Ln E,,45373,Troy,OH,US
+180 Jackson St Apt 5208,,30312,Atlanta,Georgia,USA
+1038 W.Rollingwood ct.,,34442,Hernando,FL,USA
+30 Buchanan Lane,,60107,Streamwood,IL,USA
+6732 Wimbledon drive,,46077,Zionsville,Indiana,USA
+11290 Musette Circle,,30009,Alpharetta,GA,USA
+15 Glad Valley Dr,,01821,Billerica,Massachusetts,United States
+120 Kingston st apt 905,,02111,Boston,Massachusetts,US
+5022 Pinelake Road,,33543,Wesley Chapel,FL,US
+4,Balaji Society N K N Road,,387001,Nadiad,Gujarat,India
+69 Bridgeport crescent,,L9k1k3,Ancaster,Ontario,Canada
+4866 Cote des neiges,,H3V1H1,Montreal,Quebec,Canada
+2523,Cannon Farm Trace,,30097,Duluth,Georgia,USA
+2472 kinglet ct,,30097,Duluth,Georgia,Usa
+11745 Stratham Drive,,30009-2430,Alpharetta,GA,USA
+3959 N Stratford Rd NE,,30342,Atlanta,Georgia,USA
+2 Karnell Ct,,08820,Edison,NJ,USA
+10207 Sable CT,,31820,Midland,Georgia,USA
+1160 Sonoma Chase,,30004,Alpharetta,Georgia,US
+280 Jon Jeff Dr,,30047,Lilburn,Georgia,Usa
+11325 donnington drive,,30097,John's creek,Ga,Uk
