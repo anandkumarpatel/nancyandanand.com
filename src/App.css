@@ -9,9 +9,14 @@
   --gray-end: #898392;
   --green: #deffd4;
   --green-end: #bce1db;
-  --white: #e0e5ec;
-  /* --white: #fff9ed; */
+  --white: #fff9ed;
+  --white-end: #fff9ed;
+  --white-shadow-1: #4d473b3f;
+  --white-shadow-2: #4d473b39;
+  /* --white: #e0e5ec;
   --white-end: #e0e5ec;
+  --white-shadow-1: rgb(163, 177, 198, 0.6);
+  --white-shadow-2: rgba(163, 177, 198, 0.5); */
   --black: #1a0000;
   --head-font: 'Amita';
   --head-font: 'Calligraffitti';
@@ -113,6 +118,7 @@ h2,
   text-align: center;
   color: #ffffff;
   display: block;
+  mix-blend-mode: difference;
 }
 
 .top-text h1 {
@@ -290,51 +296,109 @@ h2,
 } */
 
 .events {
-  padding-top: 5vh;
-  padding-bottom: 5vh;
   text-align: center;
 }
+
 .event {
   position: relative;
-  padding: 2vh;
-  margin: 2vh 1vw;
-  border-radius: 4px;
+  padding: 4vh 1vw;
+  margin: 4vh 0;
   background-color: var(--white);
-  box-shadow: 9px 9px 16px rgb(163, 177, 198, 0.6),
-    -9px -9px 16px rgba(255, 255, 255, 0.5);
+  box-shadow: 9px 9px 16px var(--white-shadow-1),
+    -9px -9px 16px var(--white-shadow-2);
+  border-image: url(./img/event-border.svg);
+  border-image-width: 10px;
+  border-image-outset: 10px;
+}
+
+.event:before,
+.event:after {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 6px;
+  top: 0;
+}
+
+.event:before {
+  left: -6px;
+  background: radial-gradient(
+      circle,
+      transparent,
+      transparent 50%,
+      var(--white) 50%,
+      var(--white) 100%
+    ) -8px -8px / 16px 16px repeat-y;
+}
+
+.event:after {
+  right: -6px;
+  background: radial-gradient(
+      circle,
+      transparent,
+      transparent 50%,
+      var(--white) 50%,
+      var(--white) 100%
+    ) -2px -2px / 16px 16px repeat-y;
 }
 
 .map-parent {
   text-align: end;
+  border-right: var(--black);
+  border-right-style: dotted;
 }
 
 .map-info {
   text-align: left;
+  padding: 2vh 2vw;
 }
 
 .map-overlay {
   position: absolute;
+  right: 0;
   height: 100%;
   width: 100%;
 }
 
 .map {
   height: 100%;
+  width: 100%;
   border-width: 2px;
   border-style: inset;
   border-color: initial;
   border-image: initial;
-  width: 100%;
 }
 
 .section {
   width: 100vw;
+  padding-top: 5vh;
+  padding-bottom: 5vh;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+
   /* height: 100vh; */
 }
+
 .section h2 {
   font-size: 2em;
 }
 
+.todo {
+  position: relative;
+  margin: auto;
+}
+
+.card-columns {
+  @include media-breakpoint-only(xl) {
+    column-count: 2;
+  }
+}
+
+.card-img-top {
+  max-height: 300px;
+  object-fit: cover;
+}
 @font-face {
   font-family: 'anandfont';
   src: url('./img/f1.ttf');
