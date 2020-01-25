@@ -310,8 +310,7 @@ class App extends Component {
       const link = thing.link
       const img = thing.img
       return (
-        // <Col>
-        <Card bg="dark" text="white" style={{ width: '18rem' }}>
+        <Card bg="dark" text="white" style={{ width: '30vw' }}>
           <Card.Img variant="top" src={img} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
@@ -319,7 +318,6 @@ class App extends Component {
             <Card.Link href={link}>Explore</Card.Link>
           </Card.Body>
         </Card>
-        // </Col>
       )
     }
 

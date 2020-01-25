@@ -6,7 +6,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
-    "gh-pages": "^2.1.1",
+    "gh-pages": "^2.2.0",
     "googleapi": "^1.0.2",
     "googleapis": "^39.2.0",
     "react": "^16.12.0",
@@ -15,7 +15,7 @@
     "react-dom": "^16.12.0",
     "react-film": "^1.3.0",
     "react-scripts": "^3.3.0",
-    "react-scroll-parallax": "^2.2.0",
+    "react-scroll-parallax": "^2.3.1",
     "react-slick": "^0.25.2",
     "react-waypoint": "^9.0.2",
     "react-youtube": "^7.9.0",
@@ -56,7 +56,7 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.3",
+    "autoprefixer": "^9.7.4",
     "prettier": "^1.19.1"
   }
 }
