@@ -111,13 +111,11 @@ h2,
 }
 
 .top-text {
-  z-index: 1;
   max-width: 512px;
   margin: 0 auto;
   position: relative;
   text-align: center;
   color: #ffffff;
-  display: block;
   mix-blend-mode: difference;
 }
 
@@ -301,18 +299,16 @@ h2,
 
 .event {
   position: relative;
-  padding: 4vh 1vw;
-  margin: 4vh 0;
+  padding: 3vh 2vw;
+  margin: 5vh 0;
   background-color: var(--white);
   box-shadow: 9px 9px 16px var(--white-shadow-1),
     -9px -9px 16px var(--white-shadow-2);
-  border-image: url(./img/event-border.svg);
-  border-image-width: 10px;
-  border-image-outset: 10px;
 }
-
-.event:before,
-.event:after {
+/* gold back */
+/* url(https://marketplace.canva.com/MADerwiKCSU/1/thumbnail_large/canva-gold-foil-texture-background-MADerwiKCSU.jpg) */
+.event-left,
+.event-right {
   content: '';
   position: absolute;
   height: 100%;
@@ -320,18 +316,7 @@ h2,
   top: 0;
 }
 
-.event:before {
-  left: -6px;
-  background: radial-gradient(
-      circle,
-      transparent,
-      transparent 50%,
-      var(--white) 50%,
-      var(--white) 100%
-    ) -8px -8px / 16px 16px repeat-y;
-}
-
-.event:after {
+.event-right {
   right: -6px;
   background: radial-gradient(
       circle,
@@ -342,6 +327,46 @@ h2,
     ) -2px -2px / 16px 16px repeat-y;
 }
 
+.event-left {
+  content: '';
+  position: absolute;
+  height: 100%;
+  width: 6px;
+  top: 0;
+  left: -6px;
+  background: radial-gradient(
+      circle,
+      transparent,
+      transparent 50%,
+      var(--white) 50%,
+      var(--white) 100%
+    ) -8px -8px / 16px 16px repeat-y;
+}
+
+.event-border {
+  width: 98%;
+  height: 96%;
+  right: 1%;
+  top: 2%;
+  position: absolute;
+
+  border-top-style: solid;
+  border-top-width: 2rem;
+  border-right-style: solid;
+  border-right-width: 2rem;
+  border-bottom-style: solid;
+  border-bottom-width: 2rem;
+  border-left-style: solid;
+  border-left-width: 2rem;
+
+  -o-border-image: url('./img/tix-b.svg');
+  border-image-source: url('./img/tix-b.svg');
+  border-image-slice: 135 220;
+  border-image-width: 35px 50px;
+  border-image-outset: 0px;
+  border-image-repeat: stretch;
+}
+
 .map-parent {
   text-align: end;
   border-right: var(--black);
@@ -350,7 +375,6 @@ h2,
 
 .map-info {
   text-align: left;
-  padding: 2vh 2vw;
 }
 
 .map-overlay {
@@ -376,8 +400,7 @@ h2,
   text-align: center;
   align-items: center;
   justify-content: center;
-
-  /* height: 100vh; */
+  display: flex;
 }
 
 .section h2 {
@@ -389,16 +412,51 @@ h2,
   margin: auto;
 }
 
-.card-columns {
-  @include media-breakpoint-only(xl) {
-    column-count: 2;
-  }
-}
-
 .card-img-top {
   max-height: 300px;
   object-fit: cover;
 }
+
+.names {
+  background-color: var(--pink);
+  height: 40vh;
+  position: relative;
+}
+
+.name-text {
+  color: #ffffff;
+}
+
+.name-text h1 {
+  background: linear-gradient(
+    to bottom,
+    #cfc09f 22%,
+    #dcbe89 24%,
+    #cfc09f 26%,
+    #cfc09f 40%,
+    #ffecb3 50%,
+    #3a2c0f 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #fff;
+}
+
+.name-text h1:after {
+  background: none;
+  content: attr(data-heading);
+  left: 0;
+  top: 0;
+  z-index: -1;
+  position: absolute;
+  text-shadow: -1px 0 1px #c6bb9f, 0 1px 1px #c6bb9f,
+    5px 5px 10px rgba(0, 0, 0, 0.4), -5px -5px 10px rgba(0, 0, 0, 0.4);
+}
+
+.name-text h1 {
+  font-size: 5em;
+}
+
 @font-face {
   font-family: 'anandfont';
   src: url('./img/f1.ttf');

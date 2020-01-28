@@ -11,7 +11,6 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import { Waypoint } from 'react-waypoint'
 import YouTube from 'react-youtube'
-
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
@@ -19,11 +18,6 @@ import './App.css'
 
 import Invite from './invite.js'
 import foil from './img/foil.jpg'
-
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-
-import Slider from 'react-slick'
 
 const request = require('request-promise')
 
@@ -150,6 +144,7 @@ class App extends Component {
     const eventCard = (place, name, date, times, loc, desc) => {
       return (
         <Row className="event">
+          <div className="event-left" />
           <Col sm={4} className="map-parent">
             <a href="google.com">
               <div className="map-overlay" />
@@ -171,6 +166,8 @@ class App extends Component {
               {desc}
             </div>
           </Col>
+          <div className="event-border"></div>
+          <div className="event-right" />
         </Row>
       )
     }
@@ -310,7 +307,7 @@ class App extends Component {
       const link = thing.link
       const img = thing.img
       return (
-        <Card bg="dark" text="white" style={{ width: '30vw' }}>
+        <Card bg="dark" text="white">
           <Card.Img variant="top" src={img} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
@@ -369,11 +366,13 @@ class App extends Component {
           />
         </div>
         {/* {navBar()} */}
-        <div className="section pink">
+        <div className="section names pink">
           <Container>
-            <h1>Nancy & Anand </h1>
-            <h2>Are getting married</h2>
-            <h2>April 4th 2020</h2>
+            <div className="name-text">
+              <h1>Nancy & Anand </h1>
+              <h2>Are getting married</h2>
+              <h2>April 4th 2020</h2>
+            </div>
           </Container>
         </div>
         {events()}
