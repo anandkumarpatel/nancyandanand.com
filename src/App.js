@@ -50,41 +50,6 @@ class App extends Component {
       id = 'helloId'
     }
     this.state = {}
-    setTimeout(() => {
-      if (window && window.L && window.L.Wrld) {
-        console.log('LOADED')
-        const fox = [33.7726272, -84.3866794]
-
-        const map = window.L.Wrld.map(
-          'map',
-          '21475d0804e530c16af25671b935cc3a',
-          {
-            headingDegrees: 0,
-            center: fox,
-            zoom: 18
-          }
-        )
-        var marker = window.L.marker(fox, { title: 'My marker' }).addTo(map)
-
-        let deg = 0
-        function move() {
-          deg = deg + 90
-          console.log('Set View')
-          map.setView(fox, 18, {
-            headingDegrees: deg,
-            animate: true,
-            durationSeconds: 20
-          })
-          setTimeout(function() {
-            console.log('deg', deg)
-            move()
-          }, 10000)
-        }
-        setTimeout(() => {
-          move()
-        }, 5000)
-      }
-    }, 1000)
 
     this.handleEnterStage = this.handleEnterStage.bind(this)
   }
@@ -105,19 +70,6 @@ class App extends Component {
   }
 
   render() {
-    const API_KEY = 'AIzaSyCqnOPWWqsgOJXtw2H_P6AjtYUJjPF0RD4'
-
-    var storySettings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      autoplaySpeed: 1000,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-      autoplay: true,
-      pauseOnHover: true
-    }
-
     const navBar = () => {
       return (
         <Navbar expand="sm" sticky="top">
@@ -128,10 +80,10 @@ class App extends Component {
             <div className="mr-auto"></div>
             <Nav>
               <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#events">Events</Nav.Link>
+              <Nav.Link href="#hotels">Hotels</Nav.Link>
+              <Nav.Link href="#todo">Things to do</Nav.Link>
               <Nav.Link href="#ourstory">Our Story</Nav.Link>
-              <Nav.Link href="#link">What to do</Nav.Link>
-              <Nav.Link href="#link">Date</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
@@ -139,6 +91,8 @@ class App extends Component {
     }
 
     const eventCard = (place, name, date, times, loc, desc) => {
+      const API_KEY = 'AIzaSyCqnOPWWqsgOJXtw2H_P6AjtYUJjPF0RD4'
+
       return (
         <Row className="event">
           <div className="event-left" />
@@ -349,6 +303,7 @@ class App extends Component {
 
     return (
       <div className="page">
+        <a href="/" name="home" />
         <div className="page-top">
           <Container>
             <div className="top-text">
@@ -362,7 +317,7 @@ class App extends Component {
             }}
           />
         </div>
-        {/* {navBar()} */}
+        {navBar()}
         <div className="section names pink">
           <Container>
             <div className="name-text">
@@ -372,9 +327,11 @@ class App extends Component {
             </div>
           </Container>
         </div>
+        <a href="/" name="events" className="spot" />
         {events()}
+        <a href="/" name="todo" className="spot" />
         {thingsToDo()}
-        <a href="/" name="ourstory"></a>
+        <a href="/" name="ourstory" className="spot" />
         <Waypoint onPositionChange={this.handleEnterStage} />
         <div className="story">
           <div className="story-stage"></div>
