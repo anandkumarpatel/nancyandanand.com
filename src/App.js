@@ -16,9 +16,6 @@ import { withCookies, Cookies } from 'react-cookie'
 
 import './App.css'
 
-import Invite from './invite.js'
-import foil from './img/foil.jpg'
-
 const request = require('request-promise')
 
 const hostname = window && window.location && window.location.hostname
@@ -395,7 +392,6 @@ class App extends Component {
         </div>
       </div>
     )
-    // return <Invite />
   }
 }
 
