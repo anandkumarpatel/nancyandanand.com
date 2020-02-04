@@ -73,7 +73,7 @@ class App extends Component {
     const navBar = () => {
       return (
         <Navbar expand="sm" sticky="top">
-          <Navbar.Brand href="#home">N&A</Navbar.Brand>
+          <Navbar.Brand href="#home">#TheAdventureBegins</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse>
             {/* Used to justify right */}
@@ -221,7 +221,7 @@ class App extends Component {
         desc: 'Shopping & Eatting in an old Ford Factory',
         link: 'http://www.poncecitymarket.com/',
         img:
-          'https://poncecitymarket.com/wp-content/themes/poncecitymarket/assets/images/header_icon.png'
+          'https://cdn2.atlantamagazine.com/wp-content/uploads/sites/4/2012/07/0812_Feature_PonceCityMarket.jpg'
       },
       {
         name: 'High Museum of Art',
@@ -238,10 +238,11 @@ class App extends Component {
           'https://beltlineorg-wpengine.netdna-ssl.com/wp-content/uploads/2018/11/videothumb.jpg'
       },
       {
-        name: 'Atlantic Station',
-        desc: 'Outdoor mall',
-        link: 'https://www.atlanticstation.com/',
-        img: 'https://assets.speakcdn.com/assets/2500/skyview-2.jpg'
+        name: 'Dads Garage Theatre',
+        desc: 'Light Laughts',
+        link: 'https://dadsgarage.com/',
+        img:
+          'https://dadsgarage.com/wp-content/uploads/2016/12/logo_dads-garage.png'
       },
       {
         name: 'Final Four',

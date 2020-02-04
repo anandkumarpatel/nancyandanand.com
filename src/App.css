@@ -43,6 +43,7 @@ h2,
     var(--white) 0%,
     var(--white-end) 100%
   );
+  background-image: url('http://api.thumbr.it/whitenoise-361x370.png?background=fff9edff&noise=e6e0d4&density=100&opacity=100');
   color: var(--black);
 }
 
@@ -437,9 +438,9 @@ h2,
   background: linear-gradient(0deg, #fff65c, #9a8000);
   background-size: 200% 200%;
 
-  -webkit-animation: AnimationName 2s ease infinite;
-  -moz-animation: AnimationName 2s ease infinite;
-  animation: AnimationName 2s ease infinite;
+  -webkit-animation: AnimationName 3s ease infinite;
+  -moz-animation: AnimationName 3s ease infinite;
+  animation: AnimationName 3s ease infinite;
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
