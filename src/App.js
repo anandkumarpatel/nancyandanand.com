@@ -1,36 +1,22 @@
 import React, { Component } from 'react'
-import Button from 'react-bootstrap/Button'
-import { Waypoint } from 'react-waypoint'
+import Container from 'react-bootstrap/Container'
+import Card from 'react-bootstrap/Card'
+import CardColumns from 'react-bootstrap/CardColumns'
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+// import { Waypoint } from 'react-waypoint'
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
-import './App.css'
-
-import Address from './address.js'
-import April from './april.js'
-import Atl from './atl.js'
-import Dance from './dance.js'
-import Divider from './divider.js'
-import Events from './events.js'
-import Garnesh from './garnesh.js'
 import Hotels from './hotels.js'
-import Mehndi from './mehndi.js'
-import Msg from './msg.js'
-import People from './people.js'
-import Pithi from './pithi.js'
-import Star from './star.js'
-import Stars from './stars.js'
-import Welcome from './welcome.js'
-import Beach from './beach.js'
-import InviteCode from './invitecode.js'
-import Email from './email.js'
-import Plane from './plane.js'
-import MM from './mm.js'
-import GS from './gs.js'
 
-import star from './img/star.svg'
+import './App.css'
+// import YouTube from 'react-youtube'
+// import Hero from './curtain.js'
 
-const request = require('request-promise')
+const curtains = require('./img/curtain-1.jpg')
 
 const hostname = window && window.location && window.location.hostname
 let bURL = 'https://invite.nancyandanand.com'
@@ -51,42 +37,6 @@ if (hostname === 'nancyandanand.com') {
   IS_LOCAL = false
 }
 
-const MOCK = {
-  people: {
-    anand: { isAttending: '?' },
-    nancy: { isAttending: '?' },
-    Niru: { isAttending: '?' },
-    Dhansukh: { isAttending: '?' }
-    // "people1": { "isAttending": "?" },
-    // "people2": { "isAttending": "?" },
-    // "people3": { "isAttending": "?" },
-  },
-  hotel: {
-    rate: '0',
-    name: 'GT'
-  },
-  didRSVP: false,
-  gotInvite: true,
-  submitted: true,
-  flags: {
-    afam: 'Yes'
-    // flight: "sfo".
-    // boice: "Yes"
-  },
-  events: {
-    pithi: 'Yes',
-    mehndi: 'Yes'
-  },
-  email: 'anand@gmail.com'
-  // address: {
-  //   street: '860 peachtree street NE unit 1814',
-  //   city: 'Atlanta',
-  //   state: 'Georgia',
-  //   zip: '30308',
-  //   country: 'USA',
-  // }
-}
-
 class App extends Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired
@@ -99,787 +49,332 @@ class App extends Component {
     if (IS_MOCK) {
       id = 'helloId'
     }
-    this.state = {
-      id,
-      didRSVP: false,
-      hotel: {},
-      people: {},
-      address: {
-        street: '',
-        city: '',
-        state: '',
-        zip: '',
-        country: ''
-      },
-      events: {},
-      flags: {},
-      email: '',
-      submitClicked: false,
-      updateCodeClicked: false,
-      backendUrl: `${bURL}/invite`,
-      gotInvite: false,
-      invite: {}
-    }
+    this.state = {}
 
-    logger('XX init state', this.state)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.attendOptionClick = this.attendOptionClick.bind(this)
-    this.handlePositionChange = this.handlePositionChange.bind(this)
-    this.eventChange = this.eventChange.bind(this)
-    this.emailChange = this.emailChange.bind(this)
-    this.addrChange = this.addrChange.bind(this)
-    this.addrBlur = this.addrBlur.bind(this)
-    this.submitInviteCode = this.submitInviteCode.bind(this)
-    this.getInvite()
+    this.handleEnterStage = this.handleEnterStage.bind(this)
   }
 
-  getUrl() {
-    return this.state.backendUrl + '/' + this.state.id
-  }
-  handlePositionChange(data) {
-    if (
-      data.currentPosition === 'above' &&
-      data.previousPosition === 'inside'
-    ) {
-      document.getElementById('App').classList.add('darken')
+  handleEnterStage(data) {
+    if (data.currentPosition === 'above' || data.currentPosition === 'inside') {
+      console.log('enter theatre, nav off', data)
+      // document.getElementById('App').classList.add('darken')
     }
+
     if (
       data.currentPosition === 'inside' &&
       data.previousPosition === 'above'
     ) {
-      document.getElementById('App').classList.remove('darken')
+      console.log('leave theatre, run on nav')
+      // document.getElementById('App').classList.remove('darken')
     }
-  }
-
-  getInvite() {
-    if (IS_MOCK) {
-      return setTimeout(() => {
-        this.setState(MOCK)
-      }, 100)
-    }
-
-    if (!this.state.id) {
-      return
-    }
-
-    return request(this.getUrl(), {
-      json: true
-    })
-      .then((data) => {
-        const people = data.people
-        const hotel = data.hotel
-        const didRSVP = data.didRSVP
-        const address = data.address
-        const flags = data.flags
-        const events = data.events
-        const email = data.email
-
-        if (!IS_LOCAL) {
-          // @ts-ignore
-          window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
-        }
-
-        logger('XX setting invite', {
-          people,
-          hotel,
-          didRSVP,
-          address,
-          flags,
-          events,
-          email
-        })
-
-        this.setState(
-          {
-            people,
-            hotel,
-            didRSVP,
-            address,
-            flags,
-            events,
-            email,
-            gotInvite: true,
-            invite: JSON.parse(
-              JSON.stringify({
-                people,
-                address,
-                events,
-                email
-              })
-            )
-          },
-          () => {
-            if (this.state.updateCodeClicked) {
-              window.scrollTo(0, document.body.clientHeight)
-            }
-          }
-        )
-      })
-      .catch((err) => {
-        window.onerror(err.message, err)
-        logger(`XX get invite failed ${err.message}`, err.statusCode)
-        if (err.statusCode === 404) {
-          return this.setState({
-            id: ''
-          })
-        }
-
-        setTimeout(() => {
-          return this.getInvite()
-        }, 1000)
-      })
-  }
-
-  rsvpChanged() {
-    return !this.isEquivalent(this.state.invite, {
-      people: this.state.people,
-      address: this.state.address,
-      events: this.state.events,
-      email: this.state.email
-    })
-  }
-
-  isEquivalent(a, b) {
-    var aProps = Object.keys(a)
-    var bProps = Object.keys(b)
-
-    if (aProps.length !== bProps.length) {
-      return false
-    }
-
-    for (var i = 0; i < aProps.length; i++) {
-      var propName = aProps[i]
-      if (typeof a[propName] === 'object') {
-        if (!this.isEquivalent(a[propName], b[propName])) {
-          return false
-        }
-        continue
-      }
-
-      if (a[propName] !== b[propName]) {
-        return false
-      }
-    }
-    return true
-  }
-
-  addressIsValid() {
-    return !(
-      this.state.address.street === '' ||
-      this.state.address.city === '' ||
-      this.state.address.state === '' ||
-      this.state.address.zip === '' ||
-      this.state.address.country === ''
-    )
-  }
-
-  async handlePatch(data) {
-    logger('XX handlePatch', data)
-    try {
-      await this.post(data)
-    } catch (err) {
-      logger('ignore post err', err)
-    }
-  }
-
-  async post(data) {
-    try {
-      await request.post(this.getUrl(), {
-        json: data
-      })
-    } catch (err) {
-      logger('XX Error posting', err)
-      window.onerror(err.message, err)
-      throw err
-    }
-  }
-
-  async handleSubmit() {
-    this.state.submitClicked = true
-    logger('XX handleSubmit: people', this.state.people)
-    logger('XX handleSubmit: address', this.state.address)
-    logger('XX handleSubmit: email', this.state.email)
-    logger('XX handleSubmit: events', this.state.events)
-
-    this.setState({
-      submitClicked: true
-    })
-
-    if (this.anyYes() && !this.addressIsValid()) {
-      logger('XX invalid address')
-      return
-    }
-
-    if (IS_MOCK) {
-      return
-    }
-
-    try {
-      await this.post({
-        people: this.state.people,
-        address: this.state.address,
-        events: this.state.events,
-        email: this.state.email
-      })
-    } catch (err) {
-      setTimeout(() => {
-        return this.handleSubmit()
-      }, 1000)
-    }
-  }
-
-  /**
-   * @param {React.ReactText} name
-   */
-  attendOptionClick(name) {
-    return (event) => {
-      const update = this.state.people
-      if (event.target.value === 'Yes') {
-        update[name] = {
-          isAttending: 'Yes'
-        }
-      } else if (event.target.value === 'No') {
-        update[name] = {
-          isAttending: 'No'
-        }
-      }
-
-      const peopleUpdate = {
-        people: update
-      }
-
-      this.setState(peopleUpdate)
-      this.handlePatch(peopleUpdate)
-      logger('XX attendOptionClick', update)
-    }
-  }
-
-  submitInviteCode(inviteCode) {
-    logger('submitInviteCode: ', inviteCode)
-    this.props.cookies.set('id', inviteCode, {
-      httpOnly: false,
-      domain: hostname,
-      path: '/',
-      sameSite: 'none',
-      secure: true,
-      maxAge: 315569520
-    })
-    return this.setState(
-      {
-        id: inviteCode,
-        updateCodeClicked: true
-      },
-      () => {
-        return this.getInvite()
-      }
-    )
-  }
-
-  addrBlur(event) {
-    logger('XX addr blur', this.state.address)
-    if (this.addressIsValid()) {
-      this.handlePatch({
-        address: this.state.address
-      })
-    }
-  }
-
-  addrChange(event) {
-    const field = event.target.name
-    const val = event.target.value
-    logger('XX addr change', field, val)
-    const update = this.state
-    update.address[field] = val
-    this.setState(update)
-  }
-
-  yesList() {
-    return Object.keys(this.state.people).filter((name) => {
-      return 'Yes' === this.state.people[name].isAttending
-    })
-  }
-
-  anyYes() {
-    return this.yesList().length > 0
-  }
-
-  getMehndi() {
-    if (!this.state.events.mehndi) {
-      return null
-    }
-
-    // Nancy info
-    let date = 'April 2ed'
-    let location = 'Saha Household'
-    if (this.state.flags.afam) {
-      // Anands info
-      date = 'April 1st'
-      location = 'Patel Household'
-    }
-
-    return (
-      <React.Fragment>
-        <Divider className="divider" />
-        <div className="cItem">
-          <div className="info-hold">
-            <Mehndi className="detail mehndi" />
-            <h1> Mehndi Night </h1>
-            <p> {date} </p>
-            <p> {location}</p>
-          </div>
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  getMM() {
-    if (!this.state.events.mm) {
-      return null
-    }
-
-    return (
-      <React.Fragment>
-        <Divider className="divider" />
-        <div className="cItem">
-          <div className="info-hold">
-            <MM className="detail" />
-            <h1> Mandap Muhurat </h1>
-            <p> Morning of April 2nd </p>
-            <p> Patel House </p>
-          </div>
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  getGS() {
-    if (!this.state.events.gs) {
-      return null
-    }
-
-    return (
-      <React.Fragment>
-        <Divider className="divider" />
-        <div className="cItem">
-          <div className="info-hold">
-            <GS className="detail" />
-            <h1> Grah Shanti </h1>
-            <p> Night of April 2nd </p>
-            <p> Mandir </p>
-          </div>
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  getPithi() {
-    if (!this.state.events.pithi) {
-      return null
-    }
-
-    // Nancy info
-    let date = 'April 3rd'
-    let location = 'Thakkar Household'
-    let event = 'Pithi'
-
-    return (
-      <React.Fragment>
-        <Divider className="divider" />
-        <div className="cItem">
-          <div className="info-hold">
-            <Pithi className="detail pithi" />
-            <h1> {event} </h1>
-            <p> {date} </p>
-            <p> {location} </p>
-          </div>
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  eventChange(event) {
-    return (e) => {
-      const update = {
-        events: this.state.events
-      }
-      update.events[event] = e.target.value
-      this.setState(update)
-      this.handlePatch({
-        events: update.events
-      })
-      logger('XX eventChange', update)
-    }
-  }
-
-  emailChange(e) {
-    const update = {
-      email: e.target.value
-    }
-    this.setState(update)
-    logger('XX eventChange', update)
-  }
-
-  anyMissingEvent() {
-    return Object.keys(this.state.events).some((name) => {
-      return '?' === this.state.events[name]
-    })
-  }
-
-  getRSVPButton() {
-    if (!this.state.gotInvite) {
-      return null
-    }
-
-    const anyMissingAnswer = () => {
-      return Object.keys(this.state.people).some((name) => {
-        return '?' === this.state.people[name].isAttending
-      })
-    }
-
-    const emailIsValid = () => {
-      if (this.state.email === '') {
-        return true
-      }
-
-      return /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(this.state.email)
-    }
-
-    const isSubmitDisabled = () => {
-      return (
-        !this.state.gotInvite ||
-        anyMissingAnswer() ||
-        (this.anyYes() &&
-          (!this.addressIsValid() ||
-            this.anyMissingEvent() ||
-            !emailIsValid())) ||
-        this.state.submitClicked ||
-        (this.state.didRSVP && !this.rsvpChanged())
-      )
-    }
-
-    const getRsvpText = () => {
-      if (!this.state.gotInvite) {
-        return ''
-      }
-
-      if (anyMissingAnswer()) {
-        return 'Please click Yes or No for all guests above'
-      }
-
-      if (this.anyYes()) {
-        if (!this.addressIsValid()) {
-          return 'Please enter mailing address above'
-        }
-        if (this.anyMissingEvent()) {
-          return 'Please click Yes or No for all events above'
-        }
-
-        if (this.state.email !== '') {
-          if (
-            !/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(.\w{2,3})+$/.test(this.state.email)
-          ) {
-            return 'Please valid email above'
-          }
-        }
-      }
-
-      if (this.state.didRSVP) {
-        if (this.rsvpChanged()) {
-          return 'Click to update RSVP'
-        } else {
-          return 'RSVP Confirmed'
-        }
-      }
-
-      return 'Click to RSVP'
-    }
-
-    return (
-      <div className="rsvp rsvp-button">
-        <div className="info-hold">
-          <Button
-            size="lg"
-            value="RSVP"
-            onClick={this.handleSubmit}
-            disabled={isSubmitDisabled()}
-          >
-            {getRsvpText()}
-          </Button>
-        </div>
-      </div>
-    )
-  }
-
-  getAtlanta() {
-    return (
-      <React.Fragment>
-        <Divider className="divider" />
-        <div className="cItem location">
-          <div className="info-hold">
-            <div className="detail fly-path">
-              <Plane className="plane" />
-            </div>
-            <Atl className="detail atl" />
-            <h1> Atlanta, GA </h1>
-          </div>
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  getWelcomeDinner() {
-    if (!this.state.events.wdin) {
-      return null
-    }
-
-    return (
-      <React.Fragment>
-        <Divider className="divider" />
-        <div className="cItem date">
-          <div className="info-hold">
-            <Welcome className="detail welcome" />
-            <h1> Welcome Dinner </h1>
-            <p> April 3rd </p>
-          </div>
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  getWedding() {
-    if (!this.state.events.wed) {
-      return <Waypoint onPositionChange={this.handlePositionChange} />
-    }
-
-    return (
-      <React.Fragment>
-        <Divider className="divider" />
-        <div className="cItem">
-          <Waypoint onPositionChange={this.handlePositionChange} />
-          <div className="info-hold">
-            <Garnesh className="detail garnesh" />
-            <h1> Wedding </h1>
-            <p> Piedmont Room at Park Tavern </p>
-          </div>
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  getReception() {
-    if (!this.state.events.res) {
-      return null
-    }
-    return (
-      <React.Fragment>
-        <Divider className="divider" />
-        <Stars />
-        <div className="cItem">
-          <div className="info-hold">
-            <Dance className="detail dance" />
-            <h1> Reception </h1>
-            <p> Egyptian ballroom at Fox Theater </p>
-          </div>
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  getPcb() {
-    if (
-      !(
-        this.state.events.mehndi ||
-        this.state.events.mm ||
-        this.state.events.gs
-      )
-    ) {
-      return null
-    }
-
-    return (
-      <React.Fragment>
-        <Divider className="divider" />
-        <div className="cItem location">
-          <div className="info-hold">
-            <Beach className="detail beach" />
-            <h1> Panama City Beach </h1>
-          </div>
-        </div>
-      </React.Fragment>
-    )
-  }
-
-  getNancy() {
-    return (
-      <React.Fragment>
-        {this.getAtlanta()}
-        {this.getMehndi()}
-        {this.getPithi()}
-      </React.Fragment>
-    )
-  }
-
-  getAnand() {
-    return (
-      <React.Fragment>
-        {this.getPcb()}
-        {this.getMehndi()}
-        {this.getMM()}
-        {this.getGS()}
-        {this.getAtlanta()}
-      </React.Fragment>
-    )
-  }
-
-  getPreEvents() {
-    if (this.state.flags.nfam) {
-      return this.getNancy()
-    }
-
-    if (this.state.flags.afam) {
-      return this.getAnand()
-    }
-
-    return this.getAtlanta()
-  }
-
-  getNames() {
-    const first = this.state.flags.afam ? 'Anand' : 'Nancy'
-    const sec = this.state.flags.afam ? 'Nancy' : 'Anand'
-
-    return (
-      <div className="intro blue-font">
-        <div className="info-hold us">
-          <h1 className="cursive">{first}</h1>
-          <p> & </p>
-          <h1 className="cursive">{sec}</h1>
-        </div>
-      </div>
-    )
   }
 
   render() {
-    const getDrawerClass = () => {
-      if (this.anyYes()) {
-        return 'drawer drawer-show'
-      }
-      return 'drawer'
+    const navBar = () => {
+      return (
+        <Navbar expand="sm" sticky="top">
+          <Navbar.Brand href="#home">#TheAdventureBegins</Navbar.Brand>
+          <Navbar.Toggle />
+          <Navbar.Collapse>
+            {/* Used to justify right */}
+            <div className="mr-auto"></div>
+            <Nav>
+              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#events">Events</Nav.Link>
+              <Nav.Link href="#hotels">Hotels</Nav.Link>
+              <Nav.Link href="#todo">Things to do</Nav.Link>
+              <Nav.Link href="#ourstory">Our Story</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      )
     }
 
-    if (this.state.submitClicked) {
-      window.scrollTo(0, 0)
+    const eventCard = (place, name, date, times, loc, desc, url) => {
+      const API_KEY = 'AIzaSyCqnOPWWqsgOJXtw2H_P6AjtYUJjPF0RD4'
+
       return (
-        <div className="App" id="App">
-          <Msg show={this.state.submitClicked} yesList={this.yesList()} />
+        <Row className="event">
+          <div className="event-left" />
+          <Col sm={4} className="map-parent">
+            <a href={url} target="_blank">
+              <div className="map-overlay" />
+            </a>
+            <iframe
+              className="map"
+              name="gMap"
+              src={`https://www.google.com/maps/embed/v1/place?q=${place}&key=${API_KEY}`}
+            />
+          </Col>
+          <Col className="map-info">
+            <h1>{name}</h1>
+            <div className="text-detail">
+              {date}: {times} <br />
+              {loc} <br />
+            </div>
+            <div className="text-detail">
+              <br />
+              {desc}
+            </div>
+          </Col>
+          <div className="event-border"></div>
+          <div className="event-right" />
+        </Row>
+      )
+    }
+    const events = () => {
+      return (
+        <div className="section white-marble">
+          <Container className="events">
+            <h1>Events</h1>
+            {eventCard(
+              'place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y',
+              'Garba',
+              'April 3rd',
+              '7:00 pm',
+              'Ashiana: 5675 Jimmy Carter Blvd, Norcross, GA',
+              "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Do not worry if you don't know it, it is easy to pick up! Dress colorfully.",
+              'https://goo.gl/maps/YidKb36x7KoyfxsE9'
+            )}
+
+            {eventCard(
+              'place_id:ChIJRwFXzj0E9YgRkpI_K4PvVeU',
+              'Wedding',
+              'April 4th 2020',
+              '10:00 am',
+              'Park Tavern: 500 10th St NE, Atlanta, GA',
+              "We will start with the Bharat, which is the groom's procession to the venue. Once at the venue we will have a short Hindu ceremony followed by a lunch. Dress Indian.",
+              'https://g.page/park-tavern-atlanta?share'
+            )}
+
+            {eventCard(
+              'place_id:ChIJ28DQdm8E9YgRnsZ4YZ94nRo',
+              'Reception',
+              'April 4th 2020',
+              '7:00 pm',
+              'Fox Theater:  660 Peachtree St NE, Atlanta, GA',
+              'This is it - the final event. There will be food, performances and more dancing. Dress sharp.',
+              'https://goo.gl/maps/Qc85TqNm8qa2HeH5A'
+            )}
+          </Container>
+        </div>
+      )
+    }
+    const food = [
+      {
+        name: 'STK',
+        desc: 'Succulent Steak',
+        link: 'https://stksteakhouse.com/venues/atlanta/#venue-menu-section',
+        img:
+          'https://lh5.googleusercontent.com/p/AF1QipM2Ty9gW29dpeZTpDuZQFvEs2WHTZ9yzfsBBxHF=h600'
+      },
+      {
+        name: 'Krog Street Market',
+        desc: 'Various Vendors',
+        link: 'https://krogstreetmarket.com/',
+        img:
+          'https://lh5.googleusercontent.com/p/AF1QipPBAkBiejx3sqV4LjFtHT561USwqvfzuND41WpE=h600'
+      },
+      {
+        name: 'A Mano',
+        desc: 'Incredible Italian',
+        link: 'https://www.amanoatl.com/',
+        img:
+          'https://lh5.googleusercontent.com/p/AF1QipMcHOiu7FhxRh4xg0R8Fz7P9RIH-5pB1zYcoR96=h600'
+      },
+      {
+        name: 'Alma Cocina',
+        desc: 'Mouthwatering Mexican',
+        link: 'https://krogstreetmarket.com/',
+        img:
+          'https://lh5.googleusercontent.com/p/AF1QipN1mmcWPcesZIZ0sZo6G5RqSmuYlIoVHBIiN-e-=h600'
+      },
+      {
+        name: 'Nina & Rafi',
+        desc: 'Potent Pizza',
+        link: 'https://www.ninaandrafi.com/',
+        img:
+          'https://lh5.googleusercontent.com/p/AF1QipOTBfICmo2YLuGr5mIBm6yhLYzQ2UPKBpXaZ2w3=h600'
+      },
+      {
+        name: 'Dairies',
+        desc: 'Captivating Cafe',
+        link: 'https://www.coldbrewbar.com/',
+        img:
+          'https://lh5.googleusercontent.com/p/AF1QipN-rJGESdMiXaBq-2v-P5tnKA1W163To3iQAwWu=h600'
+      }
+    ]
+
+    const activities = [
+      {
+        name: 'Georgia Aquarium',
+        desc: 'See fish',
+        link: 'https://www.georgiaaquarium.org/',
+        img:
+          'https://www.georgiaaquarium.org/wp-content/uploads/2018/07/whale-1-300x143@2x.png'
+      },
+      {
+        name: 'World of Coke',
+        desc: 'See where Coke is made',
+        link: 'https://www.worldofcoca-cola.com/',
+        img: 'http://assets.stickpng.com/thumbs/580b57fbd9996e24bc43c0e3.png'
+      },
+      {
+        name: 'Ponce City Market',
+        desc: 'Shopping & Eatting in an old Ford Factory',
+        link: 'http://www.poncecitymarket.com/',
+        img:
+          'https://cdn2.atlantamagazine.com/wp-content/uploads/sites/4/2012/07/0812_Feature_PonceCityMarket.jpg'
+      },
+      {
+        name: 'High Museum of Art',
+        desc: "Plenty'o Pictures",
+        link: 'https://high.org/',
+        img:
+          'https://high.org/wp-content/themes/base-theme/assets/logo/high-logo.svg'
+      },
+      {
+        name: 'Beltline',
+        desc: 'great to walk',
+        link: 'https://beltline.org/',
+        img:
+          'https://beltlineorg-wpengine.netdna-ssl.com/wp-content/uploads/2018/11/videothumb.jpg'
+      },
+      {
+        name: 'Dads Garage Theatre',
+        desc: 'Light Laughts',
+        link: 'https://dadsgarage.com/',
+        img:
+          'https://dadsgarage.com/wp-content/uploads/2016/12/logo_dads-garage.png'
+      },
+      {
+        name: 'Final Four',
+        desc: 'Sports!',
+        link: 'https://www.ncaa.com/final-four',
+        img:
+          'https://www.ncaa.com/sites/default/files/public/styles/original/public-s3/tile-images/franchise_hero/logos/20_MBB_FinalFour_FC_RGB%4072_0.png?itok=MRj9xwGW'
+      }
+    ]
+
+    const createThingCard = (thing) => {
+      const name = thing.name
+      const desc = thing.desc
+      const link = thing.link
+      const img = thing.img
+      return (
+        <Card bg="dark" text="white">
+          <Card.Img variant="top" src={img} />
+          <Card.Body>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>{desc}</Card.Text>
+            <Card.Link href={link}>Explore</Card.Link>
+          </Card.Body>
+        </Card>
+      )
+    }
+
+    const thingsToDo = () => {
+      return (
+        <div className="section todo white">
+          <Container>
+            <h1>Have your own Atlanta Adventure </h1>
+            <h2> Food </h2>
+            <CardColumns>{food.map(createThingCard)}</CardColumns>
+
+            <h2> Activities </h2>
+            <CardColumns>{activities.map(createThingCard)}</CardColumns>
+          </Container>
         </div>
       )
     }
 
+    const vidOps = {
+      height: '390',
+      width: '640',
+      playerVars: {
+        autoplay: 0,
+        controls: 1,
+        iv_load_policy: 3,
+        modestbranding: 1,
+        rel: 0
+      }
+    }
+
+    const _onReady = (event) => {
+      // access to player in all event handlers via event.target
+      event.target.playVideo()
+    }
+
     return (
-      <div className="App" id="App">
-        <div
-          className="star-drop"
-          style={{
-            top: '1vh',
-            left: 'calc(1rem + 45px)',
-            animationDelay: '.5s'
-          }}
-        >
-          <div className="star-sway" style={{ animationDelay: '1.5s' }}>
-            <Star src={star} className="star" />
-          </div>
+      <div className="page">
+        <a href="/" name="home" />
+        <div className="page-top">
+          <Container>
+            <div className="top-text">
+              <h1>The Adventure Begins</h1>
+            </div>
+          </Container>
+          <div
+            className="moving-clouds"
+            style={{
+              backgroundImage: 'url(' + require('./img/clouds.png') + ')'
+            }}
+          />
         </div>
-        <div
-          className="star-drop"
-          style={{
-            top: '50vh',
-            left: 'calc(2rem + 45px)',
-            animationDelay: '1.3s'
-          }}
-        >
-          <div className="star-sway" style={{ animationDelay: '2.3s' }}>
-            <Star src={star} className="star" />
-          </div>
-        </div>
-        <div
-          className="star-drop"
-          style={{
-            top: '60vh',
-            right: 'calc(2rem + 90px)',
-            animationDelay: '.1s'
-          }}
-        >
-          <div className="star-sway" style={{ animationDelay: '1.1s' }}>
-            <Star src={star} className="star" />
-          </div>
-        </div>
-        <div
-          className="star-drop"
-          style={{
-            top: '5vh',
-            right: 'calc(1rem + 90px)',
-            animationDelay: '.7s'
-          }}
-        >
-          <div className="star-sway" style={{ animationDelay: '1.7s' }}>
-            <Star src={star} className="star" />
-          </div>
-        </div>
-        <div className="intro blue-font">
-          <div className="info-hold">
-            <h1 className="cursive"> You Are </h1>
-            <h1 className="cursive">Invited</h1>
-            <p> To Celebrate the Marriage of </p>
-          </div>
-        </div>
-
-        {this.getNames()}
-        {this.getPreEvents()}
-        {this.getWelcomeDinner()}
-
-        <Divider className="divider" />
-        <div className="cItem date">
-          <div className="info-hold">
-            <April className="detail april" />
-            <h1> April 4th 2020 </h1>
-          </div>
-        </div>
-
-        {this.getWedding()}
-
-        <div className="star-bottom">
-          {this.getReception()}
-          <Divider className="divider" />
-          <div className="cItem fox">
-            <h1 className="gold-text cursive"> R.S.V.P. </h1>
-            <div className="fox-outer">
-              <div className="fox-neon">
-                <div className="names">
-                  <People
-                    valid={!!this.state.id}
-                    people={this.state.people}
-                    click={this.attendOptionClick}
-                  />
-                  <InviteCode
-                    valid={!this.state.id}
-                    handle={this.submitInviteCode}
-                  />
+        {navBar()}
+        <div className="section names pink">
+          <Container>
+            <Row>
+              <Col>
+                <img
+                  className="name-left"
+                  src={require('./img/right-png.png')}
+                />
+              </Col>
+              <Col>
+                <div className="name-text">
+                  <h1>Nancy </h1>
+                  <h1>& </h1>
+                  <h1>Anand </h1>
+                  <h2>Are getting married</h2>
+                  <h2>April 4th 2020</h2>
                 </div>
+              </Col>
+              <Col>
+                <img
+                  className="name-right"
+                  src={require('./img/right-png.png')}
+                />
+              </Col>
+            </Row>
+          </Container>
+        </div>
+        <a href="/" name="events" className="spot" />
+        {events()}
+        <a href="/" name="hotels" className="spot" />
+        <Hotels />
+        <a href="/" name="todo" className="spot" />
+        {thingsToDo()}
+        <a href="/" name="ourstory" />
+        {/* <Waypoint onPositionChange={this.handleEnterStage} /> */}
+        <div className="story">
+          <div className="story-stage"></div>
+          <div className="story-main">
+            {/* <h1 className="story-intro">Our Story</h1> */}
+            <div className="story-image">
+              <img className="story-curtain" src={curtains} />
+              <div className="bottom-text">
+                <h1>Comming Soon</h1>
               </div>
+              {/* <Hero /> */}
+              {/* <YouTube
+                videoId="FTLKdAU4XJM?controls=0"
+                opts={vidOps}
+                onReady={_onReady}
+                lassName="story-video"
+              /> */}
             </div>
           </div>
-          <br />
-          <div className={getDrawerClass()}>
-            <Address
-              address={this.state.address}
-              change={this.addrChange}
-              blur={this.addrBlur}
-            />
-            <Events events={this.state.events} click={this.eventChange} />
-            <Email email={this.state.email} change={this.emailChange} />
-            <Hotels flags={this.state.flags} info={this.state.hotel} />
-          </div>
-          {this.getRSVPButton()}
         </div>
       </div>
     )
