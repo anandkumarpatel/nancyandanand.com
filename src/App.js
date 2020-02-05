@@ -11,26 +11,71 @@ import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
 import Hotels from './hotels.js'
+import InviteCode from './invitecode.js'
 
 import './App.css'
 // import YouTube from 'react-youtube'
 // import Hero from './curtain.js'
+const request = require('request-promise')
 
 const curtains = require('./img/curtain-1.jpg')
 const flower = require('./img/right-png.png')
 
 const hostname = window && window.location && window.location.hostname
+let bURL = 'https://invite.nancyandanand.com'
 
 const B_MOCK = true
+let IS_MOCK = false
+let IS_LOCAL = false
 let logger = (...args) => {}
 
+const MOCK = {
+  people: {
+    anand: { isAttending: '?' },
+    nancy: { isAttending: '?' },
+    Niru: { isAttending: '?' },
+    Dhansukh: { isAttending: '?' }
+    // "people1": { "isAttending": "?" },
+    // "people2": { "isAttending": "?" },
+    // "people3": { "isAttending": "?" },
+  },
+  hotel: {
+    rate: '0',
+    name: 'GT'
+  },
+  didRSVP: false,
+  gotInvite: true,
+  submitted: true,
+  flags: {
+    afam: 'Yes'
+    // flight: "sfo".
+    // boice: "Yes"
+  },
+  events: {
+    pithi: 'Yes',
+    mehndi: 'Yes'
+  },
+  email: 'anand@gmail.com'
+  // address: {
+  //   street: '860 peachtree street NE unit 1814',
+  //   city: 'Atlanta',
+  //   state: 'Georgia',
+  //   zip: '30308',
+  //   country: 'USA',
+  // }
+}
+
 if (!hostname.includes('nancy') && B_MOCK) {
+  bURL = `http://${hostname}:8080`
+  IS_LOCAL = true
   logger = console.log
 }
-
 if (hostname === 'nancyandanand.com') {
+  IS_MOCK = false
+  IS_LOCAL = false
 }
 
+const STORE_NAME = 'inviteid'
 class App extends Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired
@@ -38,8 +83,139 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+
+    const store = window.localStorage
+    const storeId = store.getItem(STORE_NAME)
+    let id = storeId || props.cookies.get('id') || null
+    if (IS_MOCK) {
+      id = 'Mnx0ZXN0'
+    }
+    this.state = {
+      id,
+      didRSVP: false,
+      hotel: {},
+      people: {},
+      address: {
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
+        country: ''
+      },
+      events: {},
+      flags: {},
+      email: '',
+      submitClicked: false,
+      updateCodeClicked: false,
+      backendUrl: `${bURL}/invite`,
+      gotInvite: false,
+      invite: {}
+    }
+
     this.handleEnterStage = this.handleEnterStage.bind(this)
+    this.submitInviteCode = this.submitInviteCode.bind(this)
+    this.getInvite()
+  }
+
+  submitInviteCode(inviteCode) {
+    logger('submitInviteCode: ', inviteCode)
+    this.props.cookies.set('id', inviteCode, {
+      httpOnly: false,
+      domain: hostname,
+      path: '/',
+      sameSite: 'none',
+      secure: true,
+      maxAge: 315569520
+    })
+    return this.setState(
+      {
+        id: inviteCode,
+        updateCodeClicked: true
+      },
+      () => {
+        return this.getInvite()
+      }
+    )
+  }
+
+  getUrl() {
+    return this.state.backendUrl + '/' + this.state.id
+  }
+
+  getInvite() {
+    if (IS_MOCK) {
+      return setTimeout(() => {
+        this.setState(MOCK)
+      }, 100)
+    }
+
+    if (!this.state.id) {
+      logger('No id, skipping')
+      return
+    }
+
+    return request(this.getUrl(), {
+      json: true
+    })
+      .then((data) => {
+        const people = data.people
+        const hotel = data.hotel
+        const didRSVP = data.didRSVP
+        const address = data.address
+        const flags = data.flags
+        const events = data.events
+        const email = data.email
+
+        const store = window.localStorage
+        store.setItem(STORE_NAME, this.state.id)
+
+        if (!IS_LOCAL) {
+          // @ts-ignore
+          window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
+        }
+
+        logger('XX setting invite', {
+          people,
+          hotel,
+          didRSVP,
+          address,
+          flags,
+          events,
+          email
+        })
+
+        this.setState({
+          people,
+          hotel,
+          didRSVP,
+          address,
+          flags,
+          events,
+          email,
+          gotInvite: true,
+          invite: JSON.parse(
+            JSON.stringify({
+              people,
+              address,
+              events,
+              email
+            })
+          )
+        })
+      })
+      .catch((err) => {
+        window.onerror(err.message, err)
+        logger(`XX get invite failed ${err.message}`, err.statusCode)
+        if (err.statusCode === 404) {
+          return this.setState({
+            id: ''
+          })
+        }
+
+        setTimeout(() => {
+          return this.getInvite()
+        }, 1000)
+      })
   }
 
   handleEnterStage(data) {
@@ -112,6 +288,15 @@ class App extends Component {
       )
     }
     const events = () => {
+      if (!this.state.gotInvite) {
+        logger('No id, do not show events')
+        return (
+          <div className="section white-marble">
+            <InviteCode valid={!this.state.id} handle={this.submitInviteCode} />
+          </div>
+        )
+      }
+
       return (
         <div className="section white-marble">
           <Container className="events">
@@ -328,7 +513,7 @@ class App extends Component {
         <a href="/" name="events" className="spot">
           {''}
         </a>
-        {/* {events()} */}
+        {events()}
         <a href="/" name="hotels" className="spot">
           {''}
         </a>
