@@ -163,7 +163,7 @@ h2,
   height: 30vh;
   -webkit-animation: cloudLoop 80s linear infinite;
   animation: cloudLoop 80s linear infinite;
-  background-image: url('./img/clouds.webp');
+  background-image: url('./img/clouds.png');
 }
 
 @keyframes cloudLoop {
@@ -208,7 +208,7 @@ h2,
   left: 0;
   top: 0;
   background-position: center center;
-  background-image: url('./img/stage1.webp');
+  background-image: url('./img/stage1.png');
   background-size: cover;
   background-repeat: no-repeat;
 }

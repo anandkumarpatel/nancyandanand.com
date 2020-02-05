@@ -16,8 +16,8 @@ import './App.css'
 // import YouTube from 'react-youtube'
 // import Hero from './curtain.js'
 
-const curtains = require('./img/curtain-1.webp')
-const flower = require('./img/right-png.webp')
+const curtains = require('./img/curtain-1.jpg')
+const flower = require('./img/right-png.png')
 
 const hostname = window && window.location && window.location.hostname
 
