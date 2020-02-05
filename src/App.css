@@ -157,7 +157,7 @@ h2,
 .moving-clouds {
   position: absolute;
   z-index: 1050;
-  bottom: -10vh;
+  bottom: 0;
   left: 0;
   width: 200vw;
   height: 30vh;
@@ -444,10 +444,12 @@ left: -10vw;
 }
 
 .map-info {
-  text-align: left;
+  text-align: center;
+  padding: 2vh 6vw;
 }
 
 .map-overlay {
+  z-index: 2;
   position: absolute;
   right: 0;
   height: 100%;
@@ -569,4 +571,23 @@ left: -10vw;
   font-family: 'anandfont';
   src: url('./img/f1.ttf');
   /* src: url('./img/f2.ttf'); */
+}
+
+@media only screen and (max-width: 600px) {
+  .event {
+    padding: 45px 0;
+  }
+  .map-parent {
+    border-right-style: hidden;
+    border-bottom-style: dotted;
+  }
+
+  .name-left,
+  .name-right {
+    transform: rotate(90deg);
+  }
+
+  .name-right {
+    transform: rotate(-90deg);
+  }
 }

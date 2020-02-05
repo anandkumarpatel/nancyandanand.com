@@ -16,7 +16,7 @@ import { withCookies, Cookies } from 'react-cookie'
 import Hotels from './hotels.js'
 
 import './App.css'
-import Hero from './curtain.js'
+// import Hero from './curtain.js'
 
 const curtains = require('./img/curtain-1.jpg')
 
@@ -92,14 +92,14 @@ class App extends Component {
       )
     }
 
-    const eventCard = (place, name, date, times, loc, desc) => {
+    const eventCard = (place, name, date, times, loc, desc, url) => {
       const API_KEY = 'AIzaSyCqnOPWWqsgOJXtw2H_P6AjtYUJjPF0RD4'
 
       return (
         <Row className="event">
           <div className="event-left" />
           <Col sm={4} className="map-parent">
-            <a href="google.com">
+            <a href={url} target="_blank">
               <div className="map-overlay" />
             </a>
             <iframe
@@ -135,25 +135,28 @@ class App extends Component {
               'April 3rd',
               '7:00 pm',
               'Ashiana: 5675 Jimmy Carter Blvd, Norcross, GA',
-              "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Do not worry if you don't know it, it is easy to pick up! Dress colorfully."
+              "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Do not worry if you don't know it, it is easy to pick up! Dress colorfully.",
+              'https://goo.gl/maps/YidKb36x7KoyfxsE9'
             )}
 
             {eventCard(
-              'place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y',
+              'place_id:ChIJRwFXzj0E9YgRkpI_K4PvVeU',
               'Wedding',
               'April 4th 2020',
               '10:00 am',
               'Park Tavern: 500 10th St NE, Atlanta, GA',
-              "We will start with the Bharat, which is the groom's procession to the venue. Once at the venue we will have a short Hindu ceremony followed by a lunch. Dress Indian."
+              "We will start with the Bharat, which is the groom's procession to the venue. Once at the venue we will have a short Hindu ceremony followed by a lunch. Dress Indian.",
+              'https://g.page/park-tavern-atlanta?share'
             )}
 
             {eventCard(
-              'place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y',
+              'place_id:ChIJ28DQdm8E9YgRnsZ4YZ94nRo',
               'Reception',
               'April 4th 2020',
               '7:00 pm',
               'Fox Theater:  660 Peachtree St NE, Atlanta, GA',
-              'This is it - the final event. There will be food, performances and more dancing. Dress sharp.'
+              'This is it - the final event. There will be food, performances and more dancing. Dress sharp.',
+              'https://goo.gl/maps/Qc85TqNm8qa2HeH5A'
             )}
           </Container>
         </div>
