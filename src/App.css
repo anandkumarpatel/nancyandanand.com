@@ -425,7 +425,7 @@ for grain effect
 
 .map-info {
   text-align: center;
-  padding: 2vh 6vw;
+  padding: 1vh 1vw;
 }
 
 .map-overlay {
@@ -575,5 +575,10 @@ for grain effect
 
   .name-right {
     right: -190px;
+  }
+
+  .map-info {
+    text-align: center;
+    padding: 2vh 2vw;
   }
 }
