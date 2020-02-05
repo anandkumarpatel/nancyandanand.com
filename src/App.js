@@ -16,7 +16,8 @@ import './App.css'
 // import YouTube from 'react-youtube'
 // import Hero from './curtain.js'
 
-const curtains = require('./img/curtain-1.jpg')
+const curtains = require('./img/curtain-1.webp')
+const flower = require('./img/right-png.webp')
 
 const hostname = window && window.location && window.location.hostname
 let bURL = 'https://invite.nancyandanand.com'
@@ -309,13 +310,13 @@ class App extends Component {
       return (
         <div className="section names pink">
           <div className="name-text">
-            <img className="name-left" src={require('./img/right-png.png')} />
+            <img className="name-left" src={flower} />
             <h1>Nancy </h1>
             <h1>& </h1>
             <h1>Anand </h1>
             <h2>Are getting married</h2>
             <h2>April 4th 2020</h2>
-            <img className="name-right" src={require('./img/right-png.png')} />
+            <img className="name-right" src={flower} />
           </div>
         </div>
       )
@@ -330,12 +331,7 @@ class App extends Component {
               <h1>The Adventure Begins</h1>
             </div>
           </Container>
-          <div
-            className="moving-clouds"
-            style={{
-              backgroundImage: 'url(' + require('./img/clouds.png') + ')'
-            }}
-          />
+          <div className="moving-clouds" />
         </div>
         {navBar()}
         {names()}
