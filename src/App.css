@@ -97,7 +97,7 @@ h2,
 }
 
 .page {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .page-top {
@@ -498,22 +498,30 @@ left: -10vw;
 
 .names {
   background-color: var(--pink);
-  min-height: 40vh;
+  min-height: 60vh;
   position: relative;
+  overflow: hidden;
 }
 
 .name-text {
   color: #ffffff;
+  position: relative;
 }
 
+.name-left,
+.name-right {
+  height: 100%;
+  position: absolute;
+  top: 0;
+}
 .name-left {
-  max-height: 60vh;
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
+  left: -250px;
 }
 
 .name-right {
-  max-height: 60vh;
+  right: -250px;
 }
 
 .name-text h1 {
@@ -582,12 +590,11 @@ left: -10vw;
     border-bottom-style: dotted;
   }
 
-  .name-left,
-  .name-right {
-    transform: rotate(90deg);
+  .name-left {
+    left: -190px;
   }
 
   .name-right {
-    transform: rotate(-90deg);
+    right: -190px;
   }
 }

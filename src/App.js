@@ -305,6 +305,22 @@ class App extends Component {
       event.target.playVideo()
     }
 
+    const names = () => {
+      return (
+        <div className="section names pink">
+          <div className="name-text">
+            <img className="name-left" src={require('./img/right-png.png')} />
+            <h1>Nancy </h1>
+            <h1>& </h1>
+            <h1>Anand </h1>
+            <h2>Are getting married</h2>
+            <h2>April 4th 2020</h2>
+            <img className="name-right" src={require('./img/right-png.png')} />
+          </div>
+        </div>
+      )
+    }
+
     return (
       <div className="page">
         <a href="/" name="home" />
@@ -322,33 +338,7 @@ class App extends Component {
           />
         </div>
         {navBar()}
-        <div className="section names pink">
-          <Container>
-            <Row>
-              <Col>
-                <img
-                  className="name-left"
-                  src={require('./img/right-png.png')}
-                />
-              </Col>
-              <Col>
-                <div className="name-text">
-                  <h1>Nancy </h1>
-                  <h1>& </h1>
-                  <h1>Anand </h1>
-                  <h2>Are getting married</h2>
-                  <h2>April 4th 2020</h2>
-                </div>
-              </Col>
-              <Col>
-                <img
-                  className="name-right"
-                  src={require('./img/right-png.png')}
-                />
-              </Col>
-            </Row>
-          </Container>
-        </div>
+        {names()}
         <a href="/" name="events" className="spot" />
         {events()}
         <a href="/" name="hotels" className="spot" />
