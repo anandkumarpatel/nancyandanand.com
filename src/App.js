@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
-import CardDeck from 'react-bootstrap/CardDeck'
 import CardColumns from 'react-bootstrap/CardColumns'
 import Image from 'react-bootstrap/Image'
 import Navbar from 'react-bootstrap/Navbar'
@@ -14,9 +13,12 @@ import YouTube from 'react-youtube'
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
-import './App.css'
+import Hotels from './hotels.js'
 
-const request = require('request-promise')
+import './App.css'
+import Hero from './curtain.js'
+
+const curtains = require('./img/curtain-1.jpg')
 
 const hostname = window && window.location && window.location.hostname
 let bURL = 'https://invite.nancyandanand.com'
@@ -124,7 +126,7 @@ class App extends Component {
     }
     const events = () => {
       return (
-        <div className="section white">
+        <div className="section white-marble">
           <Container className="events">
             <h1>Events</h1>
             {eventCard(
@@ -133,7 +135,7 @@ class App extends Component {
               'April 3rd',
               '7:00 pm',
               'Ashiana: 5675 Jimmy Carter Blvd, Norcross, GA',
-              "This is your chance to mingle with the guest before the big day. Garba is a form of Indian dance. If you don't know it is quick to pick up. Dress colorful"
+              "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Do not worry if you don't know it, it is easy to pick up! Dress colorfully."
             )}
 
             {eventCard(
@@ -142,7 +144,7 @@ class App extends Component {
               'April 4th 2020',
               '10:00 am',
               'Park Tavern: 500 10th St NE, Atlanta, GA',
-              'We will start with the Bharat which is the grooms procession to the venue. Once at the Venue we will have a short Hindu ceremony followed by a lunch. Dress Indian'
+              "We will start with the Bharat, which is the groom's procession to the venue. Once at the venue we will have a short Hindu ceremony followed by a lunch. Dress Indian."
             )}
 
             {eventCard(
@@ -151,7 +153,7 @@ class App extends Component {
               'April 4th 2020',
               '7:00 pm',
               'Fox Theater:  660 Peachtree St NE, Atlanta, GA',
-              'This is it, the final event. There will be food, performances and more dancing. Dress sharp'
+              'This is it - the final event. There will be food, performances and more dancing. Dress sharp.'
             )}
           </Container>
         </div>
@@ -160,45 +162,45 @@ class App extends Component {
     const food = [
       {
         name: 'STK',
-        desc: 'Amazing steak & drinks.',
+        desc: 'Succulent Steak',
         link: 'https://stksteakhouse.com/venues/atlanta/#venue-menu-section',
         img:
-          'https://lh5.googleusercontent.com/p/AF1QipM2Ty9gW29dpeZTpDuZQFvEs2WHTZ9yzfsBBxHF=h512'
+          'https://lh5.googleusercontent.com/p/AF1QipM2Ty9gW29dpeZTpDuZQFvEs2WHTZ9yzfsBBxHF=h600'
       },
       {
         name: 'Krog Street Market',
-        desc: 'Lots of food vendors',
+        desc: 'Various Vendors',
         link: 'https://krogstreetmarket.com/',
         img:
-          'https://lh5.googleusercontent.com/p/AF1QipPBAkBiejx3sqV4LjFtHT561USwqvfzuND41WpE=h512'
+          'https://lh5.googleusercontent.com/p/AF1QipPBAkBiejx3sqV4LjFtHT561USwqvfzuND41WpE=h600'
       },
       {
         name: 'A Mano',
-        desc: 'Best Italian resturant',
+        desc: 'Incredible Italian',
         link: 'https://www.amanoatl.com/',
         img:
-          'https://lh5.googleusercontent.com/p/AF1QipMcHOiu7FhxRh4xg0R8Fz7P9RIH-5pB1zYcoR96=h512'
+          'https://lh5.googleusercontent.com/p/AF1QipMcHOiu7FhxRh4xg0R8Fz7P9RIH-5pB1zYcoR96=h600'
       },
       {
         name: 'Alma Cocina',
-        desc: 'Best Mexican resturant',
+        desc: 'Mouthwatering Mexican',
         link: 'https://krogstreetmarket.com/',
         img:
-          'https://lh5.googleusercontent.com/p/AF1QipN1mmcWPcesZIZ0sZo6G5RqSmuYlIoVHBIiN-e-=h512'
+          'https://lh5.googleusercontent.com/p/AF1QipN1mmcWPcesZIZ0sZo6G5RqSmuYlIoVHBIiN-e-=h600'
       },
       {
         name: 'Nina & Rafi',
-        desc: 'Best Pizza',
+        desc: 'Potent Pizza',
         link: 'https://www.ninaandrafi.com/',
         img:
-          'https://lh5.googleusercontent.com/p/AF1QipOTBfICmo2YLuGr5mIBm6yhLYzQ2UPKBpXaZ2w3=h512'
+          'https://lh5.googleusercontent.com/p/AF1QipOTBfICmo2YLuGr5mIBm6yhLYzQ2UPKBpXaZ2w3=h600'
       },
       {
         name: 'Dairies',
-        desc: 'Best Cafe',
+        desc: 'Captivating Cafe',
         link: 'https://www.coldbrewbar.com/',
         img:
-          'https://lh5.googleusercontent.com/p/AF1QipN-rJGESdMiXaBq-2v-P5tnKA1W163To3iQAwWu=h512'
+          'https://lh5.googleusercontent.com/p/AF1QipN-rJGESdMiXaBq-2v-P5tnKA1W163To3iQAwWu=h600'
       }
     ]
 
@@ -225,7 +227,7 @@ class App extends Component {
       },
       {
         name: 'High Museum of Art',
-        desc: 'See Pictures',
+        desc: "Plenty'o Pictures",
         link: 'https://high.org/',
         img:
           'https://high.org/wp-content/themes/base-theme/assets/logo/high-logo.svg'
@@ -272,9 +274,9 @@ class App extends Component {
 
     const thingsToDo = () => {
       return (
-        <div className="section todo pink">
+        <div className="section todo white">
           <Container>
-            <h1>Have your own Adventure while your in Atlanta </h1>
+            <h1>Have your own Atlanta Adventure </h1>
             <h2> Food </h2>
             <CardColumns>{food.map(createThingCard)}</CardColumns>
 
@@ -321,30 +323,55 @@ class App extends Component {
         {navBar()}
         <div className="section names pink">
           <Container>
-            <div className="name-text">
-              <h1>Nancy & Anand </h1>
-              <h2>Are getting married</h2>
-              <h2>April 4th 2020</h2>
-            </div>
+            <Row>
+              <Col>
+                <img
+                  className="name-left"
+                  src={require('./img/right-png.png')}
+                />
+              </Col>
+              <Col>
+                <div className="name-text">
+                  <h1>Nancy </h1>
+                  <h1>& </h1>
+                  <h1>Anand </h1>
+                  <h2>Are getting married</h2>
+                  <h2>April 4th 2020</h2>
+                </div>
+              </Col>
+              <Col>
+                <img
+                  className="name-right"
+                  src={require('./img/right-png.png')}
+                />
+              </Col>
+            </Row>
           </Container>
         </div>
         <a href="/" name="events" className="spot" />
         {events()}
+        <a href="/" name="hotels" className="spot" />
+        <Hotels />
         <a href="/" name="todo" className="spot" />
         {thingsToDo()}
-        <a href="/" name="ourstory" className="spot" />
-        <Waypoint onPositionChange={this.handleEnterStage} />
+        <a href="/" name="ourstory" />
+        {/* <Waypoint onPositionChange={this.handleEnterStage} /> */}
         <div className="story">
           <div className="story-stage"></div>
           <div className="story-main">
             {/* <h1 className="story-intro">Our Story</h1> */}
             <div className="story-image">
-              <YouTube
+              <img className="story-curtain" src={curtains} />
+              <div className="bottom-text">
+                <h1>Comming Soon</h1>
+              </div>
+              {/* <Hero /> */}
+              {/* <YouTube
                 videoId="FTLKdAU4XJM?controls=0"
                 opts={vidOps}
                 onReady={_onReady}
                 lassName="story-video"
-              />
+              /> */}
             </div>
           </div>
         </div>

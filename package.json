@@ -6,6 +6,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
+    "curtainsjs": "^4.3.0",
     "gh-pages": "^2.2.0",
     "googleapi": "^1.0.2",
     "googleapis": "^39.2.0",
