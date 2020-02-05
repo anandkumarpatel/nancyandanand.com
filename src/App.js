@@ -328,7 +328,7 @@ class App extends Component {
         <a href="/" name="events" className="spot">
           {''}
         </a>
-        {events()}
+        {/* {events()} */}
         <a href="/" name="hotels" className="spot">
           {''}
         </a>
