@@ -555,6 +555,11 @@ for grain effect
   }
 }
 
+.form-label {
+  font-family: fantasy;
+  font-size: 1.5em;
+}
+
 @font-face {
   font-family: 'anandfont';
   src: url('./img/f1.ttf');

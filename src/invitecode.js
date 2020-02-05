@@ -33,9 +33,7 @@ class InviteCode extends Component {
       <Container className="invite-code rsvp-button">
         <Form>
           <Form.Group controlId="inviteCode">
-            <Form.Label>
-              Check your invitation email or message for code
-            </Form.Label>
+            <Form.Label>Check your invitation message for the code</Form.Label>
             <Form.Control
               value={this.state.inviteCode}
               name="inviteCode"
@@ -51,7 +49,7 @@ class InviteCode extends Component {
             onClick={this.click}
             disabled={this.state.inviteCode === ''}
           >
-            Get RSVP
+            See Events
           </Button>
         </Form>
       </Container>
