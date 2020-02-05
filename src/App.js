@@ -348,7 +348,7 @@ class App extends Component {
             <div className="story-image">
               <img alt="curtains" className="story-curtain" src={curtains} />
               <div className="bottom-text">
-                <h1>Comming Soon</h1>
+                <h1>Coming Soon</h1>
               </div>
               {/* <Hero /> */}
               {/* <YouTube
