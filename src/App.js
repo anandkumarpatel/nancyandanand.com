@@ -20,22 +20,15 @@ const curtains = require('./img/curtain-1.webp')
 const flower = require('./img/right-png.webp')
 
 const hostname = window && window.location && window.location.hostname
-let bURL = 'https://invite.nancyandanand.com'
 
 const B_MOCK = true
-let IS_MOCK = false
-let IS_LOCAL = false
 let logger = (...args) => {}
 
 if (!hostname.includes('nancy') && B_MOCK) {
-  bURL = `http://${hostname}:8080`
-  IS_LOCAL = true
   logger = console.log
 }
 
 if (hostname === 'nancyandanand.com') {
-  IS_MOCK = false
-  IS_LOCAL = false
 }
 
 class App extends Component {
@@ -45,19 +38,13 @@ class App extends Component {
 
   constructor(props) {
     super(props)
-
-    let id = props.cookies.get('id') || null
-    if (IS_MOCK) {
-      id = 'helloId'
-    }
     this.state = {}
-
     this.handleEnterStage = this.handleEnterStage.bind(this)
   }
 
   handleEnterStage(data) {
     if (data.currentPosition === 'above' || data.currentPosition === 'inside') {
-      console.log('enter theatre, nav off', data)
+      logger('enter theatre, nav off', data)
       // document.getElementById('App').classList.add('darken')
     }
 
@@ -65,7 +52,7 @@ class App extends Component {
       data.currentPosition === 'inside' &&
       data.previousPosition === 'above'
     ) {
-      console.log('leave theatre, run on nav')
+      logger('leave theatre, run on nav')
       // document.getElementById('App').classList.remove('darken')
     }
   }
@@ -98,10 +85,11 @@ class App extends Component {
         <Row className="event">
           <div className="event-left" />
           <Col sm={4} className="map-parent">
-            <a href={url} target="_blank">
+            <a href={url} target="_blank" rel="noopener noreferrer">
               <div className="map-overlay" />
             </a>
             <iframe
+              title={name}
               className="map"
               name="gMap"
               src={`https://www.google.com/maps/embed/v1/place?q=${place}&key=${API_KEY}`}
@@ -289,34 +277,34 @@ class App extends Component {
       )
     }
 
-    const vidOps = {
-      height: '390',
-      width: '640',
-      playerVars: {
-        autoplay: 0,
-        controls: 1,
-        iv_load_policy: 3,
-        modestbranding: 1,
-        rel: 0
-      }
-    }
+    // const vidOps = {
+    //   height: '390',
+    //   width: '640',
+    //   playerVars: {
+    //     autoplay: 0,
+    //     controls: 1,
+    //     iv_load_policy: 3,
+    //     modestbranding: 1,
+    //     rel: 0
+    //   }
+    // }
 
-    const _onReady = (event) => {
-      // access to player in all event handlers via event.target
-      event.target.playVideo()
-    }
+    // const _onReady = (event) => {
+    //   // access to player in all event handlers via event.target
+    //   event.target.playVideo()
+    // }
 
     const names = () => {
       return (
         <div className="section names pink">
           <div className="name-text">
-            <img className="name-left" src={flower} />
+            <img alt="" className="name-left" src={flower} />
             <h1>Nancy </h1>
             <h1>& </h1>
             <h1>Anand </h1>
             <h2>Are getting married</h2>
             <h2>April 4th 2020</h2>
-            <img className="name-right" src={flower} />
+            <img alt="" className="name-right" src={flower} />
           </div>
         </div>
       )
@@ -324,7 +312,9 @@ class App extends Component {
 
     return (
       <div className="page">
-        <a href="/" name="home" />
+        <a href="/" name="home">
+          {''}
+        </a>
         <div className="page-top">
           <Container>
             <div className="top-text">
@@ -335,20 +325,28 @@ class App extends Component {
         </div>
         {navBar()}
         {names()}
-        <a href="/" name="events" className="spot" />
+        <a href="/" name="events" className="spot">
+          {''}
+        </a>
         {events()}
-        <a href="/" name="hotels" className="spot" />
+        <a href="/" name="hotels" className="spot">
+          {''}
+        </a>
         <Hotels />
-        <a href="/" name="todo" className="spot" />
+        <a href="/" name="todo" className="spot">
+          {''}
+        </a>
         {thingsToDo()}
-        <a href="/" name="ourstory" />
+        <a href="/" name="ourstory">
+          {''}
+        </a>
         {/* <Waypoint onPositionChange={this.handleEnterStage} /> */}
         <div className="story">
           <div className="story-stage"></div>
           <div className="story-main">
             {/* <h1 className="story-intro">Our Story</h1> */}
             <div className="story-image">
-              <img className="story-curtain" src={curtains} />
+              <img alt="curtains" className="story-curtain" src={curtains} />
               <div className="bottom-text">
                 <h1>Comming Soon</h1>
               </div>
