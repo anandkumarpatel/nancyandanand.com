@@ -37,6 +37,7 @@ h2,
   background: linear-gradient(to bottom, var(--pink) 0%, var(--pink-end) 100%);
   color: var(--black);
   background-image: url('./img/pink.jpg');
+  /* background-image: url('./img/pink-hd.jpg'); */
   background-size: cover;
 }
 
