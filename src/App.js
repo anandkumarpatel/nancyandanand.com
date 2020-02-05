@@ -2,20 +2,18 @@ import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
 import Card from 'react-bootstrap/Card'
 import CardColumns from 'react-bootstrap/CardColumns'
-import Image from 'react-bootstrap/Image'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Button from 'react-bootstrap/Button'
-import { Waypoint } from 'react-waypoint'
-import YouTube from 'react-youtube'
+// import { Waypoint } from 'react-waypoint'
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
 import Hotels from './hotels.js'
 
 import './App.css'
+// import YouTube from 'react-youtube'
 // import Hero from './curtain.js'
 
 const curtains = require('./img/curtain-1.jpg')
