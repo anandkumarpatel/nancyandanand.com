@@ -6,7 +6,7 @@ const ua = require('universal-analytics')
 const Sheets = require('./sheets.js')
 
 const PORT = process.env.PORT || 8080
-const TEST_ID = process.env.TEST_ID || '2|test'
+const TEST_ID = process.env.TEST_ID || '2|'
 
 const logger = (...args) => {
   console.log(new Date(), ...args)
