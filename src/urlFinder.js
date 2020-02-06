@@ -1,5 +1,5 @@
 const hostname = window && window.location && window.location.hostname
-let defaultUrl = window && window.location && window.location.origin
+let defaultUrl = 'https://invite.nancyandanand.com'
 
 if (hostname.includes('localhost')) {
   defaultUrl = `http://localhost:8080`
