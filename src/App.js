@@ -10,14 +10,11 @@ import { withCookies, Cookies } from 'react-cookie'
 import Hotels from './hotels.js'
 import Events from './events.js'
 import Activities from './activities.js'
+import Names from './names.js'
+import Story from './story.js'
 
 import './App.css'
-// import YouTube from 'react-youtube'
-// import Hero from './curtain.js'
 const request = require('request-promise')
-
-const curtains = require('./img/curtain-1.jpg')
-const flower = require('./img/right-png.png')
 
 const hostname = window && window.location && window.location.hostname
 let bURL = 'https://invite.nancyandanand.com'
@@ -270,22 +267,6 @@ class App extends Component {
     //   event.target.playVideo()
     // }
 
-    const names = () => {
-      return (
-        <div className="section names pink">
-          <div className="name-text">
-            <img alt="" className="name-left" src={flower} />
-            <h1>Nancy </h1>
-            <h1>& </h1>
-            <h1>Anand </h1>
-            <h2>Are getting married</h2>
-            <h2>April 4th 2020</h2>
-            <img alt="" className="name-right" src={flower} />
-          </div>
-        </div>
-      )
-    }
-
     return (
       <div className="page">
         <a href="/" name="home">
@@ -300,7 +281,7 @@ class App extends Component {
           <div className="moving-clouds" />
         </div>
         {navBar()}
-        {names()}
+        <Names />
         <a href="/" name="events" className="spot">
           {''}
         </a>
@@ -322,25 +303,7 @@ class App extends Component {
           {''}
         </a>
         {/* <Waypoint onPositionChange={this.handleEnterStage} /> */}
-        <div className="story">
-          <div className="story-stage"></div>
-          <div className="story-main">
-            {/* <h1 className="story-intro">Our Story</h1> */}
-            <div className="story-image">
-              <img alt="curtains" className="story-curtain" src={curtains} />
-              <div className="bottom-text">
-                <h1>Coming Soon</h1>
-              </div>
-              {/* <Hero /> */}
-              {/* <YouTube
-                videoId="FTLKdAU4XJM?controls=0"
-                opts={vidOps}
-                onReady={_onReady}
-                lassName="story-video"
-              /> */}
-            </div>
-          </div>
-        </div>
+        <Story />
       </div>
     )
   }

@@ -51,14 +51,14 @@ const food = [
 const activities = [
   {
     name: 'Georgia Aquarium',
-    desc: 'See fish',
+    desc: 'See fish!',
     link: 'https://www.georgiaaquarium.org/',
     img:
       'https://www.georgiaaquarium.org/wp-content/uploads/2018/07/whale-1-300x143@2x.png'
   },
   {
     name: 'World of Coke',
-    desc: 'See where Coke is made',
+    desc: 'Drink unlimited coke!',
     link: 'https://www.worldofcoca-cola.com/',
     img: 'http://assets.stickpng.com/thumbs/580b57fbd9996e24bc43c0e3.png'
   },
@@ -78,14 +78,14 @@ const activities = [
   },
   {
     name: 'Beltline',
-    desc: 'great to walk',
+    desc: 'If you need to walk',
     link: 'https://beltline.org/',
     img:
       'https://beltlineorg-wpengine.netdna-ssl.com/wp-content/uploads/2018/11/videothumb.jpg'
   },
   {
     name: 'Dads Garage Theatre',
-    desc: 'Light Laughts',
+    desc: 'Light Laughs',
     link: 'https://dadsgarage.com/',
     img:
       'https://dadsgarage.com/wp-content/uploads/2016/12/logo_dads-garage.png'

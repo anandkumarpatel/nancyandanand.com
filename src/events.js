@@ -62,7 +62,7 @@ class Events extends Component {
             'April 3rd',
             '7:00 pm',
             'Ashiana: 5675 Jimmy Carter Blvd, Norcross, GA',
-            "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Do not worry if you don't know it, it is easy to pick up! Dress colorfully.",
+            "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Do not worry if you don't know it, It’s quick and easy to pick up! Dress colorfully and be ready to dance the night away!",
             'https://goo.gl/maps/YidKb36x7KoyfxsE9'
           )}
 
@@ -72,7 +72,7 @@ class Events extends Component {
             'April 4th 2020',
             '10:00 am',
             'Park Tavern: 500 10th St NE, Atlanta, GA',
-            "We will start with the Bharat, which is the groom's procession to the venue. Once at the venue we will have a short Hindu ceremony followed by a lunch. Dress Indian.",
+            "The main event! We will start with the Bharat, which is the Groom's procession to the venue. Once at the venue, we will have a short Hindu ceremony and will be followed by a traditional Gujarati lunch. Dress Indian.",
             'https://g.page/park-tavern-atlanta?share'
           )}
 
@@ -82,7 +82,7 @@ class Events extends Component {
             'April 4th 2020',
             '7:00 pm',
             'Fox Theater:  660 Peachtree St NE, Atlanta, GA',
-            'This is it - the final event. There will be food, performances and more dancing. Dress sharp.',
+            'This is it - the final event. Come celebrate our first evening as husband and wife. There will be food, performances and more dancing. Dress sharp.',
             'https://goo.gl/maps/Qc85TqNm8qa2HeH5A'
           )}
         </Container>
