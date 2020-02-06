@@ -33,6 +33,8 @@ import star from './img/star.svg'
 const request = require('request-promise')
 
 const hostname = window && window.location && window.location.hostname
+const inviteId = window.location.pathname
+
 let bURL = 'https://invite.nancyandanand.com'
 
 const B_MOCK = true
@@ -100,11 +102,19 @@ class App extends Component {
 
   constructor(props) {
     super(props)
+    if (inviteId.length > 1) {
+      const getId = window.location.pathname.substring(1)
+      window.localStorage.setItem('inviteid', getId)
+      window.location.pathname = '/'
+    }
 
-    let id = props.cookies.get('id') || null
+    const lid = window.localStorage.getItem('inviteid')
+    let id = lid || props.cookies.get('id') || null
+
     if (IS_MOCK) {
       id = 'helloId'
     }
+
     this.state = {
       id,
       didRSVP: false,
@@ -182,7 +192,8 @@ class App extends Component {
 
         if (!IS_LOCAL) {
           // @ts-ignore
-          window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
+          window.FS &&
+            window.FS.identify(`${this.state.id}--${Object.keys(people)[0]}`)
         }
 
         logger('XX setting invite', {

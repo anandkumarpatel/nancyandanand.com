@@ -13,15 +13,21 @@ const logger = (...args) => {
 }
 
 app.use((req, res, next) => {
-  if (process.env.DEV === 'yes') {
+  if (process.env.DEV === 'yes' || !req.headers.origin) {
     res.header('Access-Control-Allow-Origin', '*')
   } else {
-    res.header(
-      'Access-Control-Allow-Origin',
-      'https://invite-wedding.herokuapp.com/'
-    )
+    if (req.headers.origin.includes('invite.nancyandanand')) {
+      res.header(
+        'Access-Control-Allow-Origin',
+        'https://invite.nancyandanand.com'
+      )
+    } else {
+      res.header('Access-Control-Allow-Origin', 'https://nancyandanand.com')
+    }
+
     res.header('Vary', 'Origin')
   }
+
   res.header(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
@@ -128,41 +134,7 @@ async function main() {
       })
   })
 
-  app.get('/:id', (req, res) => {
-    const id = req.params.id
-    const tId = Buffer.from(req.params.id, 'base64').toString('ascii')
-    logger('invite hit', id, tId)
-    if (process.env.DEV !== 'yes') {
-      ua(process.env.GOOGLE_TRACK, { uid: tId })
-        .event({
-          ec: 'invite',
-          ea: 'server-invite',
-          el: tId,
-          ev: 3,
-          dp: '/' + tId
-        })
-        .send()
-    }
-    let host = 'invite.nancyandanand.com'
-    if (process.env.DEV === 'yes') {
-      host = 'localhost:3000'
-    }
-
-    res.cookie('id', req.params.id, {
-      httpOnly: false,
-      domain: host,
-      path: '/',
-      sameSite: false,
-      secure: true,
-      maxAge: 315569520000
-    })
-    if (process.env.DEV === 'yes') {
-      res.redirect(`http://${req.headers.host.split(':')[0]}:3000`)
-    } else {
-      res.redirect('https://invite.nancyandanand.com')
-    }
-  })
-
+  app.use('/:id', express.static('build'))
   app.use(express.static('build'))
 
   app.listen(PORT)
