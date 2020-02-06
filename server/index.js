@@ -16,7 +16,10 @@ app.use((req, res, next) => {
   if (process.env.DEV === 'yes') {
     res.header('Access-Control-Allow-Origin', '*')
   } else {
-    res.header('Access-Control-Allow-Origin', 'https://nancyandanand.com')
+    res.header(
+      'Access-Control-Allow-Origin',
+      'https://invite-wedding.herokuapp.com/'
+    )
     res.header('Vary', 'Origin')
   }
   res.header(
@@ -161,6 +164,8 @@ async function main() {
       res.redirect('https://nancyandanand.com')
     }
   })
+
+  app.use(express.static('build'))
 
   app.listen(PORT)
   logger(`listening http://localhost:${PORT}`)
