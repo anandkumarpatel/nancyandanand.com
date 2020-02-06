@@ -23,17 +23,9 @@
     "universal-analytics": "^0.4.20"
   },
   "scripts": {
-    "update": "ssh ubuntu@wedding './wedding-update.sh'",
-    "heroku": "heroku container:login && heroku container:push web && heroku container:release web",
-    "hon": "heroku scale web=1",
-    "hoff": "heroku scale web=0",
-    "logh": "heroku logs -t",
-    "log": "ssh-add ~/.ssh/id_rsa; ssh ubuntu@wedding docker logs -f wedding",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
-    "ss": "node ./server",
-    "dev": "DEV=yes node ./server",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
