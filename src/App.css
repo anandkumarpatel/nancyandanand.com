@@ -21,6 +21,8 @@
   --head-font: 'Calligraffitti';
   --detail-font: 'Open Sans';
   --extra-font: 'Bad Script';
+  --grass: #a1ffce;
+  --sun: #faffd1;
 }
 
 h1 {
@@ -732,4 +734,22 @@ for grain effect
   .map-info {
     padding: 2vh 2vw;
   }
+}
+
+.invite-button {
+  background-color: var(--grass);
+  background-size: auto 400%;
+  color: var(--black);
+  background-image: linear-gradient(
+    to bottom,
+    var(--sun) 0%,
+    var(--grass) 10%,
+    var(--black) 100%
+  );
+  transition: 1s;
+}
+
+.invite-button:hover {
+  color: var(--white);
+  background-position: bottom center;
 }

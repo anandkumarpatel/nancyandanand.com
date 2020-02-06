@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
+
 import InviteCode from './invitecode.js'
+import bURL from './urlFinder.js'
 
 class Events extends Component {
   createEventCard(place, name, date, times, loc, desc, url) {
@@ -37,6 +40,14 @@ class Events extends Component {
         <div className="event-right" />
       </Row>
     )
+  }
+
+  getInviteUrl() {
+    if (window.location.hostname.includes('localhost')) {
+      return `${bURL}/${this.props.id}`
+    }
+
+    return `${bURL}/${this.props.id}`
   }
 
   getEvents() {
@@ -85,6 +96,13 @@ class Events extends Component {
             'This is it - the final event. Come celebrate our first evening as husband and wife. There will be food, performances and more dancing. Dress sharp.',
             'https://goo.gl/maps/Qc85TqNm8qa2HeH5A'
           )}
+          <Button
+            href={this.getInviteUrl()}
+            className="invite-button"
+            size="lg"
+          >
+            Goto RSVP
+          </Button>
         </Container>
       </div>
     )

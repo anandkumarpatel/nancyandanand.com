@@ -12,12 +12,12 @@ import Events from './events.js'
 import Activities from './activities.js'
 import Names from './names.js'
 import Story from './story.js'
+import bURL from './urlFinder.js'
 
 import './App.css'
 const request = require('request-promise')
 
 const hostname = window && window.location && window.location.hostname
-let bURL = 'https://invite.nancyandanand.com'
 
 const MOCK_CODE = 'Mnx0ZXN0'
 const B_MOCK = true
@@ -62,7 +62,6 @@ const MOCK = {
 }
 
 if (!hostname.includes('nancy') && B_MOCK) {
-  bURL = `http://${hostname}:8080`
   IS_LOCAL = true
   logger = console.log
 }
@@ -79,6 +78,12 @@ class App extends Component {
 
   constructor(props) {
     super(props)
+
+    if (window.location.pathname.length > 1) {
+      const getId = window.location.pathname.substring(1)
+      window.localStorage.setItem(STORE_NAME, getId)
+      window.location.pathname = '/'
+    }
 
     const store = window.localStorage
     const storeId = store.getItem(STORE_NAME)
