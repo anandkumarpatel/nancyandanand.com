@@ -47,7 +47,7 @@ if (!hostname.includes('nancy') && B_MOCK) {
 }
 
 if (hostname === 'invite-wedding.herokuapp.com') {
-  bURL = `https://invite-wedding.herokuapp.com/`
+  bURL = `https://invite-wedding.herokuapp.com`
   IS_MOCK = false
   IS_LOCAL = false
 }

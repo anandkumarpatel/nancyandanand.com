@@ -143,11 +143,9 @@ async function main() {
         })
         .send()
     }
-    let host = 'nancyandanand.com'
+    let host = 'invite.nancyandanand.com'
     if (process.env.DEV === 'yes') {
       host = 'localhost:3000'
-    } else if (!req.headers.host || !req.headers.host.includes('nancy')) {
-      return res.send('OK')
     }
 
     res.cookie('id', req.params.id, {
@@ -161,7 +159,7 @@ async function main() {
     if (process.env.DEV === 'yes') {
       res.redirect(`http://${req.headers.host.split(':')[0]}:3000`)
     } else {
-      res.redirect('https://nancyandanand.com')
+      res.redirect('https://invite.nancyandanand.com')
     }
   })
 
