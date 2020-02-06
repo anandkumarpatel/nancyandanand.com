@@ -34,6 +34,13 @@ h2,
 
 .pink {
   background-color: var(--pink);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(var(--pink)),
+    to(var(--pink-end))
+  );
   background: linear-gradient(to bottom, var(--pink) 0%, var(--pink-end) 100%);
   color: var(--black);
   background-image: url('./img/pink.jpg');
@@ -43,6 +50,13 @@ h2,
 
 .white {
   background-color: var(--white);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(var(--white)),
+    to(var(--white-end))
+  );
   background: linear-gradient(
     to bottom,
     var(--white) 0%,
@@ -54,6 +68,13 @@ h2,
 
 .white-marble {
   background-color: var(--white);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(var(--white)),
+    to(var(--white-end))
+  );
   background: linear-gradient(
     to bottom,
     var(--white) 0%,
@@ -66,18 +87,40 @@ h2,
 
 .blue {
   background-color: var(--blue);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(var(--blue)),
+    to(var(--blue-end))
+  );
   background: linear-gradient(to bottom, var(--blue) 0%, var(--blue-end) 100%);
   color: var(--black);
 }
 
 .gray {
   background-color: var(--gray);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(var(--gray)),
+    to(var(--gray-end))
+  );
   background: linear-gradient(to bottom, var(--gray) 0%, var(--gray-end) 100%);
   color: var(--black);
 }
 
 .green {
   background-color: var(--green);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(var(--green)),
+    color-stop(90%, var(--green)),
+    to(var(--green-end))
+  );
   background: linear-gradient(
     to bottom,
     var(--green) 0%,
@@ -89,6 +132,13 @@ h2,
 
 .purple {
   background-color: var(--purple);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(var(--purple)),
+    to(var(--purple-end))
+  );
   background-image: linear-gradient(
     to bottom,
     var(--purple) '90%',
@@ -102,6 +152,15 @@ h2,
 }
 
 .page-top {
+  background-image: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      color-stop(60%, rgba(0, 0, 0, 0)),
+      color-stop(90%, rgba(0, 0, 0, 1)),
+      to(rgba(0, 0, 0, 1))
+    ),
+    url('./img/main.jpg');
   background-image: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 0) 60%,
@@ -117,8 +176,11 @@ h2,
   position: relative;
   width: 100%;
   z-index: 1;
+  display: -webkit-box;
   display: flex;
+  -webkit-box-align: center;
   align-items: center;
+  -webkit-box-pack: center;
   justify-content: center;
 }
 
@@ -165,6 +227,21 @@ h2,
   -webkit-animation: cloudLoop 80s linear infinite;
   animation: cloudLoop 80s linear infinite;
   background-image: url('./img/clouds.png');
+}
+
+@-webkit-keyframes cloudLoop {
+  0% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    -webkit-transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 @keyframes cloudLoop {
@@ -231,8 +308,11 @@ h2,
   text-align: center;
   height: 100%;
   width: 100%;
+  display: -webkit-box;
   display: flex;
+  -webkit-box-align: center;
   align-items: center;
+  -webkit-box-pack: center;
   justify-content: center;
 }
 
@@ -273,7 +353,9 @@ h2,
   margin: auto;
   background-position: center center;
   text-align: center;
+  -webkit-box-align: center;
   align-items: center;
+  -webkit-box-pack: center;
   justify-content: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -300,45 +382,108 @@ for grain effect
   width: 100%;
 }
 
-@keyframes grain {
+@-webkit-keyframes grain {
   0%,
   100% {
+    -webkit-transform: translate(0, 0, 0);
     transform: translate(0, 0, 0);
   }
 
   10% {
+    -webkit-transform: translate(-1%, -1%);
     transform: translate(-1%, -1%);
   }
 
   20% {
+    -webkit-transform: translate(1%, 1%);
     transform: translate(1%, 1%);
   }
 
   30% {
+    -webkit-transform: translate(-2%, -2%);
     transform: translate(-2%, -2%);
   }
 
   40% {
+    -webkit-transform: translate(3%, 3%);
     transform: translate(3%, 3%);
   }
 
   50% {
+    -webkit-transform: translate(-3%, -3%);
     transform: translate(-3%, -3%);
   }
 
   60% {
+    -webkit-transform: translate(4%, 4%);
     transform: translate(4%, 4%);
   }
 
   70% {
+    -webkit-transform: translate(-4%, -4%);
     transform: translate(-4%, -4%);
   }
 
   80% {
+    -webkit-transform: translate(2%, 2%);
     transform: translate(2%, 2%);
   }
 
   90% {
+    -webkit-transform: translate(-3%, -3%);
+    transform: translate(-3%, -3%);
+  }
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    -webkit-transform: translate(0, 0, 0);
+    transform: translate(0, 0, 0);
+  }
+
+  10% {
+    -webkit-transform: translate(-1%, -1%);
+    transform: translate(-1%, -1%);
+  }
+
+  20% {
+    -webkit-transform: translate(1%, 1%);
+    transform: translate(1%, 1%);
+  }
+
+  30% {
+    -webkit-transform: translate(-2%, -2%);
+    transform: translate(-2%, -2%);
+  }
+
+  40% {
+    -webkit-transform: translate(3%, 3%);
+    transform: translate(3%, 3%);
+  }
+
+  50% {
+    -webkit-transform: translate(-3%, -3%);
+    transform: translate(-3%, -3%);
+  }
+
+  60% {
+    -webkit-transform: translate(4%, 4%);
+    transform: translate(4%, 4%);
+  }
+
+  70% {
+    -webkit-transform: translate(-4%, -4%);
+    transform: translate(-4%, -4%);
+  }
+
+  80% {
+    -webkit-transform: translate(2%, 2%);
+    transform: translate(2%, 2%);
+  }
+
+  90% {
+    -webkit-transform: translate(-3%, -3%);
     transform: translate(-3%, -3%);
   }
 }
@@ -443,6 +588,8 @@ for grain effect
   border-width: 2px;
   border-style: inset;
   border-color: initial;
+  -webkit-border-image: initial;
+  -o-border-image: initial;
   border-image: initial;
 }
 
@@ -451,8 +598,11 @@ for grain effect
   padding-top: 5vh;
   padding-bottom: 5vh;
   text-align: center;
+  -webkit-box-align: center;
   align-items: center;
+  -webkit-box-pack: center;
   justify-content: center;
+  display: -webkit-box;
   display: flex;
 }
 
@@ -474,6 +624,7 @@ for grain effect
 
 .card-img-top {
   max-height: 300px;
+  -o-object-fit: cover;
   object-fit: cover;
 }
 
@@ -508,11 +659,17 @@ for grain effect
 .name-text h1 {
   text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.09),
     -1px -1px 0 rgba(255, 220, 0, 0.67);
+  background: -webkit-gradient(
+    linear,
+    left bottom,
+    left top,
+    from(#fff65c),
+    to(#9a8000)
+  );
   background: linear-gradient(0deg, #fff65c, #9a8000);
   background-size: 200% 200%;
 
   -webkit-animation: AnimationName 3s ease infinite;
-  -moz-animation: AnimationName 3s ease infinite;
   animation: AnimationName 3s ease infinite;
 
   -webkit-background-clip: text;
@@ -523,17 +680,6 @@ for grain effect
 }
 
 @-webkit-keyframes AnimationName {
-  0% {
-    background-position: 51% 0%;
-  }
-  50% {
-    background-position: 50% 100%;
-  }
-  100% {
-    background-position: 51% 0%;
-  }
-}
-@-moz-keyframes AnimationName {
   0% {
     background-position: 51% 0%;
   }
