@@ -21,7 +21,11 @@ class InviteCode extends Component {
   }
 
   click() {
-    this.props.handle(this.state.inviteCode)
+    if (!this.state.inviteCode.trim()) {
+      return
+    }
+
+    this.props.handle(this.state.inviteCode.trim())
   }
 
   render() {
@@ -31,23 +35,27 @@ class InviteCode extends Component {
 
     return (
       <Container className="invite-code rsvp-button">
-        <Form>
+        <Form onSubmit={this.click}>
           <Form.Group controlId="inviteCode">
-            <Form.Label>Check your invitation message for the code</Form.Label>
+            <Form.Label>
+              Lookup with your email, phone number, or invite code
+            </Form.Label>
             <Form.Control
               value={this.state.inviteCode}
               name="inviteCode"
               type="invite-code"
               onChange={this.change}
               required
-              placeholder="Enter Invite Code"
+              placeholder="Enter email, phone number, or invite code"
             />
           </Form.Group>
           <Button
             className="rsvp-button"
             size="lg"
-            onClick={this.click}
-            disabled={this.state.inviteCode === ''}
+            type="submit"
+            disabled={
+              !this.state.inviteCode.trim() || this.state.inviteCode.length < 3
+            }
           >
             See Events
           </Button>
