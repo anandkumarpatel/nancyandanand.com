@@ -237,7 +237,7 @@ class App extends Component {
   render() {
     const navBar = () => {
       return (
-        <Navbar expand="sm" sticky="top">
+        <Navbar collapseOnSelect expand="sm" sticky="top">
           <Navbar.Brand href="#home">#TheAdventureBegins</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse>

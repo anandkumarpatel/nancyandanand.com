@@ -740,12 +740,21 @@ for grain effect
   background-color: var(--grass);
   background-size: auto 400%;
   color: var(--black);
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(var(--sun)),
+    color-stop(10%, var(--grass)),
+    to(var(--black))
+  );
   background-image: linear-gradient(
     to bottom,
     var(--sun) 0%,
     var(--grass) 10%,
     var(--black) 100%
   );
+  -webkit-transition: 1s;
   transition: 1s;
 }
 
