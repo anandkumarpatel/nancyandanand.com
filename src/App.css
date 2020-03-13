@@ -278,6 +278,286 @@ h2,
   position: relative;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
+}
+
+.story-image > div:nth-child(1) {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+/*
+for grain static effect
+*/
+.story-image-static {
+  width: 110%;
+  height: 100%;
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  opacity: 0.11;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/662025/grain.jpg')
+    repeat center center;
+  -webkit-animation: grain 0.5s steps(1) infinite;
+  animation: grain 0.5s steps(1) infinite;
+}
+
+/* 2560px */
+
+@media (max-width: 2560px) and (min-height: 3080px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 2560px) and (max-height: 3080px) {
+  .story-image > div:nth-child(1) {
+    height: 46%;
+    top: 27%;
+  }
+}
+
+/* 1920px */
+
+@media (max-width: 1920px) and (min-height: 2300px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 1920px) and (max-height: 2300px) {
+  .story-image > div:nth-child(1) {
+    height: 46%;
+    top: 27%;
+  }
+}
+/* 1680px */
+
+@media (max-width: 1680px) and (min-height: 1700px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 1680px) and (max-height: 1700px) {
+  .story-image > div:nth-child(1) {
+    height: 46%;
+    top: 27%;
+  }
+}
+
+@media (max-width: 1680px) and (max-height: 916px) {
+  .story-image > div:nth-child(1) {
+    height: 68%;
+    top: 16%;
+  }
+}
+
+/* 1440px */
+
+@media (max-width: 1440px) and (min-height: 1720px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 1440px) and (max-height: 1720px) {
+  .story-image > div:nth-child(1) {
+    height: 46%;
+    top: 27%;
+  }
+}
+
+@media (max-width: 1440px) and (max-height: 900px) {
+  .story-image > div:nth-child(1) {
+    height: 59%;
+    top: 20%;
+  }
+}
+
+@media (max-width: 1440px) and (max-height: 750px) {
+  .story-image > div:nth-child(1) {
+    height: 70%;
+    top: 15%;
+  }
+}
+
+@media (max-width: 1440px) and (max-height: 540px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+/* 1200px */
+
+@media (max-width: 1200px) and (min-height: 1440px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 1200px) and (max-height: 1440px) {
+  .story-image > div:nth-child(1) {
+    height: 46%;
+    top: 27%;
+  }
+}
+
+@media (max-width: 1200px) and (max-height: 930px) {
+  .story-image > div:nth-child(1) {
+    height: 48%;
+    top: 26%;
+  }
+}
+
+@media (max-width: 1200px) and (max-height: 650px) {
+  .story-image > div:nth-child(1) {
+    height: 70%;
+    top: 15%;
+  }
+}
+
+@media (max-width: 1200px) and (max-height: 380px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+/* 992px */
+
+@media (max-width: 992px) and (min-height: 1181px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 992px) and (max-height: 1181px) {
+  .story-image > div:nth-child(1) {
+    height: 46%;
+    top: 27%;
+  }
+}
+
+@media (max-width: 992px) and (max-height: 650px) {
+  .story-image > div:nth-child(1) {
+    height: 56%;
+    top: 22%;
+  }
+}
+
+@media (max-width: 992px) and (max-height: 550px) {
+  .story-image > div:nth-child(1) {
+    height: 66%;
+    top: 17%;
+  }
+}
+
+@media (max-width: 992px) and (max-height: 380px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+/* 768px */
+
+@media (max-width: 768px) and (min-height: 915px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 768px) and (max-height: 915px) {
+  .story-image > div:nth-child(1) {
+    height: 46%;
+    top: 27%;
+  }
+}
+
+@media (max-width: 768px) and (max-height: 600px) {
+  .story-image > div:nth-child(1) {
+    height: 48%;
+    top: 26%;
+  }
+}
+
+@media (max-width: 768px) and (max-height: 412px) {
+  .story-image > div:nth-child(1) {
+    height: 68%;
+    top: 16%;
+  }
+}
+
+@media (max-width: 768px) and (max-height: 360px) {
+  .story-image > div:nth-child(1) {
+    height: 76%;
+    top: 12%;
+  }
+}
+/* 576px */
+@media (max-width: 576px) and (min-height: 690px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 576px) and (max-height: 690px) {
+  .story-image > div:nth-child(1) {
+    height: 46%;
+    top: 27%;
+  }
+}
+
+@media (max-width: 576px) and (max-height: 376px) {
+  .story-image > div:nth-child(1) {
+    height: 56%;
+    top: 22%;
+  }
+}
+
+@media (max-width: 576px) and (max-height: 321px) {
+  .story-image > div:nth-child(1) {
+    height: 66%;
+    top: 17%;
+  }
+}
+
+/* 414px */
+@media (max-width: 414px) and (min-height: 690px) {
+  .story-image > div:nth-child(1) {
+    height: 100%;
+    top: 0%;
+  }
+}
+
+@media (max-width: 414px) and (max-height: 690px) {
+  .story-image > div:nth-child(1) {
+    height: 46%;
+    top: 27%;
+  }
+}
+
+@media (max-width: 414px) and (max-height: 376px) {
+  .story-image > div:nth-child(1) {
+    height: 56%;
+    top: 22%;
+  }
+}
+
+@media (max-width: 414px) and (max-height: 321px) {
+  .story-image > div:nth-child(1) {
+    height: 66%;
+    top: 17%;
+  }
 }
 
 .story-stage {
@@ -298,7 +578,6 @@ h2,
   background: black;
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 30vw 6vw #c3c3c3 inset;
 }
 
 .story-intro {
@@ -319,8 +598,26 @@ h2,
 }
 
 .story-curtain {
-  width: 100%;
+  width: 50%;
   height: 100%;
+  position: absolute;
+  transition: all 1s ease;
+}
+
+.story-curtain-l {
+  transform: translateX(-100%);
+}
+
+.story-curtain-r {
+  transform: translateX(0%);
+}
+
+.story-curtain-lt {
+  transform: translateX(-200%);
+}
+
+.story-curtain-rt {
+  transform: translateX(+100%);
 }
 
 .plane {
@@ -344,11 +641,6 @@ h2,
 
 .story-image {
   position: relative;
-  /* for video
-   top: 10%;
-  height: 80%;
-  width: 82%; */
-
   width: 100%;
   height: 100%;
 
@@ -362,22 +654,6 @@ h2,
   background-size: contain;
   background-repeat: no-repeat;
 }
-
-/*
-for grain effect
-.story-image:after {
-  content: '';
-  width: 110%;
-  height: 100%;
-  position: absolute;
-  top: -5%;
-  left: -5%;
-  opacity: 0.11;
-  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/662025/grain.jpg')
-    repeat center center;
-  -webkit-animation: grain 0.5s steps(1) infinite;
-  animation: grain 0.5s steps(1) infinite;
-} */
 
 .story-video {
   height: 100%;
@@ -761,4 +1037,8 @@ for grain effect
 .invite-button:hover {
   color: var(--white);
   background-position: bottom center;
+}
+
+.hide {
+  display: none;
 }

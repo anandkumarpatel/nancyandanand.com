@@ -36,7 +36,7 @@ class Hotels extends Component {
       const link = thing.link
       const img = thing.img
       return (
-        <Card bg="dark" text="white">
+        <Card key={name} bg="dark" text="white">
           <Card.Img variant="top" src={img} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>

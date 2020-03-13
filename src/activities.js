@@ -106,7 +106,7 @@ class Activities extends Component {
     const link = card.link
     const img = card.img
     return (
-      <Card bg="dark" text="white">
+      <Card key={name} bg="dark" text="white">
         <Card.Img variant="top" src={img} />
         <Card.Body>
           <Card.Title>{name}</Card.Title>

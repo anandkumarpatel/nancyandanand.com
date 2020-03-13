@@ -237,7 +237,7 @@ class App extends Component {
   render() {
     const navBar = () => {
       return (
-        <Navbar collapseOnSelect expand="sm" sticky="top">
+        <Navbar id="nav" collapseOnSelect expand="sm" sticky="top">
           <Navbar.Brand href="#home">#TheAdventureBegins</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse>
@@ -255,59 +255,43 @@ class App extends Component {
       )
     }
 
-    // const vidOps = {
-    //   height: '390',
-    //   width: '640',
-    //   playerVars: {
-    //     autoplay: 0,
-    //     controls: 1,
-    //     iv_load_policy: 3,
-    //     modestbranding: 1,
-    //     rel: 0
-    //   }
-    // }
-
-    // const _onReady = (event) => {
-    //   // access to player in all event handlers via event.target
-    //   event.target.playVideo()
-    // }
-
     return (
       <div className="page">
-        <a href="/" name="home">
-          {''}
-        </a>
-        <div className="page-top">
-          <Container>
-            <div className="top-text">
-              <h1>The Adventure Begins</h1>
-            </div>
-          </Container>
-          <div className="moving-clouds" />
+        <div id="top">
+          <a href="/" name="home">
+            {''}
+          </a>
+          <div className="page-top">
+            <Container>
+              <div className="top-text">
+                <h1>The Adventure Begins</h1>
+              </div>
+            </Container>
+            <div className="moving-clouds" />
+          </div>
+          {navBar()}
+          <Names />
+          <a href="/" name="events" className="spot">
+            {''}
+          </a>
+          <Events
+            submitInviteCode={this.submitInviteCode}
+            logger={logger}
+            id={this.state.id}
+            gotInvite={this.state.gotInvite}
+          />
+          <a href="/" name="hotels" className="spot">
+            {''}
+          </a>
+          <Hotels />
+          <a href="/" name="todo" className="spot">
+            {''}
+          </a>
+          <Activities />
+          <a href="/" name="ourstory">
+            {''}
+          </a>
         </div>
-        {navBar()}
-        <Names />
-        <a href="/" name="events" className="spot">
-          {''}
-        </a>
-        <Events
-          submitInviteCode={this.submitInviteCode}
-          logger={logger}
-          id={this.state.id}
-          gotInvite={this.state.gotInvite}
-        />
-        <a href="/" name="hotels" className="spot">
-          {''}
-        </a>
-        <Hotels />
-        <a href="/" name="todo" className="spot">
-          {''}
-        </a>
-        <Activities />
-        <a href="/" name="ourstory">
-          {''}
-        </a>
-        {/* <Waypoint onPositionChange={this.handleEnterStage} /> */}
         <Story />
       </div>
     )
