@@ -124,6 +124,11 @@ object-assign
 
 /*! https://mths.be/punycode v1.4.1 by @mathias */
 
+/**
+* @link https://github.com/gajus/sister for the canonical source repository
+* @license https://github.com/gajus/sister/blob/master/LICENSE BSD 3-Clause
+*/
+
 /** @license React v0.18.0
  * scheduler.production.min.js
  *
