@@ -11,6 +11,7 @@ import Hotels from './hotels.js'
 import Events from './events.js'
 import Activities from './activities.js'
 import Names from './names.js'
+import Postpone from './postpone.js'
 import Story from './story.js'
 import bURL from './urlFinder.js'
 
@@ -238,16 +239,17 @@ class App extends Component {
     const navBar = () => {
       return (
         <Navbar id="nav" collapseOnSelect expand="sm" sticky="top">
-          <Navbar.Brand href="#home">#TheAdventureBegins</Navbar.Brand>
+          <Navbar.Brand href="#home">#TheAdventureIsPostponed</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse>
             {/* Used to justify right */}
             <div className="mr-auto"></div>
             <Nav>
               <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#events">Events</Nav.Link>
+              <Nav.Link href="#update">Update</Nav.Link>
+              {/* <Nav.Link href="#events">Events</Nav.Link>
               <Nav.Link href="#hotels">Hotels</Nav.Link>
-              <Nav.Link href="#todo">Things to do</Nav.Link>
+              <Nav.Link href="#todo">Things to do</Nav.Link> */}
               <Nav.Link href="#ourstory">Our Story</Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -264,14 +266,19 @@ class App extends Component {
           <div className="page-top">
             <Container>
               <div className="top-text">
-                <h1>The Adventure Begins</h1>
+                <h1>The Adventure</h1>
+                <h2>is postponed</h2>
               </div>
             </Container>
             <div className="moving-clouds" />
           </div>
           {navBar()}
           <Names />
-          <a href="/" name="events" className="spot">
+          <a href="/" name="update" className="spot">
+            {''}
+          </a>
+          <Postpone />
+          {/* <a href="/" name="events" className="spot">
             {''}
           </a>
           <Events
@@ -287,7 +294,7 @@ class App extends Component {
           <a href="/" name="todo" className="spot">
             {''}
           </a>
-          <Activities />
+          <Activities /> */}
           <a href="/" name="ourstory">
             {''}
           </a>

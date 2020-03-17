@@ -215,8 +215,13 @@ h2,
   mix-blend-mode: difference;
 }
 
-.top-text h1 {
+.top-text h1,
+.top-text h2 {
   font-family: 'anandfont';
+}
+
+.top-text h2 {
+  font-size: 6vw;
 }
 
 .moving-clouds {
@@ -911,6 +916,29 @@ for grain static effect
   min-height: 60vh;
   position: relative;
   overflow: hidden;
+}
+
+.postpone {
+  color: var(--black);
+  box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+  background: inherit;
+  overflow: hidden;
+  padding: 1vh 1vw;
+}
+
+.postpone:before {
+  content: '';
+  position: absolute;
+  background: inherit;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  filter: blur(10px);
 }
 
 .name-text {

@@ -11,7 +11,7 @@ class Names extends Component {
           <h1>& </h1>
           <h1>Anand </h1>
           <h2>Are getting married</h2>
-          <h2>April 4th 2020</h2>
+          <h2>In the future</h2>
           <img alt="" className="name-right" src={flower} />
         </div>
       </div>
