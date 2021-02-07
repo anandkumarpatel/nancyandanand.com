@@ -11,7 +11,7 @@ import Hotels from './hotels.js'
 import Events from './events.js'
 import Activities from './activities.js'
 import Names from './names.js'
-import Postpone from './postpone.js'
+import Redone from './redone.js'
 import Story from './story.js'
 import bURL from './urlFinder.js'
 
@@ -24,7 +24,7 @@ const MOCK_CODE = 'Mnx0ZXN0'
 const B_MOCK = true
 let IS_MOCK = false
 let IS_LOCAL = false
-let logger = (...args) => {}
+let logger = (...args) => { }
 
 const MOCK = {
   people: {
@@ -239,7 +239,7 @@ class App extends Component {
     const navBar = () => {
       return (
         <Navbar id="nav" collapseOnSelect expand="sm" sticky="top">
-          <Navbar.Brand href="#home">#TheAdventureIsPostponed</Navbar.Brand>
+          <Navbar.Brand href="#home">#TheAdventureBeginsAgain</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse>
             {/* Used to justify right */}
@@ -267,7 +267,7 @@ class App extends Component {
             <Container>
               <div className="top-text">
                 <h1>The Adventure</h1>
-                <h2>is postponed</h2>
+                <h2>begins again</h2>
               </div>
             </Container>
             <div className="moving-clouds" />
@@ -277,7 +277,7 @@ class App extends Component {
           <a href="/" name="update" className="spot">
             {''}
           </a>
-          <Postpone />
+          <Redone />
           {/* <a href="/" name="events" className="spot">
             {''}
           </a>
