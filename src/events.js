@@ -50,6 +50,94 @@ class Events extends Component {
     return `${bURL}/${this.props.id}`
   }
 
+  getPithi() {
+    if (!this.props.events.pithi) {
+      return null
+    }
+
+    // Nancy info
+    let date = 'April 8th'
+    let location = 'Thakkar Household'
+    let event = 'Pithi'
+
+    return this.createEventCard(
+      'Thakkar Household',
+      'Pithi',
+      'April 8th',
+      'TBA',
+      '1568 Dunwoody Club Crossing Dunwoody, GA 30338',
+      'A ritual application of a paste made from turmeric, chickpea flour, and rose water to the bride and groom’s faces, arms and legs. The paste is meant to both brighten the skin and purify the body in preparation for the wedding.',
+      'https://goo.gl/maps/nS3pSofk9FDNfeQq7',
+    )
+  }
+
+  getMehndi() {
+    if (!this.props.events.mehndi) {
+      return null
+    }
+
+    const event = 'Mehndi'
+    // Nancy info
+    let date = 'April 8th'
+    let location = 'Thakkar Household'
+    let map = 'https://goo.gl/maps/af8e3Ukov8DKBUno6'
+    let address = '12305 Clairmonte Ave Alpharetta, GA 30009'
+    let time = 'TBA'
+
+    if (this.props.flags.afam) {
+      let date = 'April 8th'
+      let location = 'TBA'
+      let map = 'TBA'
+      let address = 'TBA'
+      let time = 'TBA'
+    }
+
+    return this.createEventCard(
+      location,
+      event,
+      date,
+      time,
+      address,
+      'Come get painted with Medhi',
+      'https://goo.gl/maps/nS3pSofk9FDNfeQq7',
+    )
+  }
+
+  getGS() {
+    if (!this.props.events.gs) {
+      return null
+    }
+
+    return this.createEventCard(
+      'location title',
+      'event name',
+      'April 8th',
+      'TBA',
+      'address',
+      'desc',
+      'map https://goo.gl/maps/nS3pSofk9FDNfeQq7',
+    )
+  }
+
+  getPreEvents() {
+    if (this.props.flags.afam) {
+      return (
+        <React.Fragment>
+          {this.getGS()}
+          {this.getMehndi()}
+        </React.Fragment>
+      )
+    }
+
+    // Nancy
+    return (
+      <React.Fragment>
+        {this.getPithi()}
+        {this.getMehndi()}
+      </React.Fragment>
+    )
+  }
+
   getEvents() {
     if (!this.props.gotInvite) {
       this.props.logger('No id, do not show events')
@@ -67,6 +155,7 @@ class Events extends Component {
       <div className="section white-marble">
         <Container className="events">
           <h1>Events</h1>
+          {this.getPreEvents()}
           {this.createEventCard(
             'place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y',
             'Garba',

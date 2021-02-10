@@ -50,7 +50,10 @@ const MOCK = {
   },
   events: {
     pithi: 'Yes',
-    mehndi: 'Yes'
+    mehndi: 'Yes',
+    wdin: 'yes',
+    wed: 'yes',
+    res: 'yes'
   },
   email: 'anand@gmail.com'
   // address: {
@@ -286,6 +289,8 @@ class App extends Component {
             logger={logger}
             id={this.state.id}
             gotInvite={this.state.gotInvite}
+            events={this.state.events}
+            flags={this.state.flags}
           />
           <a href="/" name="hotels" className="spot">
             {''}
