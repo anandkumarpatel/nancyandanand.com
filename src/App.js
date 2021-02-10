@@ -239,7 +239,7 @@ class App extends Component {
     const navBar = () => {
       return (
         <Navbar id="nav" collapseOnSelect expand="sm" sticky="top">
-          <Navbar.Brand href="#home">#TheAdventureBeginsAgain</Navbar.Brand>
+          <Navbar.Brand href="#home">#TheAdventureContinues</Navbar.Brand>
           <Navbar.Toggle />
           <Navbar.Collapse>
             {/* Used to justify right */}
@@ -247,9 +247,9 @@ class App extends Component {
             <Nav>
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#update">Update</Nav.Link>
-              {/* <Nav.Link href="#events">Events</Nav.Link>
+              <Nav.Link href="#events">Events</Nav.Link>
               <Nav.Link href="#hotels">Hotels</Nav.Link>
-              <Nav.Link href="#todo">Things to do</Nav.Link> */}
+              <Nav.Link href="#todo">Things to do</Nav.Link>
               <Nav.Link href="#ourstory">Our Story</Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -267,7 +267,7 @@ class App extends Component {
             <Container>
               <div className="top-text">
                 <h1>The Adventure</h1>
-                <h2>begins again</h2>
+                <h2>Continues</h2>
               </div>
             </Container>
             <div className="moving-clouds" />
@@ -278,7 +278,7 @@ class App extends Component {
             {''}
           </a>
           <Redone />
-          {/* <a href="/" name="events" className="spot">
+          <a href="/" name="events" className="spot">
             {''}
           </a>
           <Events
@@ -294,7 +294,7 @@ class App extends Component {
           <a href="/" name="todo" className="spot">
             {''}
           </a>
-          <Activities /> */}
+          <Activities />
           <a href="/" name="ourstory">
             {''}
           </a>
