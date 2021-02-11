@@ -154,7 +154,7 @@ class Events extends Component {
           {this.createEventCard(
             'place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y',
             'Garba',
-            'April 3rd',
+            'April 8th',
             '7:00 pm',
             'Ashiana: 5675 Jimmy Carter Blvd, Norcross, GA',
             "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Do not worry if you don't know it, It’s quick and easy to pick up! Dress colorfully and be ready to dance the night away!",
@@ -164,7 +164,7 @@ class Events extends Component {
           {this.createEventCard(
             'place_id:ChIJRwFXzj0E9YgRkpI_K4PvVeU',
             'Wedding',
-            'April 4th 2020',
+            'April 10th',
             '10:00 am',
             'Park Tavern: 500 10th St NE, Atlanta, GA',
             "The main event! We will start with the Bharat, which is the Groom's procession to the venue. Once at the venue, we will have a short Hindu ceremony and will be followed by a traditional Gujarati lunch. Dress Indian.",
@@ -174,7 +174,7 @@ class Events extends Component {
           {this.createEventCard(
             'place_id:ChIJ28DQdm8E9YgRnsZ4YZ94nRo',
             'Reception',
-            'April 4th 2020',
+            'April 10th',
             '7:00 pm',
             'Fox Theater:  660 Peachtree St NE, Atlanta, GA',
             'This is it - the final event. Come celebrate our first evening as husband and wife. There will be food, performances and more dancing. Dress sharp.',
