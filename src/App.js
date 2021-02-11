@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 
-// import { Waypoint } from 'react-waypoint'
 import { instanceOf } from 'prop-types'
 import { withCookies, Cookies } from 'react-cookie'
 
@@ -30,39 +29,35 @@ const MOCK = {
   people: {
     anand: { isAttending: '?' },
     nancy: { isAttending: '?' },
-    Niru: { isAttending: '?' },
-    Dhansukh: { isAttending: '?' }
-    // "people1": { "isAttending": "?" },
-    // "people2": { "isAttending": "?" },
-    // "people3": { "isAttending": "?" },
   },
   hotel: {
     rate: '0',
-    name: 'GT'
+    name: 'CM'
   },
   didRSVP: false,
   gotInvite: true,
   submitted: true,
   flags: {
-    afam: 'Yes'
-    // flight: "sfo".
-    // boice: "Yes"
+    afam: 'yes',
+    paid: "yes",
+
   },
   events: {
-    pithi: 'Yes',
-    mehndi: 'Yes',
+    pithi: 'yes',
+    mehndi: 'yes',
+    vid: 'yes',
     wdin: 'yes',
     wed: 'yes',
     res: 'yes'
   },
-  email: 'anand@gmail.com'
-  // address: {
-  //   street: '860 peachtree street NE unit 1814',
-  //   city: 'Atlanta',
-  //   state: 'Georgia',
-  //   zip: '30308',
-  //   country: 'USA',
-  // }
+  email: 'anand@gmail.com',
+  address: {
+    street: '860 peachtree street NE unit 1814',
+    city: 'Atlanta',
+    state: 'Georgia',
+    zip: '30308',
+    country: 'USA',
+  }
 }
 
 if (!hostname.includes('nancy') && B_MOCK) {
@@ -75,6 +70,7 @@ if (hostname === 'nancyandanand.com') {
 }
 
 const STORE_NAME = 'inviteid'
+
 class App extends Component {
   static propTypes = {
     cookies: instanceOf(Cookies).isRequired
@@ -239,6 +235,15 @@ class App extends Component {
   }
 
   render() {
+    let evs = null
+    if (this.state.id) {
+      evs = (
+        <React.Fragment>
+          <Nav.Link href="#events">Events</Nav.Link>
+          <Nav.Link href="#hotels">Hotels</Nav.Link>
+        </React.Fragment>
+      )
+    }
     const navBar = () => {
       return (
         <Navbar id="nav" collapseOnSelect expand="sm" sticky="top">
@@ -250,18 +255,17 @@ class App extends Component {
             <Nav>
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#update">Update</Nav.Link>
-              <Nav.Link href="#events">Events</Nav.Link>
-              <Nav.Link href="#hotels">Hotels</Nav.Link>
-              <Nav.Link href="#todo">Things to do</Nav.Link>
+              {evs}
+              {/* <Nav.Link href="#todo">Things to do</Nav.Link> */}
               <Nav.Link href="#ourstory">Our Story</Nav.Link>
             </Nav>
           </Navbar.Collapse>
-        </Navbar>
+        </Navbar >
       )
     }
 
     return (
-      <div className="page">
+      <div className="page" >
         <div id="top">
           <a href="/" name="home">
             {''}
@@ -295,11 +299,11 @@ class App extends Component {
           <a href="/" name="hotels" className="spot">
             {''}
           </a>
-          <Hotels />
+          <Hotels hotel={this.state.hotel} flags={this.state.flags} />
           <a href="/" name="todo" className="spot">
             {''}
           </a>
-          <Activities />
+          {/* <Activities /> */}
           <a href="/" name="ourstory">
             {''}
           </a>

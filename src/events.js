@@ -76,7 +76,7 @@ class Events extends Component {
       return null
     }
 
-    const event = 'Mehndi'
+    const e = 'Mehndi'
     // Nancy info
     let date = 'April 8th'
     let location = 'Thakkar Household'
@@ -85,37 +85,37 @@ class Events extends Component {
     let time = 'TBA'
 
     if (this.props.flags.afam) {
-      let date = 'April 8th'
-      let location = 'TBA'
-      let map = 'TBA'
-      let address = 'TBA'
-      let time = 'TBA'
+      date = 'April 8th'
+      location = 'Shakti Mandir'
+      map = 'https://goo.gl/maps/5fioU4j91P6iazE4A'
+      address = '1450 Huie Rd, Lake City, GA 30260'
+      time = '5:00 PM'
     }
 
     return this.createEventCard(
       location,
-      event,
+      e,
       date,
       time,
       address,
-      'Come get painted with Medhi',
-      'https://goo.gl/maps/nS3pSofk9FDNfeQq7',
+      'Come get painted with Medhi!',
+      map,
     )
   }
 
-  getGS() {
-    if (!this.props.events.gs) {
+  getVidhi() {
+    if (!this.props.events.vid) {
       return null
     }
 
     return this.createEventCard(
-      'location title',
-      'event name',
-      'April 8th',
-      'TBA',
-      'address',
-      'desc',
-      'map https://goo.gl/maps/nS3pSofk9FDNfeQq7',
+      'Shakti Mandir',
+      'Vidhi',
+      'April 9th',
+      '9:00 AM',
+      '1450 Huie Rd, Lake City, GA 30260',
+      'Mr. Pareshbhai & Mrs. Shilaben Patel cordially invite you to share your blessings at Mandap Muharat, Ganesh Pujan, & Pithi of their son. Lunch will be provided. With Best Wishes from: Anuben & Mayurbhai and Chetanaben & Alkeshbhai',
+      'https://goo.gl/maps/5fioU4j91P6iazE4A',
     )
   }
 
@@ -123,8 +123,8 @@ class Events extends Component {
     if (this.props.flags.afam) {
       return (
         <React.Fragment>
-          {this.getGS()}
           {this.getMehndi()}
+          {this.getVidhi()}
         </React.Fragment>
       )
     }
@@ -190,7 +190,7 @@ class Events extends Component {
             className="invite-button"
             size="lg"
           >
-            Goto RSVP
+            Click to RSVP
           </Button>
         </Container>
       </div>

@@ -6,7 +6,6 @@ import Card from 'react-bootstrap/Card'
 const hotels = [
   {
     name: 'Courtyard Marriott',
-    desc: '1132 Techwood Dr NW, Atlanta, GA 30318 | (404) 607-1112',
     link:
       'https://www.marriott.com/hotels/travel/atlmn-courtyard-atlanta-midtown-georgia-tech/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2',
     img:
@@ -18,22 +17,46 @@ class Hotels extends Component {
   render() {
     const createThingCard = (thing) => {
       const name = thing.name
-      const desc = thing.desc
       const link = thing.link
       const img = thing.img
+
+      let desc = (
+        <React.Fragment>
+          To make a reservation please call Marriott reservation at 1(800) 321 - 2211 before March 18, 2021.
+          < br />
+          Tell them you are part of the Patel Wedding Family Block #2 group
+          < br />
+          for Courtyard Marriott Atlanta, Midtown / Georgia Tech
+          < br />
+          located at 1132 Techwood Drive NW, Atlanta, GA 30318
+        </React.Fragment>
+      )
+
+      if (this.props.flags.paid) {
+        desc = (
+          <React.Fragment>
+            We have taken care of your room here and will give you room details shortly.
+          </React.Fragment>
+        )
+      }
       return (
         <Card key={name} bg="dark" text="white">
-          <Card.Img variant="top" src={img} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
-            <Card.Text>{desc}</Card.Text>
-            <Card.Link href={link}>Website</Card.Link>
+            <Card.Text>
+              {desc}
+            </Card.Text>
           </Card.Body>
         </Card>
       )
+
     }
 
     const getHotels = () => {
+      if (this.props.hotel.name != "CM") {
+        return null
+      }
+
       return (
         <div className="section hotel pink">
           <Container>

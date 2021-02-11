@@ -1041,6 +1041,7 @@ for grain static effect
 }
 
 .invite-button {
+  font-size: 3em;
   background-color: var(--grass);
   background-size: auto 400%;
   color: var(--black);
