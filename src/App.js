@@ -20,7 +20,7 @@ const request = require('request-promise')
 const hostname = window && window.location && window.location.hostname
 
 const MOCK_CODE = 'Mnx0ZXN0'
-const B_MOCK = true
+const B_MOCK = false
 let IS_MOCK = false
 let IS_LOCAL = false
 let logger = (...args) => { }
