@@ -55,17 +55,12 @@ class Events extends Component {
       return null
     }
 
-    // Nancy info
-    let date = 'April 8th'
-    let location = 'Thakkar Household'
-    let event = 'Pithi'
-
     return this.createEventCard(
-      'Thakkar Household',
+      'place_id:ChIJZ4HcS7gL9YgRC32f7k8REi0',
       'Pithi',
       'April 8th',
       'TBA',
-      '1568 Dunwoody Club Crossing Dunwoody, GA 30338',
+      'Thakkar Household: 1568 Dunwoody Club Crossing Dunwoody, GA 30338',
       'A ritual application of a paste made from turmeric, chickpea flour, and rose water to the bride and groom’s faces, arms and legs. The paste is meant to both brighten the skin and purify the body in preparation for the wedding.',
       'https://goo.gl/maps/nS3pSofk9FDNfeQq7',
     )
@@ -79,16 +74,16 @@ class Events extends Component {
     const e = 'Mehndi'
     // Nancy info
     let date = 'April 8th'
-    let location = 'Thakkar Household'
     let map = 'https://goo.gl/maps/af8e3Ukov8DKBUno6'
-    let address = '12305 Clairmonte Ave Alpharetta, GA 30009'
+    let address = 'Thakkar Household: 12305 Clairmonte Ave Alpharetta, GA 30009'
     let time = 'TBA'
+    let location = 'place_id:ChIJ-UORrZF19YgRngKtPOtS9MA'
 
     if (this.props.flags.afam) {
-      date = 'April 8th'
       location = 'Shakti Mandir'
+      date = 'April 8th'
       map = 'https://goo.gl/maps/5fioU4j91P6iazE4A'
-      address = '1450 Huie Rd, Lake City, GA 30260'
+      address = 'Shakti Mandir: 1450 Huie Rd, Lake City, GA 30260'
       time = '5:00 PM'
     }
 
@@ -98,7 +93,7 @@ class Events extends Component {
       date,
       time,
       address,
-      'Come get painted with Medhi!',
+      'Come get painted with Mehndi!',
       map,
     )
   }

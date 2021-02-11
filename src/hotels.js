@@ -17,8 +17,6 @@ class Hotels extends Component {
   render() {
     const createThingCard = (thing) => {
       const name = thing.name
-      const link = thing.link
-      const img = thing.img
 
       let desc = (
         <React.Fragment>
@@ -53,7 +51,7 @@ class Hotels extends Component {
     }
 
     const getHotels = () => {
-      if (this.props.hotel.name != "CM") {
+      if (this.props.hotel.name !== "CM") {
         return null
       }
 

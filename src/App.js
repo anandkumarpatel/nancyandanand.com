@@ -8,7 +8,7 @@ import { withCookies, Cookies } from 'react-cookie'
 
 import Hotels from './hotels.js'
 import Events from './events.js'
-import Activities from './activities.js'
+// import Activities from './activities.js'
 import Names from './names.js'
 import Redone from './redone.js'
 import Story from './story.js'
