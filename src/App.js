@@ -308,7 +308,7 @@ class App extends Component {
             {''}
           </a>
         </div>
-        <Story />
+        {/* <Story /> */}
       </div>
     )
   }
