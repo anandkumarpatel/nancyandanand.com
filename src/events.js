@@ -154,7 +154,7 @@ class Events extends Component {
           {this.createEventCard(
             'place_id:ChIJZ3_vhMem9YgRX3--sf9DM3Y',
             'Garba',
-            'April 8th',
+            'April 9th',
             '7:00 pm',
             'Ashiana: 5675 Jimmy Carter Blvd, Norcross, GA',
             "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Do not worry if you don't know it, It’s quick and easy to pick up! Dress colorfully and be ready to dance the night away!",
