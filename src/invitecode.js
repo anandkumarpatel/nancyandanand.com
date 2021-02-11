@@ -42,7 +42,7 @@ class InviteCode extends Component {
             </Form.Label>
             <Form.Control
               value={this.state.inviteCode}
-              name="inviteCode"
+              name="email"
               type="invite-code"
               onChange={this.change}
               required
