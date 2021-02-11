@@ -20,13 +20,14 @@ class Hotels extends Component {
 
       let desc = (
         <React.Fragment>
-          To make a reservation please call Marriott reservation at 1(800) 321 - 2211 before March 18, 2021.
+          Hotel information will be updated shortly.
+          {/* To make a reservation please call Marriott reservation at 1(800) 321 - 2211 before March 18, 2021.
           < br />
           Tell them you are part of the Patel Wedding Family Block #2 group
           < br />
           for Courtyard Marriott Atlanta, Midtown / Georgia Tech
           < br />
-          located at 1132 Techwood Drive NW, Atlanta, GA 30318
+          located at 1132 Techwood Drive NW, Atlanta, GA 30318 */}
         </React.Fragment>
       )
 
