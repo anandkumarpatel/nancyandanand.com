@@ -93,7 +93,7 @@ class Events extends Component {
       date,
       time,
       address,
-      'Come get painted with Mehndi!',
+      'Come get painted with Mehndi! Dinner will be provided.',
       map,
     )
   }
@@ -109,7 +109,7 @@ class Events extends Component {
       'April 9th',
       '9:00 AM',
       '1450 Huie Rd, Lake City, GA 30260',
-      'Mr. Pareshbhai & Mrs. Shilaben Patel cordially invite you to share your blessings at Mandap Muharat, Ganesh Pujan, & Pithi of their son. Lunch will be provided. With Best Wishes from: Anuben & Mayurbhai and Chetanaben & Alkeshbhai',
+      'Come share your blessings at Mandap Muharat, Ganesh Pujan, Pithi & Grah Shanti. Lunch will be provided.',
       'https://goo.gl/maps/5fioU4j91P6iazE4A',
     )
   }
