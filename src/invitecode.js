@@ -38,7 +38,7 @@ class InviteCode extends Component {
         <Form onSubmit={this.click}>
           <Form.Group controlId="inviteCode">
             <Form.Label>
-              Lookup with your email, phone number, or invite code
+              Lookup with your email or phone number
             </Form.Label>
             <Form.Control
               value={this.state.inviteCode}
@@ -46,7 +46,7 @@ class InviteCode extends Component {
               type="invite-code"
               onChange={this.change}
               required
-              placeholder="Enter email, phone number, or invite code"
+              placeholder="Enter your email or phone number"
             />
           </Form.Group>
           <Button

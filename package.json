@@ -5,22 +5,22 @@
   "private": true,
   "dependencies": {
     "body-parser": "^1.19.0",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^4.6.0",
     "gh-pages": "^2.2.0",
     "googleapi": "^1.0.2",
     "googleapis": "^39.2.0",
-    "react": "^16.12.0",
-    "react-bootstrap": "^1.0.0-beta.16",
+    "react": "^16.14.0",
+    "react-bootstrap": "^1.4.3",
     "react-cookie": "^4.0.3",
-    "react-dom": "^16.12.0",
+    "react-dom": "^16.14.0",
     "react-film": "^1.3.0",
-    "react-scripts": "^3.4.0",
+    "react-scripts": "^3.4.4",
     "react-slick": "^0.25.2",
-    "react-waypoint": "^9.0.2",
-    "react-youtube": "^7.9.0",
+    "react-waypoint": "^9.0.3",
+    "react-youtube": "^7.13.1",
     "request": "^2.88.2",
-    "request-promise": "^4.2.5",
-    "universal-analytics": "^0.4.20"
+    "request-promise": "^4.2.6",
+    "universal-analytics": "^0.4.23"
   },
   "scripts": {
     "predeploy": "npm run build",
@@ -46,7 +46,7 @@
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.7.4",
+    "autoprefixer": "^9.8.6",
     "prettier": "^1.19.1"
   }
 }
