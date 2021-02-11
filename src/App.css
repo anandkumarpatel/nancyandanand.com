@@ -779,7 +779,7 @@ for grain static effect
   position: relative;
   padding: 3vh 2vw;
   margin: 5vh 0;
-  background-image: url('http://api.thumbr.it/whitenoise-361x370.png?background=fff9edff&noise=e6e0d4&density=100&opacity=25');
+  background-image: url('./img/whitenoise.png');
   background-color: var(--white);
 
   box-shadow: 9px 9px 16px var(--white-shadow-1),
