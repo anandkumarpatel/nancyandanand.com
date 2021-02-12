@@ -5,7 +5,7 @@ import Card from 'react-bootstrap/Card'
 
 const hotels = [
   {
-    name: 'Courtyard Marriott',
+    name: 'TBA',
     link:
       'https://www.marriott.com/hotels/travel/atlmn-courtyard-atlanta-midtown-georgia-tech/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2',
     img:
