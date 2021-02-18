@@ -5,11 +5,11 @@ import Card from 'react-bootstrap/Card'
 
 const hotels = [
   {
-    name: 'TBA',
+    name: 'Sonesta Select Atlanta Midtown Georgia Tech',
     link:
-      'https://www.marriott.com/hotels/travel/atlmn-courtyard-atlanta-midtown-georgia-tech/?scid=bb1a189a-fec3-4d19-a255-54ba596febe2',
+      'https://gc.synxis.com/rez.aspx?Hotel=32565&Chain=5157&group=2104PATELW_001',
     img:
-      'https://lh5.googleusercontent.com/p/AF1QipNvWj0LccNpYgRl-Z4CbhVzravLpvbWT5Yvt_77=h600'
+      'https://res.cloudinary.com/sonesta/image/fetch/c_crop,x_0,y_242,w_1920,h_801,q_auto:good,f_auto,fl_force_strip.lossy.progressive/c_scale,w_1920/https%3A%2F%2Fwww.sonesta.com%2Fsites%2Fdefault%2Ffiles%2Fatlmn-low%2520res%2Fatlmn-low%2520res%2Fatlmn-king-guestroom_web.jpg'
   },
 ]
 
@@ -17,17 +17,14 @@ class Hotels extends Component {
   render() {
     const createThingCard = (thing) => {
       const name = thing.name
+      const link = thing.link
+      const img = thing.img
 
       let desc = (
         <React.Fragment>
-          Hotel information will be updated shortly.
-          {/* To make a reservation please call Marriott reservation at 1(800) 321 - 2211 before March 18, 2021.
+          Use the link below to make a reservation in our room block before March 18, 2021.
           < br />
-          Tell them you are part of the Patel Wedding Family Block #2 group
-          < br />
-          for Courtyard Marriott Atlanta, Midtown / Georgia Tech
-          < br />
-          located at 1132 Techwood Drive NW, Atlanta, GA 30318 */}
+          1132 Techwood Drive NW, Atlanta, GA 30318
         </React.Fragment>
       )
 
@@ -40,11 +37,11 @@ class Hotels extends Component {
       }
       return (
         <Card key={name} bg="dark" text="white">
+          <Card.Img variant="top" src={img} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
-            <Card.Text>
-              {desc}
-            </Card.Text>
+            <Card.Text>{desc}</Card.Text>
+            <Card.Link href={link}>Book Here</Card.Link>
           </Card.Body>
         </Card>
       )

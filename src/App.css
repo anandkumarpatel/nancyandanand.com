@@ -1071,3 +1071,7 @@ for grain static effect
 .hide {
   display: none;
 }
+
+a.card-link {
+  font-size: xx-large;
+}
