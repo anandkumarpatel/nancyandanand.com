@@ -22,16 +22,22 @@ class Hotels extends Component {
 
       let desc = (
         <React.Fragment>
-          Use the link below to make a reservation in our room block before March 18, 2021.
+          <Card.Text>
+            Use the link below to make a reservation in our room block before March 18, 2021.
           < br />
           1132 Techwood Drive NW, Atlanta, GA 30318
+          </Card.Text>
+          <Card.Link href={link}>Book Here</Card.Link>
+
         </React.Fragment>
       )
 
       if (this.props.flags.paid) {
         desc = (
           <React.Fragment>
-            We have taken care of your room here and will give you room details shortly.
+            <Card.Text>
+              We have taken care of your room here and will give you room details shortly.
+          </Card.Text>
           </React.Fragment>
         )
       }
@@ -40,8 +46,7 @@ class Hotels extends Component {
           <Card.Img variant="top" src={img} />
           <Card.Body>
             <Card.Title>{name}</Card.Title>
-            <Card.Text>{desc}</Card.Text>
-            <Card.Link href={link}>Book Here</Card.Link>
+            {desc}
           </Card.Body>
         </Card>
       )
