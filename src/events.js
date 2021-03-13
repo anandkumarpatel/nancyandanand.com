@@ -58,8 +58,8 @@ class Events extends Component {
     return this.createEventCard(
       'place_id:ChIJZ4HcS7gL9YgRC32f7k8REi0',
       'Pithi',
-      'April 8th',
-      'TBA',
+      'April 9th',
+      '10:00 AM',
       'Thakkar Household: 1568 Dunwoody Club Crossing Dunwoody, GA 30338',
       'A ritual application of a paste made from turmeric, chickpea flour, and rose water to the bride and groom’s faces, arms and legs. The paste is meant to both brighten the skin and purify the body in preparation for the wedding.',
       'https://goo.gl/maps/nS3pSofk9FDNfeQq7',
@@ -75,8 +75,8 @@ class Events extends Component {
     // Nancy info
     let date = 'April 8th'
     let map = 'https://goo.gl/maps/af8e3Ukov8DKBUno6'
-    let address = 'Thakkar Household: 12305 Clairmonte Ave Alpharetta, GA 30009'
-    let time = 'TBA'
+    let address = 'Saha Household: 12305 Clairmonte Ave Alpharetta, GA 30009'
+    let time = '5:00 PM'
     let location = 'place_id:ChIJ-UORrZF19YgRngKtPOtS9MA'
 
     if (this.props.flags.afam) {
