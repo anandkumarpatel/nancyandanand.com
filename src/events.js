@@ -57,11 +57,11 @@ class Events extends Component {
 
     return this.createEventCard(
       'place_id:ChIJZ4HcS7gL9YgRC32f7k8REi0',
-      'Pithi',
+      'Grah Shanti and Pithi',
       'April 9th',
-      '10:00 AM',
+      '9:00 AM',
       'Thakkar Household: 1568 Dunwoody Club Crossing Dunwoody, GA 30338',
-      'A ritual application of a paste made from turmeric, chickpea flour, and rose water to the bride and groom’s faces, arms and legs. The paste is meant to both brighten the skin and purify the body in preparation for the wedding.',
+      'A ritual application of a paste made from turmeric, chickpea flour, and rose water to the bride face, arms and legs. The paste is meant to both brighten the skin and purify the body in preparation for the wedding.',
       'https://goo.gl/maps/nS3pSofk9FDNfeQq7',
     )
   }
@@ -157,7 +157,7 @@ class Events extends Component {
             'April 9th',
             '7:00 pm',
             'Ashiana: 5675 Jimmy Carter Blvd, Norcross, GA',
-            "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Do not worry if you don't know it, It’s quick and easy to pick up! Dress colorfully and be ready to dance the night away!",
+            "This is your chance to mingle with the other guests before the big day. Garba is a folk dance that originates from the state of Gujarat in India, where Nancy and Anand's families are from. Don't worry if you don't know it, it’s quick and easy to pick up! Dress colorfully and be ready to dance the night away!",
             'https://goo.gl/maps/YidKb36x7KoyfxsE9'
           )}
 
@@ -167,7 +167,7 @@ class Events extends Component {
             'April 10th',
             '10:00 am',
             'Park Tavern: 500 10th St NE, Atlanta, GA',
-            "The main event! We will start with the Bharat, which is the Groom's procession to the venue. Once at the venue, we will have a short Hindu ceremony and will be followed by a traditional Gujarati lunch. Dress Indian.",
+            "The main event! We will start with the Bharat, which is the Groom's procession to the venue. Once at the venue, we will have a short Hindu ceremony in the meadow that will be followed by a traditional Gujarati lunch. Dress Indian.",
             'https://g.page/park-tavern-atlanta?share'
           )}
 
