@@ -237,7 +237,7 @@ class App extends Component {
 
   render() {
     let evs = null
-    if (this.state.id) {
+    if (this.state.hotel.name) {
       evs = (
         <React.Fragment>
           <Nav.Link href="#events">Events</Nav.Link>
@@ -245,6 +245,7 @@ class App extends Component {
         </React.Fragment>
       )
     }
+
     const navBar = () => {
       return (
         <Navbar id="nav" collapseOnSelect expand="sm" sticky="top">
@@ -257,7 +258,7 @@ class App extends Component {
               <Nav.Link href="#home">Home</Nav.Link>
               <Nav.Link href="#update">Update</Nav.Link>
               {evs}
-              {/* <Nav.Link href="#todo">Things to do</Nav.Link> */}
+              <Nav.Link href="#store">Registry</Nav.Link>
               <Nav.Link href="#ourstory">Our Story</Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -301,15 +302,18 @@ class App extends Component {
             {''}
           </a>
           <Hotels hotel={this.state.hotel} flags={this.state.flags} />
-          <a href="/" name="todo" className="spot">
+          <a href="/" name="store">
             {''}
           </a>
+          {/* <a href="/" name="todo" className="spot">
+            {''}
+          </a> */}
           {/* <Activities /> */}
-          <a href="/" name="ourstory">
-            {''}
-          </a>
         </div>
         <Store />
+        <a href="/" name="ourstory">
+          {''}
+        </a>
         <Story />
       </div>
     )
