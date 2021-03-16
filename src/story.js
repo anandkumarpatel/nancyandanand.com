@@ -30,6 +30,7 @@ class Story extends Component {
       document.getElementById('bottom-text').classList.add('hide')
       document.getElementById('nav').classList.add('hide')
       document.getElementById('top').classList.add('hide')
+      document.getElementsByClassName("zola-registry-iframe")[0].classList.add('hide')
       document.getElementById('story-static').classList.remove('hide')
     }
 
@@ -47,6 +48,7 @@ class Story extends Component {
       document.getElementById('bottom-text').classList.remove('hide')
       document.getElementById('nav').classList.remove('hide')
       document.getElementById('top').classList.remove('hide')
+      document.getElementsByClassName("zola-registry-iframe")[0].classList.remove('hide')
       document.getElementById('story-static').classList.add('hide')
 
       this.setState({

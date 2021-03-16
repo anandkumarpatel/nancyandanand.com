@@ -13,7 +13,7 @@ class Store extends Component {
 
     return (
       <React.Fragment>
-        <a className="zola-registry-embed" href="www.zola.com/registry/nancyandanand" data-registry-key="nancyandanand">
+        <a id="registry" className="zola-registry-embed" href="www.zola.com/registry/nancyandanand" data-registry-key="nancyandanand">
           Our Zola Wedding Registry
         </a>
       </React.Fragment>
