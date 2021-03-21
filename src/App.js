@@ -286,7 +286,7 @@ class App extends Component {
           <a href="/" name="update" className="spot">
             {''}
           </a>
-          <Redone />
+          <Redone isAttending={this.state.gotInvite} />
           <a href="/" name="events" className="spot">
             {''}
           </a>
