@@ -28,17 +28,14 @@ class Redone extends Component {
           We will have some available in case anyone forgets!
         <br />
         <br />
-          The Wedding ceremony will be outdoors on a grassy meadow.
-        <br />
-          The Reception dance party will take place on an outdoor terrace.
-        <br />
+          We are expecting mother nature to be celebrating with us so expect some rain.
         <br />
           If you have any questions, feel free to reach out to us!
         <br />
         <br />
           Stay healthy,
         <br />
-          Nancy & Anand
+        Anand & Nancy
       </div>
     )
   }

@@ -167,7 +167,7 @@ class Events extends Component {
             'April 10th',
             '10:00 am',
             'Park Tavern: 500 10th St NE, Atlanta, GA',
-            "The main event! We will start with the Bharat, which is the Groom's procession to the venue. Once at the venue, we will have a short Hindu ceremony outside on the grassy meadow that will be followed by a traditional Gujarati lunch. Dress Indian.",
+            "The main event! We will start with the Bharat, which is the Groom's procession to the venue. Once at the venue, we will have a short Hindu ceremony followed by a traditional Gujarati lunch. Dress Indian.",
             'https://g.page/park-tavern-atlanta?share'
           )}
 
