@@ -28,7 +28,7 @@ class Redone extends Component {
           We will have some available in case anyone forgets!
         <br />
         <br />
-          We are expecting mother nature to be celebrating with us so expect some rain.
+          Mother nature will be celebrating with us so expect some rain.
         <br />
           If you have any questions, feel free to reach out to us!
         <br />
