@@ -14,6 +14,7 @@ import Redone from './redone.js'
 import Story from './story.js'
 import bURL from './urlFinder.js'
 import Store from './store.js'
+import Stream from './stream.js'
 
 import './App.css'
 const request = require('request-promise')
@@ -311,10 +312,13 @@ class App extends Component {
           {/* <Activities /> */}
         </div>
         <Store />
+        {/* <Stream /> */}
         <a href="/" name="ourstory">
           {''}
         </a>
         <Story />
+
+
       </div>
     )
   }

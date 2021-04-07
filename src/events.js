@@ -127,8 +127,8 @@ class Events extends Component {
     // Nancy
     return (
       <React.Fragment>
-        {this.getPithi()}
         {this.getMehndi()}
+        {this.getPithi()}
       </React.Fragment>
     )
   }
