@@ -80,7 +80,7 @@ class Story extends Component {
         <div className="story-main">
           <div className="story-image">
             <YouTube
-              videoId="3EL1V2pPnJQ?controls=0"
+              videoId="xiOp1cXy_8Q?controls=0"
               opts={vidOps}
               onReady={this.ready}
               onEnd={this.end}
